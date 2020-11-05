@@ -1,0 +1,3 @@
+[submodule "src/qml/PrimeboxQmlWidgets"]
+	path = src/qml/PrimeboxQmlWidgets
+	url = https://github.com/sokolov19830711/PrimeboxQmlWidgets.git
