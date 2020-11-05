@@ -1,0 +1,15 @@
+/build
+/.vs
+/out
+
+/firmware/.vs
+/firmware/__vm
+/firmware/Debug
+/firmware/Release
+/firmware/*.filters
+/firmware/*.sln
+/firmware/*.user
+/firmware/*.vcxproj
+
+CMakeLists.txt.user
+CMakeSettings.json
