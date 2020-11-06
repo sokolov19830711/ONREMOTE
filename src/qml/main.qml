@@ -1,5 +1,6 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
+import QtQuick.Layouts 1.15
 import "qrc:/"
 import "./PrimeboxQmlWidgets"
 
@@ -59,6 +60,7 @@ ApplicationWindow
         SwitchFrameButton {
             id: mainFrameButton
             text: "ГЛАВНАЯ"
+            checked: true
             ButtonGroup.group: switchFrameButtons
         }
 
@@ -88,6 +90,17 @@ ApplicationWindow
 
         ButtonGroup {
             id: switchFrameButtons
+        }
+    }
+
+    StackLayout {
+        id: framesLayout
+        x: 30
+        y: 90
+        width: 400
+        height: 500
+
+        MainFrame {
         }
     }
 }
