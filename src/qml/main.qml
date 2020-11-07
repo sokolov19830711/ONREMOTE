@@ -62,6 +62,8 @@ ApplicationWindow
             text: "ГЛАВНАЯ"
             checked: true
             ButtonGroup.group: switchFrameButtons
+
+            onClicked: framesLayout.currentIndex = 0
         }
 
         SwitchFrameButton {
@@ -74,6 +76,8 @@ ApplicationWindow
             id: pwswFrameButton
             text: "PWSW"
             ButtonGroup.group: switchFrameButtons
+
+            onClicked: framesLayout.currentIndex = 1
         }
 
         SwitchFrameButton {
@@ -101,6 +105,16 @@ ApplicationWindow
         height: 500
 
         MainFrame {
+            id: mainFrame
         }
+
+        PwswFrame {
+            id: pwswFrame
+        }
+    }
+
+    Connections {
+        target: pwswFrame
+        onCurrentPwswLevelChanged: mainFrame.currentPwswLevel = pwswFrame.currentPwswLevel
     }
 }

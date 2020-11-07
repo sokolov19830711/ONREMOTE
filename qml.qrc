@@ -1,7 +1,9 @@
-<!DOCTYPE RCC><RCC version="1.0">
-    <qresource>
+<RCC>
+    <qresource prefix="/">
         <file>src/qml/main.qml</file>
-		<file>src/qml/MainFrame.qml</file>
-		<file>src/qml/PrimeboxQmlWidgets/SwitchFrameButton.qml</file>
+        <file>src/qml/MainFrame.qml</file>
+        <file>src/qml/PrimeboxQmlWidgets/SwitchFrameButton.qml</file>
+        <file>src/qml/PrimeboxQmlWidgets/OnOffButton.qml</file>
+        <file>src/qml/PwswFrame.qml</file>
     </qresource>
 </RCC>
