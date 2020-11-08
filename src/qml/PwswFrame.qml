@@ -11,7 +11,7 @@ Item {
     Text {
         id: setPwswLevelLabel
         x: 0
-        y: 24
+        y: 0
         width: 401
         height: 51
         color: "#fefefe"
@@ -27,7 +27,7 @@ Item {
     Button {
         id: setPwswLowButton
         x: 0
-        y: 82
+        y: 60
         width: 112
         height: 60
         text: qsTr("НИЗКИЙ")
@@ -55,7 +55,7 @@ Item {
     Button {
         id: setPwswMediumButton
         x: 115
-        y: 82
+        y: 60
         width: 112
         height: 60
         text: qsTr("СРЕДНИЙ")
@@ -83,7 +83,7 @@ Item {
     Button {
         id: setPwswHighButton
         x: 230
-        y: 82
+        y: 60
         width: 112
         height: 60
         text: qsTr("ВЫСОКИЙ")
@@ -111,7 +111,7 @@ Item {
     Button {
         id: setPwswOffButton
         x: 345
-        y: 82
+        y: 60
         width: 56
         height: 60
         text: qsTr("OFF")
@@ -145,10 +145,29 @@ Item {
             else pwswFrame.currentPwswLevel = 0;
         }
     }
+
+    //-------------------------------------------------------------------------------------------------
+    MySpinBox {
+        id: digitInputPeriodSpinBox
+        x: 292
+        y: 129
+    }
+
+    MySpinBox {
+        id: wrongKeyUsageForPowerOffSpinBox
+        x: 292
+        y: 175
+    }
+
+    MySpinBox {
+        id: blockingtPeriodSpinBox
+        x: 292
+        y: 221
+    }
 }
 
 /*##^##
 Designer {
-    D{i:0;formeditorColor:"#808080"}D{i:1}
+    D{i:0;formeditorColor:"#808080"}
 }
 ##^##*/

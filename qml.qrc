@@ -5,5 +5,6 @@
         <file>src/qml/PrimeboxQmlWidgets/SwitchFrameButton.qml</file>
         <file>src/qml/PrimeboxQmlWidgets/OnOffButton.qml</file>
         <file>src/qml/PwswFrame.qml</file>
+        <file>src/qml/PrimeboxQmlWidgets/MySpinBox.qml</file>
     </qresource>
 </RCC>
