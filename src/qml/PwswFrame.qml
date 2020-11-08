@@ -150,25 +150,25 @@ Item {
     MySpinBox {
         id: digitInputPeriodSpinBox
         x: 292
-        y: 107
+        y: 113
     }
 
     MySpinBox {
         id: wrongKeyUsageForPowerOffSpinBox
         x: 292
-        y: 153
+        y: 159
     }
 
     MySpinBox {
         id: blockingtPeriodSpinBox
         x: 292
-        y: 199
+        y: 205
     }
 
     Text {
         id: text1
         x: 92
-        y: 109
+        y: 115
         width: 196
         height: 14
         color: "#fefefe"
@@ -180,7 +180,7 @@ Item {
     Text {
         id: text2
         x: 230
-        y: 129
+        y: 135
         width: 58
         height: 14
         color: "#eccc4a"
@@ -192,7 +192,7 @@ Item {
     Text {
         id: text3
         x: 59
-        y: 157
+        y: 163
         width: 229
         height: 14
         color: "#fefefe"
@@ -204,7 +204,7 @@ Item {
     Text {
         id: text4
         x: 208
-        y: 177
+        y: 183
         width: 80
         height: 14
         color: "#eccc4a"
@@ -216,7 +216,7 @@ Item {
     Text {
         id: text5
         x: 128
-        y: 178
+        y: 184
         width: 83
         height: 14
         color: "#fefefe"
@@ -228,7 +228,7 @@ Item {
     Text {
         id: text6
         x: 92
-        y: 202
+        y: 208
         width: 196
         height: 14
         color: "#fefefe"
@@ -240,7 +240,7 @@ Item {
     Text {
         id: text7
         x: 239
-        y: 222
+        y: 228
         width: 49
         height: 14
         color: "#eccc4a"
@@ -252,7 +252,7 @@ Item {
     Text {
         id: text8
         x: 156
-        y: 223
+        y: 229
         width: 83
         height: 14
         color: "#fefefe"
@@ -264,7 +264,7 @@ Item {
     Text {
         id: setPwswLevelLabel1
         x: 0
-        y: 255
+        y: 262
         width: 401
         height: 30
         color: "#fefefe"
@@ -275,6 +275,24 @@ Item {
         font.weight: Font.Light
         font.family: "Arial"
         minimumPixelSize: 16
+    }
+
+    DigitValueWidget {
+        id: digitValueWidget1
+        x: 5
+        y: 305
+    }
+
+    DigitValueWidget {
+        id: digitValueWidget2
+        x: 145
+        y: 304
+    }
+
+    DigitValueWidget {
+        id: digitValueWidget3
+        x: 283
+        y: 304
     }
 }
 

@@ -263,7 +263,7 @@ Item {
         id: temperatureButton
         x: 180
         y: 302
-        text: "Текст кнопки"
+        text: "0"
         width: 40
         height: 40
         layer.enabled: false
@@ -281,12 +281,20 @@ Item {
 
         contentItem: Text {
             color: "#fefefe"
-            text: "35"
+            text: parent.text
             font: parent.font
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             elide: Text.ElideRight
         }
+
+        onClicked: console.log(dataManager.getTemperature())
+
+        Connections {
+            target: dataManager
+            function onTemperatureValueChanged(value) {temperatureButton.text = value}
+        }
+
     }
 
     Text {
