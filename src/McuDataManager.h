@@ -3,6 +3,8 @@
 #include "firmware/dataStructures.h"
 
 #include <QObject>
+#include <QSettings>
+#include <QSharedPointer>
 
 class McuDataManager : public QObject
 {
@@ -11,6 +13,7 @@ class McuDataManager : public QObject
 public:
 
 	McuDataManager();
+	virtual ~McuDataManager();
 
 	McuInData& inData();
 	McuOutData& outData();
@@ -27,6 +30,8 @@ signals:
 private:
 
 	void update();
+
+	QSharedPointer<QSettings> _settings;
 
 	McuInData _mcuInData;
 	McuOutData _mcuOutData;
