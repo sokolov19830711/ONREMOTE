@@ -19,7 +19,10 @@ public:
 
 signals:
 
+	void breakIn1ValueChanged(int value);
+	void breakIn2ValueChanged(int value);
 	void temperatureValueChanged(int value);
+	void dustinessValueChanged(int value);
 
 private:
 

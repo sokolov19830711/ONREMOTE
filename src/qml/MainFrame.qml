@@ -184,7 +184,8 @@ Item {
         text: qsTr("НИЗКИЙ")
         checked: false
         checkable: true
-        enabled: true
+        enabled: false
+
         background: Rectangle {
             color: parent.checked ? "#00be94" : "#636363"
         }
@@ -202,7 +203,7 @@ Item {
     }
 
     Button {
-        id: lowPwswButton2
+        id: mediumDustinessButton
         x: 134
         y: 211
         width: 132
@@ -210,7 +211,8 @@ Item {
         text: qsTr("СРЕДНИЙ")
         checked: false
         checkable: true
-        enabled: true
+        enabled: false
+
         background: Rectangle {
             color: parent.checked ? "#cea400" : "#636363"
         }
@@ -228,7 +230,7 @@ Item {
     }
 
     Button {
-        id: lowPwswButton3
+        id: highDustinessButton
         x: 269
         y: 211
         width: 131
@@ -236,7 +238,8 @@ Item {
         text: qsTr("ВЫСОКИЙ")
         checked: false
         checkable: true
-        enabled: true
+        enabled: false
+
         background: Rectangle {
             color: parent.checked ? "#c05046" : "#636363"
         }
@@ -269,6 +272,7 @@ Item {
         layer.enabled: false
         font.pointSize: 12
         checkable: true
+        enabled: false
 
         bottomPadding: 4
         topPadding: 4
@@ -317,6 +321,8 @@ Item {
         width: 40
         height: 40
         text: "txt"
+        enabled: false
+
         contentItem: Text {
             color: "#fefefe"
             text: parent.checked ? "!!!" : "OK"
@@ -335,6 +341,11 @@ Item {
         layer.enabled: false
         checkable: true
         bottomPadding: 4
+
+        Connections {
+            target: dataManager
+            function onBreakIn1ValueChanged(value) {breakInButton1.checked = !value}
+        }
     }
 
     Text {
@@ -385,6 +396,8 @@ Item {
         width: 40
         height: 40
         text: "txt"
+        enabled: false
+
         contentItem: Text {
             color: "#fefefe"
             text: parent.checked ? "!!!" : "OK"
@@ -403,6 +416,11 @@ Item {
         checkable: true
         layer.enabled: false
         bottomPadding: 4
+
+        Connections {
+            target: dataManager
+            function onBreakIn2ValueChanged(value) {breakInButton2.checked = value}
+        }
     }
 
     Text {
@@ -450,6 +468,7 @@ Item {
         id: ledButton
         x: 180
         y: 440
+        enabled: false
     }
 
     Text {
@@ -491,6 +510,27 @@ Item {
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         minimumPixelSize: 10
+    }
+
+    Connections {
+        target: dataManager
+        function onDustinessValueChanged(value)
+        {
+            if(value < 40)
+            {
+                lowDustinessButton.checked = true
+            }
+
+            else if (value < 60)
+            {
+                mediumDustinessButton.checked = true
+            }
+
+            else
+            {
+                highDustinessButton.checked = true
+            }
+        }
     }
 }
 
