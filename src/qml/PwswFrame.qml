@@ -13,7 +13,7 @@ Item {
         x: 0
         y: 0
         width: 401
-        height: 51
+        height: 30
         color: "#fefefe"
         text: qsTr("УКАЖИТЕ УРОВЕНЬ ЗАЩИТЫ")
         font.pixelSize: 20
@@ -27,7 +27,7 @@ Item {
     Button {
         id: setPwswLowButton
         x: 0
-        y: 60
+        y: 38
         width: 112
         height: 60
         text: qsTr("НИЗКИЙ")
@@ -55,7 +55,7 @@ Item {
     Button {
         id: setPwswMediumButton
         x: 115
-        y: 60
+        y: 38
         width: 112
         height: 60
         text: qsTr("СРЕДНИЙ")
@@ -83,7 +83,7 @@ Item {
     Button {
         id: setPwswHighButton
         x: 230
-        y: 60
+        y: 38
         width: 112
         height: 60
         text: qsTr("ВЫСОКИЙ")
@@ -111,7 +111,7 @@ Item {
     Button {
         id: setPwswOffButton
         x: 345
-        y: 60
+        y: 38
         width: 56
         height: 60
         text: qsTr("OFF")
@@ -150,19 +150,131 @@ Item {
     MySpinBox {
         id: digitInputPeriodSpinBox
         x: 292
-        y: 129
+        y: 107
     }
 
     MySpinBox {
         id: wrongKeyUsageForPowerOffSpinBox
         x: 292
-        y: 175
+        y: 153
     }
 
     MySpinBox {
         id: blockingtPeriodSpinBox
         x: 292
-        y: 221
+        y: 199
+    }
+
+    Text {
+        id: text1
+        x: 92
+        y: 109
+        width: 196
+        height: 14
+        color: "#fefefe"
+        text: qsTr("ВРЕМЯ ОЖИДАНИЯ КОМБИНАЦИЙ")
+        font.pixelSize: 12
+        horizontalAlignment: Text.AlignRight
+    }
+
+    Text {
+        id: text2
+        x: 230
+        y: 129
+        width: 58
+        height: 14
+        color: "#eccc4a"
+        text: qsTr("(секунд)")
+        font.pixelSize: 12
+        horizontalAlignment: Text.AlignRight
+    }
+
+    Text {
+        id: text3
+        x: 59
+        y: 157
+        width: 229
+        height: 14
+        color: "#fefefe"
+        text: qsTr("ДОПУСТИМОЕ КОЛИЧЕСТВО НЕВЕРНЫХ")
+        font.pixelSize: 12
+        horizontalAlignment: Text.AlignRight
+    }
+
+    Text {
+        id: text4
+        x: 208
+        y: 177
+        width: 80
+        height: 14
+        color: "#eccc4a"
+        text: qsTr("(раз подряд)")
+        font.pixelSize: 12
+        horizontalAlignment: Text.AlignRight
+    }
+
+    Text {
+        id: text5
+        x: 128
+        y: 178
+        width: 83
+        height: 14
+        color: "#fefefe"
+        text: qsTr("КОМБИНАЦИЙ")
+        font.pixelSize: 12
+        horizontalAlignment: Text.AlignRight
+    }
+
+    Text {
+        id: text6
+        x: 92
+        y: 202
+        width: 196
+        height: 14
+        color: "#fefefe"
+        text: qsTr("БЛОКИРОВАТЬ ПОСЛЕ НЕВЕРНЫХ")
+        font.pixelSize: 12
+        horizontalAlignment: Text.AlignRight
+    }
+
+    Text {
+        id: text7
+        x: 239
+        y: 222
+        width: 49
+        height: 14
+        color: "#eccc4a"
+        text: qsTr("(минут)")
+        font.pixelSize: 12
+        horizontalAlignment: Text.AlignRight
+    }
+
+    Text {
+        id: text8
+        x: 156
+        y: 223
+        width: 83
+        height: 14
+        color: "#fefefe"
+        text: qsTr("КОМБИНАЦИЙ")
+        font.pixelSize: 12
+        horizontalAlignment: Text.AlignRight
+    }
+
+    Text {
+        id: setPwswLevelLabel1
+        x: 0
+        y: 255
+        width: 401
+        height: 30
+        color: "#fefefe"
+        text: qsTr("ВЫБЕРИТЕ ЧИСЛО КОМБИНАЦИИ")
+        font.pixelSize: 20
+        horizontalAlignment: Text.AlignHCenter
+        verticalAlignment: Text.AlignVCenter
+        font.weight: Font.Light
+        font.family: "Arial"
+        minimumPixelSize: 16
     }
 }
 
