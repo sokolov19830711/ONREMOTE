@@ -46,8 +46,8 @@ ApplicationWindow
         font.family: "Arial"
     }
 
-    Row {
-        id: switchFrameButtonsLayout
+    Item {
+        id: switchFrameButtonsItem
         y: 601
         height: 92
         anchors.left: parent.left
@@ -61,6 +61,7 @@ ApplicationWindow
             id: mainFrameButton
             text: "ГЛАВНАЯ"
             checked: true
+            width: 114
             ButtonGroup.group: switchFrameButtons
 
             onClicked: framesLayout.currentIndex = 0
@@ -69,26 +70,32 @@ ApplicationWindow
         SwitchFrameButton {
             id: controlsFrameButton
             text: "НАСТРОЙКИ"
+            width: 114
+            x: 115
             ButtonGroup.group: switchFrameButtons
         }
 
         SwitchFrameButton {
             id: pwswFrameButton
-            text: "PWSW"
+            text: "КОДИРОВАНИЕ"
+            width: 114
+            x: 230
             ButtonGroup.group: switchFrameButtons
 
             onClicked: framesLayout.currentIndex = 1
         }
 
-        SwitchFrameButton {
-            id: sensorsFrameButton
-            text: "SENS"
-            ButtonGroup.group: switchFrameButtons
-        }
+//        SwitchFrameButton {
+//            id: sensorsFrameButton
+//            text: "SENS"
+//            ButtonGroup.group: switchFrameButtons
+//        }
 
         SwitchFrameButton {
             id: helpFrameButton
             text: "ПОМОЩЬ"
+            width: 114
+            x: 345
             ButtonGroup.group: switchFrameButtons
         }
 
