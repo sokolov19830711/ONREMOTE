@@ -16,6 +16,7 @@ int main(int argc, char** argv)
 
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("dataManager", &dataManager);
+    engine.rootContext()->setContextProperty("portManager", &portManager);
     engine.load(QUrl(QStringLiteral("qrc:/src/qml/main.qml")));
     return app.exec();
 }

@@ -7,6 +7,7 @@ Item {
     height: 500
 
     property int currentPwswLevel: 0
+    property bool ledActive: false
 
     Text {
         id: currentPwswLevelLabel
@@ -511,6 +512,8 @@ Item {
         verticalAlignment: Text.AlignVCenter
         minimumPixelSize: 10
     }
+
+    onLedActiveChanged: ledButton.checked = ledActive
 
 //    Text {
 //        id: text9

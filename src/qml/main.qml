@@ -73,6 +73,8 @@ ApplicationWindow
             width: 114
             x: 115
             ButtonGroup.group: switchFrameButtons
+
+            onClicked: framesLayout.currentIndex = 1
         }
 
         SwitchFrameButton {
@@ -82,7 +84,7 @@ ApplicationWindow
             x: 230
             ButtonGroup.group: switchFrameButtons
 
-            onClicked: framesLayout.currentIndex = 1
+            onClicked: framesLayout.currentIndex = 2
         }
 
 //        SwitchFrameButton {
@@ -115,6 +117,10 @@ ApplicationWindow
             id: mainFrame
         }
 
+        ControlsFrame {
+            id: controlsFrame
+        }
+
         PwswFrame {
             id: pwswFrame
         }
@@ -122,6 +128,11 @@ ApplicationWindow
 
     Connections {
         target: pwswFrame
-        onCurrentPwswLevelChanged: mainFrame.currentPwswLevel = pwswFrame.currentPwswLevel
+        function onCurrentPwswLevelChanged() { mainFrame.currentPwswLevel = pwswFrame.currentPwswLevel }
+    }
+
+    Connections {
+        target: controlsFrame
+        function onLedActiveChanged() { mainFrame.ledActive = controlsFrame.ledActive }
     }
 }

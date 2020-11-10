@@ -7,6 +7,7 @@
         <file>src/qml/PwswFrame.qml</file>
         <file>src/qml/PrimeboxQmlWidgets/MySpinBox.qml</file>
         <file>src/qml/PrimeboxQmlWidgets/DigitValueButton.qml</file>
-		<file>src/qml/PrimeboxQmlWidgets/DigitValueWidget.qml</file>
+        <file>src/qml/PrimeboxQmlWidgets/DigitValueWidget.qml</file>
+        <file>src/qml/ControlsFrame.qml</file>
     </qresource>
 </RCC>

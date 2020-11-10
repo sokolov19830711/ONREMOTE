@@ -30,6 +30,17 @@ bool SerialPortManager::connectedToPort() const
     return _port.isOpen();
 }
 
+QStringList SerialPortManager::avaliablePortsNames() const
+{
+    QStringList portsNames;
+	auto ports = QSerialPortInfo::availablePorts();
+    for (auto& i : ports)
+    {
+        portsNames.push_back(i.portName());
+    }
+    return portsNames;
+}
+
 void SerialPortManager::refresh()
 {
     static int isSync = 0;

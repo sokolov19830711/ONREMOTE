@@ -19,6 +19,8 @@ public:
     QString getPortName() const;
     bool connectedToPort() const;
 
+    Q_INVOKABLE QStringList avaliablePortsNames() const;
+
 signals:
     void deviceConnected(bool state);
     void noConnection();
