@@ -253,6 +253,14 @@ Item {
         font.pointSize: 10
 
         model: portManager.avaliablePortsNames()
+        displayText: portManager.getPortName()
+
+        onActivated: {portManager.setPort(currentText); displayText = currentText}
+
+        Connections {
+            target: portManager
+            function onConnectedToPort(portName) {}
+        }
     }
 
     Text {

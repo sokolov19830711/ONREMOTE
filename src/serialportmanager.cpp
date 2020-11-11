@@ -13,21 +13,18 @@ SerialPortManager::SerialPortManager(McuDataManager& dataManager, QObject* paren
     _noConnectionTimer = new QTimer(this);
 	connect(_noConnectionTimer, SIGNAL(timeout()), this, SIGNAL(noConnection()));
     _noConnectionTimer->start(_connectionWaitingTime);
+
+    setPort(_dataManager.settings()->value("SerialPort/name").toString());
 }
 
 SerialPortManager::~SerialPortManager()
 {
-
+    _dataManager.settings()->setValue("SerialPort/name", getPortName());
 }
 
 QString SerialPortManager::getPortName() const
 {
     return _port.portName();
-}
-
-bool SerialPortManager::connectedToPort() const
-{
-    return _port.isOpen();
 }
 
 QStringList SerialPortManager::avaliablePortsNames() const
@@ -43,33 +40,31 @@ QStringList SerialPortManager::avaliablePortsNames() const
 
 void SerialPortManager::refresh()
 {
-    static int isSync = 0;
     static int counter = 0;
-    static QByteArray data;
 
-    if (isSync != 2)
+    if (_isSync != 2)
     {
-        data.append(_port.read(sizeof(McuOutData)));
-        if(data.size() >= sizeof(McuOutData))
+        _rawData.append(_port.read(sizeof(McuOutData)));
+        if(_rawData.size() >= sizeof(McuOutData))
 		{
-			int marker1Pos = data.indexOf(START_MARKER1);
-			int marker2Pos = data.indexOf(START_MARKER2);
+			int marker1Pos = _rawData.indexOf(START_MARKER1);
+			int marker2Pos = _rawData.indexOf(START_MARKER2);
 			if ((marker2Pos - marker1Pos) == 1)
 			{
-				data = data.mid(marker1Pos);
-                if(data.at(9) == CONTROL_MARKER)
+                _rawData = _rawData.mid(marker1Pos);
+                if(_rawData.at(9) == CONTROL_MARKER)
 				{
-					isSync++;
-                    if(isSync == 2)
+					_isSync++;
+                    if(_isSync == 2)
 					{
                         emit deviceConnected(true);
                     }
 				}
 			}
 
-            else if (data.size() > 1000)
+            else if (_rawData.size() > 1000)
             {
-                data.clear();
+                _rawData.clear();
             }
 		}
     }
@@ -78,13 +73,13 @@ void SerialPortManager::refresh()
     {
         //qDebug() << "Size of recieved bytearray:" << data.size() << "bytes; content of array:" << data;
 
-        if (data.size() >= sizeof(McuOutData))
+        if (_rawData.size() >= sizeof(McuOutData))
         {
-            _dataManager.writeMcuOutData(data);
-            data = data.mid(sizeof(McuOutData));
+            _dataManager.writeMcuOutData(_rawData);
+            _rawData = _rawData.mid(sizeof(McuOutData));
         }
 
-		data.append(_port.read(sizeof(McuOutData)));
+        _rawData.append(_port.read(sizeof(McuOutData)));
 
         _noConnectionTimer->start(_connectionWaitingTime);
     }
@@ -108,10 +103,18 @@ void SerialPortManager::setPort(const QString &name)
     {
         if(i.portName() == name)
         {
-            _port.close();
+            if (_port.isOpen())
+            {
+                _port.close();
+            }
             _port.setPort(i);
             _port.setBaudRate(19200);
             _port.open(QIODevice::ReadWrite);
+
+            _isSync = 0;
+            _rawData.clear();
+
+            emit connectedToPort(name);
             break;
         }
     }

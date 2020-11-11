@@ -16,14 +16,14 @@ public:
     SerialPortManager(McuDataManager& dataManager, QObject *parent = nullptr);
     virtual ~SerialPortManager();
 
-    QString getPortName() const;
-    bool connectedToPort() const;
-
+    Q_INVOKABLE QString getPortName() const;
     Q_INVOKABLE QStringList avaliablePortsNames() const;
+
 
 signals:
     void deviceConnected(bool state);
     void noConnection();
+    void connectedToPort(QString portName);
 
 public slots:
 
@@ -34,6 +34,10 @@ private:
 
     McuDataManager& _dataManager;
     const int _connectionWaitingTime = 10000; // Сколько ждем, прежде чем шлем сигнал об отсутствии связи с устройством (мс)
+
     QSerialPort _port;
+	int _isSync = 0;
+	QByteArray _rawData;
+
     QTimer* _noConnectionTimer;
 };

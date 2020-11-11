@@ -17,6 +17,7 @@ public:
 
 	McuInData& inData();
 	McuOutData& outData();
+	QSharedPointer<QSettings> settings();
 
 	void writeMcuOutData(const QByteArray& data);
 

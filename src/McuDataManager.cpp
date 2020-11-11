@@ -56,6 +56,11 @@ McuOutData& McuDataManager::outData()
 	return _mcuOutData;
 }
 
+QSharedPointer<QSettings> McuDataManager::settings()
+{
+	return _settings;
+}
+
 void McuDataManager::writeMcuOutData(const QByteArray& data)
 {
 	_prevMcuOutData = _mcuOutData;
