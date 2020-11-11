@@ -21,6 +21,20 @@ public:
 
 	void writeMcuOutData(const QByteArray& data);
 
+	Q_INVOKABLE int powerButtonPwdLevel() const;
+	Q_INVOKABLE int digitInputPeriod() const;
+	Q_INVOKABLE int powerButtonPwdDigit1() const;
+	Q_INVOKABLE int powerButtonPwdDigit2() const;
+	Q_INVOKABLE int powerButtonPwdDigit3() const;
+
+public slots:
+
+	void setPowerButtonPwdLevel(int value);
+	void setDigitInputPeriod(int value);
+	void setPowerButtonPwdDigit1(int value);
+	void setPowerButtonPwdDigit2(int value);
+	void setPowerButtonPwdDigit3(int value);
+
 signals:
 
 	void breakIn1ValueChanged(int value);

@@ -68,6 +68,31 @@ void McuDataManager::writeMcuOutData(const QByteArray& data)
 	update();
 }
 
+int McuDataManager::powerButtonPwdLevel() const
+{
+	return _mcuInData.powerButtonPwdLevel;
+}
+
+int McuDataManager::digitInputPeriod() const
+{
+	return _mcuInData.digitInputPeriod;
+}
+
+int McuDataManager::powerButtonPwdDigit1() const
+{
+	return _mcuInData.powerButtonPwdDigit1;
+}
+
+int McuDataManager::powerButtonPwdDigit2() const
+{
+	return _mcuInData.powerButtonPwdDigit2;
+}
+
+int McuDataManager::powerButtonPwdDigit3() const
+{
+	return _mcuInData.powerButtonPwdDigit3;
+}
+
 void McuDataManager::update()
 {
 	if (_mcuOutData.breakInSensor1 != _prevMcuOutData.breakInSensor1)
@@ -89,4 +114,34 @@ void McuDataManager::update()
 	{
 		emit dustinessValueChanged(_mcuOutData.dustSensor1);
 	}
+}
+
+void McuDataManager::setPowerButtonPwdLevel(int value)
+{
+	if(_mcuInData.powerButtonPwdLevel != value)
+		_mcuInData.powerButtonPwdLevel = value;
+}
+
+void McuDataManager::setDigitInputPeriod(int value)
+{
+	if(_mcuInData.digitInputPeriod != value)
+		_mcuInData.digitInputPeriod = value;
+}
+
+void McuDataManager::setPowerButtonPwdDigit1(int value)
+{
+	if (_mcuInData.powerButtonPwdDigit1 != value)
+		_mcuInData.powerButtonPwdDigit1 = value;
+}
+
+void McuDataManager::setPowerButtonPwdDigit2(int value)
+{
+	if (_mcuInData.powerButtonPwdDigit2 != value)
+		_mcuInData.powerButtonPwdDigit2 = value;
+}
+
+void McuDataManager::setPowerButtonPwdDigit3(int value)
+{
+	if (_mcuInData.powerButtonPwdDigit3 != value)
+		_mcuInData.powerButtonPwdDigit3 = value;
 }

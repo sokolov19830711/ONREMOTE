@@ -8,6 +8,8 @@ Item {
 
     property int currentPwswLevel: 0
 
+    onCurrentPwswLevelChanged: dataManager.setPowerButtonPwdLevel(currentPwswLevel)
+
     Text {
         id: setPwswLevelLabel
         x: 0
@@ -31,7 +33,7 @@ Item {
         width: 112
         height: 60
         text: qsTr("НИЗКИЙ")
-        checked: false
+        checked: dataManager.powerButtonPwdLevel() === 1
         enabled: true
         checkable: true
         font.pointSize: 13
@@ -59,7 +61,7 @@ Item {
         width: 112
         height: 60
         text: qsTr("СРЕДНИЙ")
-        checked: false
+        checked: dataManager.powerButtonPwdLevel() === 2
         enabled: true
         checkable: true
         font.pointSize: 13
@@ -87,7 +89,7 @@ Item {
         width: 112
         height: 60
         text: qsTr("ВЫСОКИЙ")
-        checked: false
+        checked: dataManager.powerButtonPwdLevel() === 3
         enabled: true
         checkable: true
         font.pointSize: 13
@@ -115,7 +117,7 @@ Item {
         width: 56
         height: 60
         text: qsTr("OFF")
-        checked: false
+        checked: dataManager.powerButtonPwdLevel() === 0
         enabled: true
         checkable: true
         font.pointSize: 13
@@ -138,6 +140,7 @@ Item {
 
     ButtonGroup {
         id: setPwswButtons
+
         onClicked: {
             if(button == setPwswLowButton) pwswFrame.currentPwswLevel = 1;
             else if(button == setPwswMediumButton) pwswFrame.currentPwswLevel = 2;
@@ -151,6 +154,10 @@ Item {
         id: digitInputPeriodSpinBox
         x: 292
         y: 113
+
+        currentValue: dataManager.digitInputPeriod()
+
+        onCurrentValueChanged: dataManager.setDigitInputPeriod(currentValue)
     }
 
     MySpinBox {
@@ -160,7 +167,7 @@ Item {
     }
 
     MySpinBox {
-        id: blockingtPeriodSpinBox
+        id: blockingPeriodSpinBox
         x: 292
         y: 205
     }
@@ -281,18 +288,26 @@ Item {
         id: digitValueWidget1
         x: 5
         y: 305
+        currentValue: dataManager.powerButtonPwdDigit1()
+
+        onCurrentValueChanged: dataManager.setPowerButtonPwdDigit1(currentValue)
     }
 
     DigitValueWidget {
         id: digitValueWidget2
         x: 145
         y: 304
+        currentValue: dataManager.powerButtonPwdDigit2()
+        onCurrentValueChanged: dataManager.setPowerButtonPwdDigit2(currentValue)
     }
 
     DigitValueWidget {
         id: digitValueWidget3
         x: 283
         y: 304
+        currentValue: dataManager.powerButtonPwdDigit3()
+
+        onCurrentValueChanged: dataManager.setPowerButtonPwdDigit3(currentValue)
     }
 }
 
