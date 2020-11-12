@@ -9,5 +9,7 @@
         <file>src/qml/PrimeboxQmlWidgets/DigitValueButton.qml</file>
         <file>src/qml/PrimeboxQmlWidgets/DigitValueWidget.qml</file>
         <file>src/qml/ControlsFrame.qml</file>
+        <file>src/qml/HelpFrame.qml</file>
+        <file>src/qml/EnterPasswordFrame.qml</file>
     </qresource>
 </RCC>

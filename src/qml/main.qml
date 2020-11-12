@@ -99,6 +99,8 @@ ApplicationWindow
             width: 114
             x: 345
             ButtonGroup.group: switchFrameButtons
+
+            onClicked: framesLayout.currentIndex = 3
         }
 
         ButtonGroup {
@@ -112,6 +114,7 @@ ApplicationWindow
         y: 90
         width: 400
         height: 500
+        currentIndex: 4
 
         MainFrame {
             id: mainFrame
@@ -124,6 +127,14 @@ ApplicationWindow
         PwswFrame {
             id: pwswFrame
         }
+
+        HelpFrame {
+            id: helpFrame
+        }
+
+        EnterPasswordFrame {
+            id: enterPasswordFrame
+        }
     }
 
     Connections {
@@ -132,7 +143,7 @@ ApplicationWindow
     }
 
     Connections {
-        target: controlsFrame
-        function onLedActiveChanged() { mainFrame.ledActive = controlsFrame.ledActive }
+        target: enterPasswordFrame
+        function onPasswordAttemptedChanged() {if(enterPasswordFrame.passwordAttempted) framesLayout.currentIndex = 0}
     }
 }
