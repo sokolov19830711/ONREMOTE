@@ -21,6 +21,8 @@ public:
 
 	void writeMcuOutData(const QByteArray& data);
 
+	Q_INVOKABLE bool isDeviceActive() const;
+	Q_INVOKABLE bool isLedActive() const;
 	Q_INVOKABLE int powerButtonPwdLevel() const;
 	Q_INVOKABLE int digitInputPeriod() const;
 	Q_INVOKABLE int powerButtonPwdDigit1() const;
@@ -29,6 +31,8 @@ public:
 
 public slots:
 
+	void setDeviceActive(bool state);
+	void setLedActive(bool state);
 	void setPowerButtonPwdLevel(int value);
 	void setDigitInputPeriod(int value);
 	void setPowerButtonPwdDigit1(int value);
@@ -37,6 +41,8 @@ public slots:
 
 signals:
 
+	void deviceActiveChanged(bool state);
+	void ledActiveChanged(bool state);
 	void breakIn1ValueChanged(int value);
 	void breakIn2ValueChanged(int value);
 	void temperatureValueChanged(int value);

@@ -6,13 +6,13 @@ Item {
     width: 400
     height: 500
 
-    property bool ledActive: false
-
     OnOffButton {
         id: bypassButton
         x: 352
         y: 8
         enabled: true
+        checked: !dataManager.isDeviceActive()
+        onCheckedChanged: dataManager.setDeviceActive(!checked)
     }
 
     Text {
@@ -139,8 +139,8 @@ Item {
         x: 352
         y: 214
         enabled: true
-
-        onCheckedChanged: ledActive = checked
+        checked: dataManager.isLedActive()
+        onCheckedChanged: dataManager.setLedActive(checked)
     }
 
     Text {

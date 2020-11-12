@@ -2,14 +2,14 @@
 /.vs
 /out
 
-/firmware/.vs
-/firmware/__vm
-/firmware/Debug
-/firmware/Release
-/firmware/*.filters
-/firmware/*.sln
-/firmware/*.user
-/firmware/*.vcxproj
+src/firmware/.vs
+src/firmware/__vm
+src/firmware/Debug
+src/firmware/Release
+src/firmware/*.filters
+src/firmware/*.sln
+src/firmware/*.user
+src/firmware/*.vcxproj
 
 CMakeLists.txt.user
 CMakeSettings.json

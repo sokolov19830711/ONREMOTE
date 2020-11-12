@@ -470,6 +470,12 @@ Item {
         x: 180
         y: 169
         enabled: false
+        checked: dataManager.isLedActive()
+
+        Connections {
+            target: dataManager
+            function onLedActiveChanged(state) {ledButton.checked = state}
+        }
     }
 
     Text {

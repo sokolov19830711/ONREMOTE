@@ -47,7 +47,7 @@ struct  McuOutData
     unsigned long OS_sessionRunningTime; // Время работы ОС за сессию, в секундах
 };  // Итого получаем 36 байт
 
-enum FunctionsFlag {startOnBoot = 0x1, lockOS = 0x2, lockApp = 0x4, turnOn = 0x8, sound = 0x10, popupNotification = 0x20};
+enum FunctionsFlag {startOnBoot = 0x1, lockOS = 0x2, lockApp = 0x4, turnOn = 0x8, sound = 0x10, popupNotification = 0x20, led = 0x40};
 enum ActionsFlag {notification = 0x1, soundSignal = 0x2, PCShutDown = 0x4, active = 0x8};
 enum IButtonFlag { iButtonActive = 0x1, reset = 0x2, shutDown = 0x4 };
 
@@ -56,7 +56,7 @@ struct McuInData
     unsigned char startMarker1 = START_MARKER1;
     unsigned char startMarker2 = START_MARKER2;
 
-    unsigned char functionsFlags = 0;
+    unsigned char functionsFlags = 0x48;
 
     unsigned char vibrationFlags1 = 0;
     unsigned char vibrationFlags2 = 0;

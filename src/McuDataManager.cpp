@@ -7,6 +7,7 @@ McuDataManager::McuDataManager()
 {
 	_settings = QSharedPointer<QSettings>::create(QCoreApplication::applicationDirPath() + "/settings.ini", QSettings::IniFormat);
 
+	_mcuInData.functionsFlags = _settings->value("functionsFlags").toUInt();
 	_mcuInData.breakInFlags1 = _settings->value("breakInFlags").toUInt();
 	_mcuInData.dustFlags1 = _settings->value("dustFlags").toUInt();
 
@@ -27,6 +28,7 @@ McuDataManager::McuDataManager()
 
 McuDataManager::~McuDataManager()
 {
+	_settings->setValue("functionsFlags", _mcuInData.functionsFlags);
 	_settings->setValue("breakInFlags", _mcuInData.breakInFlags1);
 	_settings->setValue("dustFlags", _mcuInData.dustFlags1);
 
@@ -68,6 +70,18 @@ void McuDataManager::writeMcuOutData(const QByteArray& data)
 	update();
 }
 
+//--- Геттеры --------------------------------------------------------------------
+
+bool McuDataManager::isDeviceActive() const
+{
+	return _mcuInData.functionsFlags & FunctionsFlag::turnOn;
+}
+
+bool McuDataManager::isLedActive() const
+{
+	return _mcuInData.functionsFlags & FunctionsFlag::led;
+}
+
 int McuDataManager::powerButtonPwdLevel() const
 {
 	return _mcuInData.powerButtonPwdLevel;
@@ -93,6 +107,8 @@ int McuDataManager::powerButtonPwdDigit3() const
 	return _mcuInData.powerButtonPwdDigit3;
 }
 
+//------------------------------------------------------------------------------------------------
+
 void McuDataManager::update()
 {
 	if (_mcuOutData.breakInSensor1 != _prevMcuOutData.breakInSensor1)
@@ -114,6 +130,20 @@ void McuDataManager::update()
 	{
 		emit dustinessValueChanged(_mcuOutData.dustSensor1);
 	}
+}
+
+//--- public slots ----------------------------------------------------------------------------
+
+void McuDataManager::setDeviceActive(bool state)
+{
+	setBit(_mcuInData.functionsFlags, FunctionsFlag::turnOn, state);
+	emit deviceActiveChanged(state);
+}
+
+void McuDataManager::setLedActive(bool state)
+{
+	setBit(_mcuInData.functionsFlags, FunctionsFlag::led, state);
+	emit ledActiveChanged(state);
 }
 
 void McuDataManager::setPowerButtonPwdLevel(int value)

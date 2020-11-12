@@ -2,6 +2,8 @@
 
 #include <Arduino.h>
 
+#include "DataManager.h"
+
 TricolorLED::TricolorLED()
 {
 }
@@ -39,6 +41,9 @@ void TricolorLED::update()
 
 void TricolorLED::blink(int color)
 {
+	if ( !(DataManager::config().functionsFlags & FunctionsFlag::led) )
+		return;
+
 	if (!getInstance()._isOn)
 	{
 		getInstance()._pin = color;
@@ -46,5 +51,4 @@ void TricolorLED::blink(int color)
 		getInstance()._isOn = true;
 		digitalWrite(getInstance()._pin, HIGH);
 	}
-
 }
