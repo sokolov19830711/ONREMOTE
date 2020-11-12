@@ -19,13 +19,13 @@
 
 static SerialPortManager portManager;
 static InternalMemoryManager internalMemoryManager;
-static TemperatureSensors temperatureSensors;
-static MoistureSensors moistureSensors;
-static DustSensors dustSensors;
-static PositionVibrationSensors positionVibrationSensors;
-static BreakInSensors breakInSensors;
+//static TemperatureSensors temperatureSensors;
+//static MoistureSensors moistureSensors;
+//static DustSensors dustSensors;
+//static PositionVibrationSensors positionVibrationSensors;
+//static BreakInSensors breakInSensors;
+//static IButtonManager iButtonManager;
 static PowerButtonWatcher powerButtonWatcher;
-static IButtonManager iButtonManager;
 
 static int loopsCounter = 0; // счетчик кол-ва вызовов функции loop()
 const int LOOPS_COUNT = 100; // кол-во циклов, через которое мы снимаем показания с "тяжелых" датчиков.
@@ -41,17 +41,17 @@ void setup()
     TricolorLED::init(RED, TIMER_PERIOD, 200);
 
     internalMemoryManager.initConfig();
-    iButtonManager.init(&internalMemoryManager);
+    //iButtonManager.init(&internalMemoryManager);
 
     Timer5.setPeriod(TIMER_PERIOD); // Устанавливаем период таймера 20000 мкс -> 50 гц
     Timer5.enableISR(CHANNEL_A); // Или просто.enableISR(), запускаем прерывание на канале А таймера
 
     Serial.begin(19200);
 
-    temperatureSensors.init();
-    moistureSensors.init();
-    dustSensors.init();
-    positionVibrationSensors.init();
+    //temperatureSensors.init();
+    //moistureSensors.init();
+    //dustSensors.init();
+    //positionVibrationSensors.init();
     powerButtonWatcher.updateConfig();
 
     DataManager::outData().totalRunningTime = internalMemoryManager.lastTotalRunningTimeValue();
@@ -77,23 +77,26 @@ void loop()
       loopsCounter = 0;
       
       // Влажность
-      moistureSensors.update();
+      //moistureSensors.update();
 
       // Температура
-      temperatureSensors.update();
+      //temperatureSensors.update();
 
       // Датчик пыли
-      dustSensors.update();
+      //dustSensors.update();
 
       // Датчики вскрытия
-      breakInSensors.update();
+      //breakInSensors.update();
+
+      //Пока датчики не работают, не забыть потом убрать!!!
+      delay(500);
     }
 
     else
     {
         loopsCounter++;
 
-        positionVibrationSensors.update();
+        //positionVibrationSensors.update();
 
 
         portManager.update();
@@ -105,7 +108,7 @@ void loop()
 			powerButtonWatcher.updateConfig();
         }
 
-        iButtonManager.update();
+        //iButtonManager.update();
     }
 }
 
