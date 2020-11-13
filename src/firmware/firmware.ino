@@ -3,13 +3,13 @@
 #include "SerialPortManager.h"
 #include "DataManager.h"
 #include "InternalMemoryManager.h"
-#include "TemperatureSensors.h"
-#include "MoistureSensors.h"
-#include "DustSensors.h"
-#include "PositionVibrationSensors.h"
-#include "BreakInSensors.h"
+//#include "TemperatureSensors.h"
+//#include "MoistureSensors.h"
+//#include "DustSensors.h"
+//#include "PositionVibrationSensors.h"
+//#include "BreakInSensors.h"
 #include "PowerButtonWatcher.h"
-#include "IButtonManager.h"
+//#include "IButtonManager.h"
 
 #include "Beeper.h"
 #include "PcPower.h"
@@ -43,8 +43,8 @@ void setup()
     internalMemoryManager.initConfig();
     //iButtonManager.init(&internalMemoryManager);
 
-    Timer5.setPeriod(TIMER_PERIOD); // Устанавливаем период таймера 20000 мкс -> 50 гц
-    Timer5.enableISR(CHANNEL_A); // Или просто.enableISR(), запускаем прерывание на канале А таймера
+    Timer2.setPeriod(TIMER_PERIOD); // Устанавливаем период таймера 20000 мкс -> 50 гц
+    Timer2.enableISR(CHANNEL_A); // Или просто.enableISR(), запускаем прерывание на канале А таймера
 
     Serial.begin(19200);
 
@@ -113,7 +113,7 @@ void loop()
 }
 
 // Прерывание А таймера 5
-ISR(TIMER5_A)
+ISR(TIMER2_A)
 {
     Beeper::update();
     PcPower::update();

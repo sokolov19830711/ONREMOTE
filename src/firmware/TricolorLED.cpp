@@ -34,7 +34,7 @@ void TricolorLED::update()
 		{
 			getInstance()._cyclesCounter = 0;
 			getInstance()._isOn = false;
-			digitalWrite(getInstance()._pin, LOW);
+			digitalWrite(getInstance()._pin, HIGH);
 		}
 	}
 }
@@ -49,6 +49,6 @@ void TricolorLED::blink(int color)
 		getInstance()._pin = color;
 		getInstance().getInstance()._cyclesCounter = 0;
 		getInstance()._isOn = true;
-		digitalWrite(getInstance()._pin, HIGH);
+		digitalWrite(getInstance()._pin, LOW);
 	}
 }
