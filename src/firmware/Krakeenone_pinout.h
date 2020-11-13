@@ -24,7 +24,7 @@ const int PC_POWER = A3;
 //
 //const int SYS_FAN = 35;
 //
-//const int DEFAULT_PIN = 36;
+const int DEFAULT_PIN = 3;
 
 const int PC_POWER_BUTTON = 2;
 //const int PC_RESET_BUTTON = 3;

@@ -3,6 +3,7 @@
 #include <Arduino.h>
 
 #include "DataManager.h"
+#include "Krakeenone_pinout.h"
 
 TricolorLED::TricolorLED()
 {
@@ -21,7 +22,19 @@ void TricolorLED::init(int pin, int timerPeriod, int duration)
 	getInstance()._timerPeriod = timerPeriod;
 	getInstance()._duration = duration;
 	getInstance()._cyclesCount = getInstance()._duration / (getInstance()._timerPeriod / 1000);
+
 	pinMode(getInstance()._pin, OUTPUT);
+	digitalWrite(getInstance()._pin, HIGH);
+
+	getInstance()._pin = BLUE;
+	pinMode(getInstance()._pin, OUTPUT);
+	digitalWrite(getInstance()._pin, HIGH);
+
+	getInstance()._pin = GREEN;
+	pinMode(getInstance()._pin, OUTPUT);
+	digitalWrite(getInstance()._pin, HIGH);
+
+	getInstance()._pin = RED;
 }
 
 
