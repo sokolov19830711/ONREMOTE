@@ -55,7 +55,7 @@ void PowerButtonWatcher::update(int dt)
 	{
 		if (_isPressed && !currentButtonState) // кнопку нажали и отпустили
 		{
-			if(_pwdLevel)
+			if(_pwdLevel && (DataManager::config().functionsFlags & FunctionsFlag::turnOn))
 			{
 				_isWatching = true;
 				_counter = 1;
