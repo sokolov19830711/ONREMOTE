@@ -5,6 +5,7 @@
 #include "DataManager.h"
 #include "SerialPortManager.h"
 #include "AccountManager.h"
+#include "TrayIconManager.h"
 
 int main(int argc, char** argv)
 {
@@ -13,6 +14,7 @@ int main(int argc, char** argv)
     DataManager dataManager;
     SerialPortManager portManager(dataManager);
     AccountManager accountManager(dataManager);
+    TrayIconManager trayIconManager;
 
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("dataManager", &dataManager);
