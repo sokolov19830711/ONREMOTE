@@ -15,6 +15,8 @@ public:
 	Q_INVOKABLE bool passwordAttempted() const;
 	Q_INVOKABLE bool attemptLicenseKey(const QString& key) const;
 	Q_INVOKABLE bool attemptPassword(const QString& password);
+	Q_INVOKABLE bool checkPassword(const QString& password) const;
+	Q_INVOKABLE void savePassword(const QString& password);
 
 private:
 

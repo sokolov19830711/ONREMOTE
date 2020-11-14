@@ -6,6 +6,29 @@ Item {
     width: 400
     height: 500
 
+    Button {
+        id: passwordButton
+        x: 292
+        y: 264
+        width: 100
+        height: 40
+        text: "ПАРОЛЬ"
+        font.pointSize: 10
+
+        background: Rectangle {
+            color: parent.pressed ? "#166999" : "#30859B"
+        }
+
+        contentItem: Text {
+            color: "#fefefe"
+            text: parent.text
+            font: parent.font
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            elide: Text.ElideRight
+        }
+    }
+
     OnOffButton {
         id: bypassButton
         x: 352
@@ -155,29 +178,6 @@ Item {
         horizontalAlignment: Text.AlignRight
         verticalAlignment: Text.AlignVCenter
         minimumPixelSize: 10
-    }
-
-    Button {
-        id: passwordButton
-        x: 292
-        y: 264
-        width: 100
-        height: 40
-        text: "ПАРОЛЬ"
-        font.pointSize: 10
-
-        background: Rectangle {
-            color: parent.pressed ? "#166999" : "#30859B"
-        }
-
-        contentItem: Text {
-            color: "#fefefe"
-            text: parent.text
-            font: parent.font
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-            elide: Text.ElideRight
-        }
     }
 
     Text {

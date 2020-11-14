@@ -192,6 +192,18 @@ ApplicationWindow
 
     Connections {
         target: enterPasswordFrame.children[2] // Кнопка "ВОЙТИ"
-        function onClicked() {if(accountManager.passwordAttempted()) framesLayout.currentIndex = 0; switchFrameButtonsItem.visible = true}
+        function onClicked()
+        {
+            if(accountManager.passwordAttempted())
+            {
+                framesLayout.currentIndex = 0;
+                switchFrameButtonsItem.visible = true;
+            }
+        }
+    }
+
+    Connections {
+        target: controlsFrame.children[0] // Кнопка "ПАРОЛЬ"
+        function onClicked() {framesLayout.currentIndex = 7}
     }
 }

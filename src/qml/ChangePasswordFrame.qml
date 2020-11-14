@@ -6,6 +6,19 @@ Item {
     width: 400
     height: 500
 
+    function checkFields ()
+    {
+        if (accountManager.checkPassword(passwordField.text) && (newPasswordField1.text === newPasswordField2.text))
+        {
+            savePasswordButton.enabled = true
+        }
+
+        else
+        {
+            savePasswordButton.enabled = false
+        }
+    }
+
     Text {
         id: text1
         x: 8
@@ -39,12 +52,14 @@ Item {
     }
 
     Button {
-        id: attemptPasswordButton
+        id: savePasswordButton
         x: 138
         y: 312
         width: 124
         height: 40
-        text: "ВОЙТИ"
+        text: "СОХРАНИТЬ"
+        enabled: false
+
         contentItem: Text {
             color: "#fefefe"
             text: "СОХРАНИТЬ"
@@ -55,10 +70,10 @@ Item {
         }
         font.pointSize: 10
         background: Rectangle {
-            color: parent.pressed ? "#166999" : "#30859B"
+            color: parent.enabled ? (parent.pressed ? "#166999" : "#30859B") : "#636363"
         }
 
-        onClicked: accountManager.attemptPassword(passwordField.text)
+        onClicked: accountManager.savePassword(newPasswordField1.text)
     }
 
     Text {
@@ -109,7 +124,20 @@ Item {
         placeholderText: ""
     }
 
+    Connections {
+        target: passwordField
+        function onTextEdited() {checkFields()}
+    }
 
+    Connections {
+        target: newPasswordField1
+        function onTextEdited() {checkFields()}
+    }
+
+    Connections {
+        target: newPasswordField2
+        function onTextEdited() {checkFields()}
+    }
 }
 
 /*##^##

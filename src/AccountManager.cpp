@@ -52,3 +52,34 @@ bool AccountManager::attemptPassword(const QString& password)
 	
 	return _isPasswordAttempted;
 }
+
+bool AccountManager::checkPassword(const QString& password) const
+{
+	if (
+		(password.isEmpty() && !_dataManager.settings()->contains("password")) || // Пароль не установлен
+		((_dataManager.settings()->value("password")).toByteArray() == QCryptographicHash::hash(QString(password + "q[fdfj").toUtf8(), QCryptographicHash::Algorithm::Md5))
+		)
+	{
+		return true;
+	}
+
+	else
+	{
+		return false;
+	}
+}
+
+void AccountManager::savePassword(const QString& password)
+{
+	if (password != "")
+	{
+		_dataManager.settings()->setValue("password", QCryptographicHash::hash(QString(password + "q[fdfj").toUtf8(), QCryptographicHash::Algorithm::Md5));
+	}
+
+	else
+	{
+		_dataManager.settings()->remove("password");
+	}
+
+	_dataManager.settings()->sync();
+}
