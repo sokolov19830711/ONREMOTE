@@ -191,6 +191,7 @@ Item {
         font.pixelSize: 16
         horizontalAlignment: Text.AlignRight
         verticalAlignment: Text.AlignVCenter
+        font.italic: true
         minimumPixelSize: 10
     }
 
@@ -205,6 +206,7 @@ Item {
         font.pixelSize: 16
         horizontalAlignment: Text.AlignRight
         verticalAlignment: Text.AlignVCenter
+        font.italic: true
         minimumPixelSize: 10
     }
 

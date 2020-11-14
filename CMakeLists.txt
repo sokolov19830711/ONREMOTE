@@ -9,5 +9,5 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
 add_executable(${PROJECT_NAME} WIN32 "appIcon.rc" "qml.qrc" "src/main.cpp"	
-									"src/McuDataManager.cpp" "src/SerialPortManager.cpp")
+									"src/DataManager.cpp" "src/SerialPortManager.cpp" "src/AccountManager.cpp")
 target_link_libraries(${PROJECT_NAME} Qt5::Widgets Qt5::SerialPort Qt5::Qml Qt5::Quick)

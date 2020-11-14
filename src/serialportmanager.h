@@ -5,7 +5,7 @@
 #include <QSerialPort>
 #include <QTimer>
 
-#include "McuDataManager.h"
+#include "DataManager.h"
 
 class SerialPortManager : public QObject
 {
@@ -13,7 +13,7 @@ class SerialPortManager : public QObject
 
 public:
 
-    SerialPortManager(McuDataManager& dataManager, QObject *parent = nullptr);
+    SerialPortManager(DataManager& dataManager, QObject *parent = nullptr);
     virtual ~SerialPortManager();
 
     Q_INVOKABLE QString getPortName() const;
@@ -32,7 +32,7 @@ public slots:
 
 private:
 
-    McuDataManager& _dataManager;
+    DataManager& _dataManager;
     const int _connectionWaitingTime = 10000; // Сколько ждем, прежде чем шлем сигнал об отсутствии связи с устройством (мс)
 
     QSerialPort _port;

@@ -1,9 +1,9 @@
-#include "McuDataManager.h"
+#include "DataManager.h"
 
 #include <QDebug>
 #include <QCoreApplication>
 
-McuDataManager::McuDataManager()
+DataManager::DataManager()
 {
 	_settings = QSharedPointer<QSettings>::create(QCoreApplication::applicationDirPath() + "/settings.ini", QSettings::IniFormat);
 
@@ -26,7 +26,7 @@ McuDataManager::McuDataManager()
 	_mcuInData.digitInputPeriod = _settings->value("PWR/digitInputPeriod", 3).toInt();
 }
 
-McuDataManager::~McuDataManager()
+DataManager::~DataManager()
 {
 	_settings->setValue("functionsFlags", _mcuInData.functionsFlags);
 	_settings->setValue("breakInFlags", _mcuInData.breakInFlags1);
@@ -48,22 +48,22 @@ McuDataManager::~McuDataManager()
 	_settings->setValue("PWR/digitInputPeriod", _mcuInData.digitInputPeriod);
 }
 
-McuInData& McuDataManager::inData()
+McuInData& DataManager::inData()
 {
 	return _mcuInData;
 }
 
-McuOutData& McuDataManager::outData()
+McuOutData& DataManager::outData()
 {
 	return _mcuOutData;
 }
 
-QSharedPointer<QSettings> McuDataManager::settings()
+QSharedPointer<QSettings> DataManager::settings()
 {
 	return _settings;
 }
 
-void McuDataManager::writeMcuOutData(const QByteArray& data)
+void DataManager::writeMcuOutData(const QByteArray& data)
 {
 	_prevMcuOutData = _mcuOutData;
 	memcpy(&_mcuOutData, data.data(), sizeof(McuOutData));
@@ -72,44 +72,44 @@ void McuDataManager::writeMcuOutData(const QByteArray& data)
 
 //--- Геттеры --------------------------------------------------------------------
 
-bool McuDataManager::isDeviceActive() const
+bool DataManager::isDeviceActive() const
 {
 	return _mcuInData.functionsFlags & FunctionsFlag::turnOn;
 }
 
-bool McuDataManager::isLedActive() const
+bool DataManager::isLedActive() const
 {
 	return _mcuInData.functionsFlags & FunctionsFlag::led;
 }
 
-int McuDataManager::powerButtonPwdLevel() const
+int DataManager::powerButtonPwdLevel() const
 {
 	return _mcuInData.powerButtonPwdLevel;
 }
 
-int McuDataManager::digitInputPeriod() const
+int DataManager::digitInputPeriod() const
 {
 	return _mcuInData.digitInputPeriod;
 }
 
-int McuDataManager::powerButtonPwdDigit1() const
+int DataManager::powerButtonPwdDigit1() const
 {
 	return _mcuInData.powerButtonPwdDigit1;
 }
 
-int McuDataManager::powerButtonPwdDigit2() const
+int DataManager::powerButtonPwdDigit2() const
 {
 	return _mcuInData.powerButtonPwdDigit2;
 }
 
-int McuDataManager::powerButtonPwdDigit3() const
+int DataManager::powerButtonPwdDigit3() const
 {
 	return _mcuInData.powerButtonPwdDigit3;
 }
 
 //------------------------------------------------------------------------------------------------
 
-void McuDataManager::update()
+void DataManager::update()
 {
 	if (_mcuOutData.breakInSensor1 != _prevMcuOutData.breakInSensor1)
 	{
@@ -134,43 +134,43 @@ void McuDataManager::update()
 
 //--- public slots ----------------------------------------------------------------------------
 
-void McuDataManager::setDeviceActive(bool state)
+void DataManager::setDeviceActive(bool state)
 {
 	setBit(_mcuInData.functionsFlags, FunctionsFlag::turnOn, state);
 	emit deviceActiveChanged(state);
 }
 
-void McuDataManager::setLedActive(bool state)
+void DataManager::setLedActive(bool state)
 {
 	setBit(_mcuInData.functionsFlags, FunctionsFlag::led, state);
 	emit ledActiveChanged(state);
 }
 
-void McuDataManager::setPowerButtonPwdLevel(int value)
+void DataManager::setPowerButtonPwdLevel(int value)
 {
 	if(_mcuInData.powerButtonPwdLevel != value)
 		_mcuInData.powerButtonPwdLevel = value;
 }
 
-void McuDataManager::setDigitInputPeriod(int value)
+void DataManager::setDigitInputPeriod(int value)
 {
 	if(_mcuInData.digitInputPeriod != value)
 		_mcuInData.digitInputPeriod = value;
 }
 
-void McuDataManager::setPowerButtonPwdDigit1(int value)
+void DataManager::setPowerButtonPwdDigit1(int value)
 {
 	if (_mcuInData.powerButtonPwdDigit1 != value)
 		_mcuInData.powerButtonPwdDigit1 = value;
 }
 
-void McuDataManager::setPowerButtonPwdDigit2(int value)
+void DataManager::setPowerButtonPwdDigit2(int value)
 {
 	if (_mcuInData.powerButtonPwdDigit2 != value)
 		_mcuInData.powerButtonPwdDigit2 = value;
 }
 
-void McuDataManager::setPowerButtonPwdDigit3(int value)
+void DataManager::setPowerButtonPwdDigit3(int value)
 {
 	if (_mcuInData.powerButtonPwdDigit3 != value)
 		_mcuInData.powerButtonPwdDigit3 = value;

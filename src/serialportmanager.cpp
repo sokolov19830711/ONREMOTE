@@ -3,7 +3,7 @@
 
 #include <QDebug>
 
-SerialPortManager::SerialPortManager(McuDataManager& dataManager, QObject* parent) :
+SerialPortManager::SerialPortManager(DataManager& dataManager, QObject* parent) :
     QObject(parent),
     _dataManager(dataManager)
 {

@@ -50,6 +50,7 @@ ApplicationWindow
         id: switchFrameButtonsItem
         y: 601
         height: 92
+        visible: false
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
@@ -114,7 +115,23 @@ ApplicationWindow
         y: 90
         width: 400
         height: 500
-        currentIndex: 4
+        currentIndex: function ()
+        {
+            if(accountManager.licenseKeyActivated())
+            {
+                if(accountManager.passwordAttempted())
+                {
+                    switchFrameButtonsItem.visible = true;
+                    return 0;
+                }
+                else
+                    return 6;
+            }
+            else
+            {
+                return 4;
+            }
+        }()
 
         MainFrame {
             id: mainFrame
@@ -132,8 +149,20 @@ ApplicationWindow
             id: helpFrame
         }
 
+        EnterActivationKeyFrame {
+            id: enterActivationKeyFrame
+        }
+
+        LicenseAgreementFrame {
+            id: licenseAgreementFrame
+        }
+
         EnterPasswordFrame {
             id: enterPasswordFrame
+        }
+
+        ChangePasswordFrame {
+            id: changePasswordFrame
         }
     }
 
@@ -143,7 +172,26 @@ ApplicationWindow
     }
 
     Connections {
-        target: enterPasswordFrame
-        function onPasswordAttemptedChanged() {if(enterPasswordFrame.passwordAttempted) framesLayout.currentIndex = 0}
+        target: enterActivationKeyFrame.children[2] // Кнопка "АКТИВИРОВАТЬ"
+        function onClicked() {if(accountManager.licenseKeyActivated()) framesLayout.currentIndex = 5}
+    }
+
+    Connections {
+        target: licenseAgreementFrame.children[1] // Кнопка "ПРИНЯТЬ"
+        function onClicked()
+        {
+            if(accountManager.passwordAttempted())
+            {
+                switchFrameButtonsItem.visible = true;
+                framesLayout.currentIndex = 0;
+            }
+            else
+                framesLayout.currentIndex = 6;
+        }
+    }
+
+    Connections {
+        target: enterPasswordFrame.children[2] // Кнопка "ВОЙТИ"
+        function onClicked() {if(accountManager.passwordAttempted()) framesLayout.currentIndex = 0; switchFrameButtonsItem.visible = true}
     }
 }

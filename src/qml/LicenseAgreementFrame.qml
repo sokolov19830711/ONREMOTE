@@ -6,29 +6,29 @@ Item {
     width: 400
     height: 500
 
-    TextField {
-        id: activationKeyField
-        x: 8
-        y: 331
-        width: 384
-        height: 52
+    Text {
+        id: currentPwswLevelLabel
+        x: 0
+        y: 16
+        width: 401
+        height: 51
         color: "#fefefe"
+        text: qsTr("ЛИЦЕНЗИОННОЕ СОГЛАШЕНИЕ")
+        font.pixelSize: 20
         horizontalAlignment: Text.AlignHCenter
-        font.pointSize: 17
-        placeholderText: "XXXX-XXXX-XXXX-XXXX"
-
-        background: Rectangle {
-            color: "#636363"
-        }
+        verticalAlignment: Text.AlignVCenter
+        minimumPixelSize: 16
+        font.family: "Arial"
+        font.weight: Font.Light
     }
 
     Button {
-        id: activateButton
-        x: 8
-        y: 394
+        id: agreeButton
+        x: 141
+        y: 407
         width: 119
         height: 40
-        text: "АКТИВИРОВАТЬ"
+        text: "ПРИНЯТЬ"
         contentItem: Text {
             color: "#fefefe"
             text: parent.text
@@ -43,83 +43,10 @@ Item {
         }
     }
 
-    Rectangle {
-        id: rectangle
-        x: 290
-        y: 394
-        width: 100
-        height: 20
-        color: "#ffffff"
-        border.width: 0
-    }
-
-    Rectangle {
-        id: rectangle1
-        x: 290
-        y: 414
-        width: 100
-        height: 20
-        color: "#245ae8"
-        border.width: 0
-    }
-
-    Rectangle {
-        id: rectangle2
-        x: 290
-        y: 434
-        width: 100
-        height: 20
-        color: "#f71d11"
-        border.width: 0
-    }
-
-    Text {
-        id: text9
-        x: 196
-        y: 394
-        width: 89
-        height: 20
-        color: "#fefefe"
-        text: qsTr("разработано и")
-        font.pixelSize: 12
-        horizontalAlignment: Text.AlignRight
-        verticalAlignment: Text.AlignVCenter
-        minimumPixelSize: 6
-    }
-
-    Text {
-        id: text10
-        x: 154
-        y: 412
-        width: 130
-        height: 20
-        color: "#fefefe"
-        text: qsTr("произведено в России")
-        font.pixelSize: 12
-        horizontalAlignment: Text.AlignRight
-        verticalAlignment: Text.AlignVCenter
-        minimumPixelSize: 6
-    }
-
-    Text {
-        id: text11
-        x: 155
-        y: 434
-        width: 130
-        height: 20
-        color: "#fefefe"
-        text: qsTr("MADE IN RUSSIA")
-        font.pixelSize: 12
-        horizontalAlignment: Text.AlignRight
-        verticalAlignment: Text.AlignVCenter
-        font.bold: true
-        minimumPixelSize: 6
-    }
-
     Text {
         id: text1
-        x: 26
-        y: 34
+        x: 34
+        y: 76
         width: 384
         height: 23
         color: "#fefefe"
@@ -132,8 +59,8 @@ Item {
 
     Text {
         id: text2
-        x: 18
-        y: 56
+        x: 26
+        y: 94
         width: 384
         height: 23
         color: "#fefefe"
@@ -146,8 +73,8 @@ Item {
 
     Text {
         id: text3
-        x: 18
-        y: 76
+        x: 26
+        y: 114
         width: 384
         height: 23
         color: "#fefefe"
@@ -160,8 +87,8 @@ Item {
 
     Text {
         id: text4
-        x: 12
-        y: 96
+        x: 20
+        y: 134
         width: 384
         height: 23
         color: "#fefefe"
@@ -174,8 +101,8 @@ Item {
 
     Text {
         id: text5
-        x: 18
-        y: 116
+        x: 26
+        y: 154
         width: 384
         height: 23
         color: "#fefefe"
@@ -188,8 +115,8 @@ Item {
 
     Text {
         id: text6
-        x: 18
-        y: 136
+        x: 26
+        y: 174
         width: 384
         height: 23
         color: "#fefefe"
@@ -202,8 +129,8 @@ Item {
 
     Text {
         id: text7
-        x: 18
-        y: 156
+        x: 26
+        y: 194
         width: 384
         height: 23
         color: "#fefefe"
@@ -216,8 +143,8 @@ Item {
 
     Text {
         id: text8
-        x: 18
-        y: 176
+        x: 26
+        y: 214
         width: 384
         height: 23
         color: "#fefefe"
@@ -229,9 +156,9 @@ Item {
     }
 
     Text {
-        id: text12
-        x: 18
-        y: 196
+        id: text9
+        x: 26
+        y: 234
         width: 384
         height: 23
         color: "#fefefe"
@@ -243,9 +170,9 @@ Item {
     }
 
     Text {
-        id: text13
-        x: 18
-        y: 216
+        id: text10
+        x: 26
+        y: 254
         width: 384
         height: 23
         color: "#fefefe"
@@ -257,9 +184,9 @@ Item {
     }
 
     Text {
-        id: text14
-        x: 18
-        y: 236
+        id: text11
+        x: 26
+        y: 274
         width: 384
         height: 23
         color: "#fefefe"
@@ -271,9 +198,9 @@ Item {
     }
 
     Text {
-        id: text15
-        x: 18
-        y: 256
+        id: text12
+        x: 26
+        y: 294
         width: 384
         height: 23
         color: "#fefefe"
@@ -285,9 +212,9 @@ Item {
     }
 
     Text {
-        id: text16
-        x: 18
-        y: 276
+        id: text13
+        x: 26
+        y: 314
         width: 384
         height: 23
         color: "#fefefe"
@@ -299,9 +226,9 @@ Item {
     }
 
     Text {
-        id: text17
-        x: 18
-        y: 296
+        id: text14
+        x: 26
+        y: 334
         width: 384
         height: 23
         color: "#fefefe"
@@ -311,8 +238,6 @@ Item {
         verticalAlignment: Text.AlignVCenter
         textFormat: Text.RichText
     }
-
-
 }
 
 /*##^##

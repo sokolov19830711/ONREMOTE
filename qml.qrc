@@ -11,5 +11,8 @@
         <file>src/qml/ControlsFrame.qml</file>
         <file>src/qml/HelpFrame.qml</file>
         <file>src/qml/EnterPasswordFrame.qml</file>
+        <file>src/qml/EnterActivationKeyFrame.qml</file>
+        <file>src/qml/LicenseAgreementFrame.qml</file>
+        <file>src/qml/ChangePasswordFrame.qml</file>
     </qresource>
 </RCC>

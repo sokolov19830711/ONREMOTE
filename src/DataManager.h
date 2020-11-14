@@ -6,14 +6,14 @@
 #include <QSettings>
 #include <QSharedPointer>
 
-class McuDataManager : public QObject
+class DataManager : public QObject
 {
 	Q_OBJECT
 
 public:
 
-	McuDataManager();
-	virtual ~McuDataManager();
+	DataManager();
+	virtual ~DataManager();
 
 	McuInData& inData();
 	McuOutData& outData();

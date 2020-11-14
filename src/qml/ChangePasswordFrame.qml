@@ -13,7 +13,7 @@ Item {
         width: 384
         height: 42
         color: "#fefefe"
-        text: "ВВЕДИТЕ ПАРОЛЬ"
+        text: "ВВЕДИТЕ ТЕКУЩИЙ ПАРОЛЬ"
         font.pixelSize: 16
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
@@ -40,14 +40,14 @@ Item {
 
     Button {
         id: attemptPasswordButton
-        x: 150
-        y: 122
-        width: 101
+        x: 138
+        y: 312
+        width: 124
         height: 40
         text: "ВОЙТИ"
         contentItem: Text {
             color: "#fefefe"
-            text: parent.text
+            text: "СОХРАНИТЬ"
             elide: Text.ElideRight
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
@@ -59,6 +59,54 @@ Item {
         }
 
         onClicked: accountManager.attemptPassword(passwordField.text)
+    }
+
+    Text {
+        id: text2
+        x: 8
+        y: 142
+        width: 384
+        height: 42
+        color: "#fefefe"
+        text: "ВВЕДИТЕ НОВЫЙ ПАРОЛЬ"
+        font.pixelSize: 16
+        horizontalAlignment: Text.AlignHCenter
+        verticalAlignment: Text.AlignVCenter
+        textFormat: Text.RichText
+    }
+
+    TextField {
+        id: newPasswordField1
+        x: 8
+        y: 183
+        width: 384
+        height: 52
+        color: "#fefefe"
+        horizontalAlignment: Text.AlignHCenter
+        font.pointSize: 15
+        passwordMaskDelay: 300
+        background: Rectangle {
+            color: "#636363"
+        }
+        placeholderText: ""
+        echoMode: TextInput.Password
+    }
+
+    TextField {
+        id: newPasswordField2
+        x: 8
+        y: 241
+        width: 384
+        height: 52
+        color: "#fefefe"
+        horizontalAlignment: Text.AlignHCenter
+        passwordMaskDelay: 300
+        font.pointSize: 15
+        background: Rectangle {
+            color: "#636363"
+        }
+        echoMode: TextInput.Password
+        placeholderText: ""
     }
 
 

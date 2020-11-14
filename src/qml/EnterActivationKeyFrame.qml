@@ -9,11 +9,11 @@ Item {
     Text {
         id: text1
         x: 8
-        y: 13
+        y: 127
         width: 384
         height: 42
         color: "#fefefe"
-        text: "ВВЕДИТЕ ПАРОЛЬ"
+        text: "ВВЕДИТЕ КЛЮЧ АКТИВАЦИИ"
         font.pixelSize: 16
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
@@ -21,17 +21,15 @@ Item {
     }
 
     TextField {
-        id: passwordField
+        id: keyField
         x: 8
-        y: 54
+        y: 168
         width: 384
         height: 52
         color: "#fefefe"
         horizontalAlignment: Text.AlignHCenter
         font.pointSize: 15
         placeholderText: ""
-        echoMode: TextInput.Password
-        passwordMaskDelay: 300
 
         background: Rectangle {
             color: "#636363"
@@ -39,12 +37,12 @@ Item {
     }
 
     Button {
-        id: attemptPasswordButton
-        x: 150
-        y: 122
-        width: 101
+        id: attemptKeyButton
+        x: 130
+        y: 233
+        width: 140
         height: 40
-        text: "ВОЙТИ"
+        text: "АКТИВИРОВАТЬ"
         contentItem: Text {
             color: "#fefefe"
             text: parent.text
@@ -58,7 +56,7 @@ Item {
             color: parent.pressed ? "#166999" : "#30859B"
         }
 
-        onClicked: accountManager.attemptPassword(passwordField.text)
+        onClicked: accountManager.attemptLicenseKey(keyField.text)
     }
 
 
