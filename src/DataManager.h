@@ -22,6 +22,8 @@ public:
 	void writeMcuOutData(const QByteArray& data);
 
 	Q_INVOKABLE bool isDeviceActive() const;
+	Q_INVOKABLE bool isStartOnBoot() const;
+	Q_INVOKABLE bool isLockOS() const;
 	Q_INVOKABLE bool isLedActive() const;
 	Q_INVOKABLE int powerButtonPwdLevel() const;
 	Q_INVOKABLE int digitInputPeriod() const;

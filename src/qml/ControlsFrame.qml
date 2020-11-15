@@ -70,7 +70,10 @@ Item {
         id: startOnBootButton
         x: 352
         y: 60
+        checked: dataManager.isStartOnBoot()
         enabled: true
+
+        onToggled: osInteractionManager.setStartOnBoot(startOnBootButton.checked)
     }
 
     Text {
@@ -105,7 +108,10 @@ Item {
         id: lockOSButton
         x: 352
         y: 111
+        checked: dataManager.isLockOS()
         enabled: true
+
+        onToggled: osInteractionManager.setLockOS(lockOSButton.checked)
     }
 
     Text {

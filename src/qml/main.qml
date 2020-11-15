@@ -9,7 +9,7 @@ ApplicationWindow
     id: applicationWindow
     width: 460
     height: 700
-    visible: true
+    visible: false
     color: "#585858"
     maximumWidth: 460
     maximumHeight: 700
@@ -215,7 +215,13 @@ ApplicationWindow
         target: trayIconManager
         function onShowAppWindow()
         {
-            if(accountManager.isPasswordSet())
+            if(!accountManager.licenseKeyActivated())
+            {
+                switchFrameButtonsItem.visible = false;
+                framesLayout.currentIndex = 4;
+            }
+
+            else if(accountManager.isPasswordSet())
             {
                 switchFrameButtonsItem.visible = false;
                 framesLayout.currentIndex = 6;

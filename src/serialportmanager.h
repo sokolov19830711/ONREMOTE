@@ -33,11 +33,11 @@ public slots:
 private:
 
     DataManager& _dataManager;
-    const int _connectionWaitingTime = 10000; // Сколько ждем, прежде чем шлем сигнал об отсутствии связи с устройством (мс)
 
     QSerialPort _port;
 	int _isSync = 0;
 	QByteArray _rawData;
 
     QTimer* _noConnectionTimer;
+    const int _connectionWaitingTime = 10000; // Сколько ждем, прежде чем шлем сигнал об отсутствии связи с устройством (мс)
 };

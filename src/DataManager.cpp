@@ -77,6 +77,16 @@ bool DataManager::isDeviceActive() const
 	return _mcuInData.functionsFlags & FunctionsFlag::turnOn;
 }
 
+bool DataManager::isStartOnBoot() const
+{
+	return _settings->value("startOnBoot").toBool();
+}
+
+bool DataManager::isLockOS() const
+{
+	return _settings->value("lockOS").toBool();
+}
+
 bool DataManager::isLedActive() const
 {
 	return _mcuInData.functionsFlags & FunctionsFlag::led;

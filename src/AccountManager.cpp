@@ -31,8 +31,21 @@ bool AccountManager::passwordAttempted() const
 
 bool AccountManager::attemptLicenseKey(const QString& key) const
 {
-	_dataManager.settings()->setValue("licenseKeyActivated", true);
-	return true;
+	QStringList keys{
+		"QMPMF-23D8R-83GV6-MMR3C-BQ7C3",
+		"PRDDH-83JD9-G6PK4-684GF-6Y73B",
+		"XQY3P-8MMD2-JC6M2-HJDYW-P6H7B",
+		"MKMXV-CDQGH-98HCX-3HM2C-G3T7B"
+	};
+
+	if (keys.contains(key, Qt::CaseInsensitive))
+	{
+		_dataManager.settings()->setValue("licenseKeyActivated", true);
+		return true;
+	}
+
+	else
+		return false;
 }
 
 bool AccountManager::attemptPassword(const QString& password)
