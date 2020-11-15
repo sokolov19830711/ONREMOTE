@@ -206,4 +206,28 @@ ApplicationWindow
         target: controlsFrame.children[0] // Кнопка "ПАРОЛЬ"
         function onClicked() {framesLayout.currentIndex = 7}
     }
+
+//----------------------------------------------------------------------------------------------------------------------------
+
+    onClosing: { close.accepted = false; hide() }
+
+    Connections {
+        target: trayIconManager
+        function onShowAppWindow()
+        {
+            if(accountManager.isPasswordSet())
+            {
+                switchFrameButtonsItem.visible = false;
+                framesLayout.currentIndex = 6;
+            }
+
+            else
+            {
+                switchFrameButtonsItem.visible = true;
+                framesLayout.currentIndex = 0;
+            }
+
+            show();
+        }
+    }
 }

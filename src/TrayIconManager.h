@@ -12,6 +12,13 @@ public:
 
 	TrayIconManager();
 
+signals:
+
+	void showAppWindow();
+
+public slots:
+	void trayIconActivated(QSystemTrayIcon::ActivationReason reason);
+
 private:
 
 	QSystemTrayIcon* _trayIcon;

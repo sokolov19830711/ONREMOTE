@@ -20,6 +20,7 @@ int main(int argc, char** argv)
     engine.rootContext()->setContextProperty("dataManager", &dataManager);
     engine.rootContext()->setContextProperty("portManager", &portManager);
     engine.rootContext()->setContextProperty("accountManager", &accountManager);
+    engine.rootContext()->setContextProperty("trayIconManager", &trayIconManager);
     engine.load(QUrl(QStringLiteral("qrc:/src/qml/main.qml")));
     return app.exec();
 }

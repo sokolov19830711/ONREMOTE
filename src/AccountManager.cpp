@@ -83,3 +83,8 @@ void AccountManager::savePassword(const QString& password)
 
 	_dataManager.settings()->sync();
 }
+
+bool AccountManager::isPasswordSet() const
+{
+	return _dataManager.settings()->contains("password");
+}

@@ -17,6 +17,7 @@ public:
 	Q_INVOKABLE bool attemptPassword(const QString& password);
 	Q_INVOKABLE bool checkPassword(const QString& password) const;
 	Q_INVOKABLE void savePassword(const QString& password);
+	Q_INVOKABLE bool isPasswordSet() const;
 
 private:
 

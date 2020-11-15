@@ -58,7 +58,7 @@ Item {
             color: parent.pressed ? "#166999" : "#30859B"
         }
 
-        onClicked: accountManager.attemptPassword(passwordField.text)
+        onClicked: { if (accountManager.attemptPassword(passwordField.text)) passwordField.clear()}
     }
 
 
