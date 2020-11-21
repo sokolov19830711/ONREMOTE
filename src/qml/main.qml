@@ -9,7 +9,7 @@ ApplicationWindow
     id: applicationWindow
     width: 460
     height: 700
-    visible: false
+    visible: true
     color: "#585858"
     maximumWidth: 460
     maximumHeight: 700
@@ -62,7 +62,7 @@ ApplicationWindow
             id: mainFrameButton
             text: "ГЛАВНАЯ"
             checked: true
-            width: 114
+            width: 91
             ButtonGroup.group: switchFrameButtons
 
             onClicked: framesLayout.currentIndex = 0
@@ -71,8 +71,8 @@ ApplicationWindow
         SwitchFrameButton {
             id: controlsFrameButton
             text: "НАСТРОЙКИ"
-            width: 114
-            x: 115
+            width: 91
+            x: 92
             ButtonGroup.group: switchFrameButtons
 
             onClicked: framesLayout.currentIndex = 1
@@ -80,25 +80,27 @@ ApplicationWindow
 
         SwitchFrameButton {
             id: pwswFrameButton
-            text: "КОДИРОВАНИЕ"
-            width: 114
-            x: 230
+            text: "PWSW"
+            width: 91
+            x: 184
             ButtonGroup.group: switchFrameButtons
 
             onClicked: framesLayout.currentIndex = 2
         }
 
-//        SwitchFrameButton {
-//            id: sensorsFrameButton
-//            text: "SENS"
-//            ButtonGroup.group: switchFrameButtons
-//        }
+        SwitchFrameButton {
+            id: sensorsFrameButton
+            text: "SENS"
+            x: 276
+            width: 91
+            ButtonGroup.group: switchFrameButtons
+        }
 
         SwitchFrameButton {
             id: helpFrameButton
             text: "ПОМОЩЬ"
-            width: 114
-            x: 345
+            width: 91
+            x: 368
             ButtonGroup.group: switchFrameButtons
 
             onClicked: framesLayout.currentIndex = 3
