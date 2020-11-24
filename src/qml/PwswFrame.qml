@@ -18,10 +18,10 @@ Item {
         height: 30
         color: "#fefefe"
         text: qsTr("УКАЖИТЕ УРОВЕНЬ ЗАЩИТЫ")
-        font.pixelSize: 20
+        font.pixelSize: 22
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
-        font.family: "Arial"
+        font.family: "Calibri Light"
         font.weight: Font.Light
         minimumPixelSize: 16
     }
@@ -180,8 +180,9 @@ Item {
         height: 14
         color: "#fefefe"
         text: qsTr("ВРЕМЯ ОЖИДАНИЯ КОМБИНАЦИЙ")
-        font.pixelSize: 12
+        font.pixelSize: 14
         horizontalAlignment: Text.AlignRight
+        font.family: "Calibri Light"
     }
 
     Text {
@@ -192,8 +193,9 @@ Item {
         height: 14
         color: "#eccc4a"
         text: qsTr("(секунд)")
-        font.pixelSize: 12
+        font.pixelSize: 14
         horizontalAlignment: Text.AlignRight
+        font.family: "Calibri Light"
     }
 
     Text {
@@ -204,8 +206,9 @@ Item {
         height: 14
         color: "#fefefe"
         text: qsTr("ДОПУСТИМОЕ КОЛИЧЕСТВО НЕВЕРНЫХ")
-        font.pixelSize: 12
+        font.pixelSize: 14
         horizontalAlignment: Text.AlignRight
+        font.family: "Calibri Light"
     }
 
     Text {
@@ -216,8 +219,9 @@ Item {
         height: 14
         color: "#eccc4a"
         text: qsTr("(раз подряд)")
-        font.pixelSize: 12
+        font.pixelSize: 14
         horizontalAlignment: Text.AlignRight
+        font.family: "Calibri Light"
     }
 
     Text {
@@ -228,8 +232,9 @@ Item {
         height: 14
         color: "#fefefe"
         text: qsTr("КОМБИНАЦИЙ")
-        font.pixelSize: 12
+        font.pixelSize: 14
         horizontalAlignment: Text.AlignRight
+        font.family: "Calibri Light"
     }
 
     Text {
@@ -240,8 +245,9 @@ Item {
         height: 14
         color: "#fefefe"
         text: qsTr("БЛОКИРОВАТЬ ПОСЛЕ НЕВЕРНЫХ")
-        font.pixelSize: 12
+        font.pixelSize: 14
         horizontalAlignment: Text.AlignRight
+        font.family: "Calibri Light"
     }
 
     Text {
@@ -252,8 +258,9 @@ Item {
         height: 14
         color: "#eccc4a"
         text: qsTr("(минут)")
-        font.pixelSize: 12
+        font.pixelSize: 14
         horizontalAlignment: Text.AlignRight
+        font.family: "Calibri Light"
     }
 
     Text {
@@ -264,8 +271,9 @@ Item {
         height: 14
         color: "#fefefe"
         text: qsTr("КОМБИНАЦИЙ")
-        font.pixelSize: 12
+        font.pixelSize: 14
         horizontalAlignment: Text.AlignRight
+        font.family: "Calibri Light"
     }
 
     Text {
@@ -276,11 +284,11 @@ Item {
         height: 30
         color: "#fefefe"
         text: qsTr("ВЫБЕРИТЕ ЧИСЛО КОМБИНАЦИИ")
-        font.pixelSize: 20
+        font.pixelSize: 22
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         font.weight: Font.Light
-        font.family: "Arial"
+        font.family: "Calibri Light"
         minimumPixelSize: 16
     }
 

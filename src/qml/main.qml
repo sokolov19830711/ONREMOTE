@@ -25,25 +25,26 @@ ApplicationWindow
         height: 45
         color: "#fefefe"
         text: "PRIMEBOX | ONREMOTE+"
-        font.pixelSize: 28
+        font.pixelSize: 36
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
+        font.bold: true
         font.weight: Font.Bold
-        font.family: "Arial"
+        font.family: "Calibri Light"
     }
 
     Text {
         id: generalLabel2
-        x: 82
-        y: 54
+        x: 67
+        y: 60
         width: 157
         height: 24
         color: "#fefefe"
         text: "by. TRUEDEVICE"
-        font.pixelSize: 11
+        font.pixelSize: 17
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
-        font.family: "Arial"
+        font.family: "Calibri Light"
     }
 
     Item {

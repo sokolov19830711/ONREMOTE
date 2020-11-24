@@ -49,6 +49,7 @@ Item {
         font.pixelSize: 16
         horizontalAlignment: Text.AlignRight
         verticalAlignment: Text.AlignVCenter
+        font.family: "Calibri Light"
         minimumPixelSize: 10
     }
 
@@ -63,6 +64,7 @@ Item {
         font.pixelSize: 16
         horizontalAlignment: Text.AlignRight
         verticalAlignment: Text.AlignVCenter
+        font.family: "Calibri Light"
         minimumPixelSize: 10
     }
 
@@ -87,6 +89,7 @@ Item {
         font.pixelSize: 16
         horizontalAlignment: Text.AlignRight
         verticalAlignment: Text.AlignVCenter
+        font.family: "Calibri Light"
         minimumPixelSize: 10
     }
 
@@ -101,6 +104,7 @@ Item {
         font.pixelSize: 16
         horizontalAlignment: Text.AlignRight
         verticalAlignment: Text.AlignVCenter
+        font.family: "Calibri Light"
         minimumPixelSize: 10
     }
 
@@ -125,6 +129,7 @@ Item {
         font.pixelSize: 16
         horizontalAlignment: Text.AlignRight
         verticalAlignment: Text.AlignVCenter
+        font.family: "Calibri Light"
         minimumPixelSize: 10
     }
 
@@ -139,6 +144,7 @@ Item {
         font.pixelSize: 16
         horizontalAlignment: Text.AlignRight
         verticalAlignment: Text.AlignVCenter
+        font.family: "Calibri Light"
         minimumPixelSize: 10
     }
 
@@ -160,6 +166,7 @@ Item {
         font.pixelSize: 16
         horizontalAlignment: Text.AlignRight
         verticalAlignment: Text.AlignVCenter
+        font.family: "Calibri Light"
         minimumPixelSize: 10
     }
 
@@ -183,20 +190,22 @@ Item {
         font.pixelSize: 16
         horizontalAlignment: Text.AlignRight
         verticalAlignment: Text.AlignVCenter
+        font.family: "Calibri Light"
         minimumPixelSize: 10
     }
 
     Text {
         id: text16
         x: 30
-        y: 265
+        y: 266
         width: 256
         height: 19
         color: "#fefefe"
         text: qsTr("нажмите, если хотите заменить")
-        font.pixelSize: 16
+        font.pixelSize: 15
         horizontalAlignment: Text.AlignRight
         verticalAlignment: Text.AlignVCenter
+        font.family: "Calibri Light"
         font.italic: true
         minimumPixelSize: 10
     }
@@ -204,14 +213,15 @@ Item {
     Text {
         id: text17
         x: 30
-        y: 284
+        y: 283
         width: 256
         height: 19
         color: "#fefefe"
         text: qsTr("или сбросить пароль приложения")
-        font.pixelSize: 16
+        font.pixelSize: 15
         horizontalAlignment: Text.AlignRight
         verticalAlignment: Text.AlignVCenter
+        font.family: "Calibri Light"
         font.italic: true
         minimumPixelSize: 10
     }
@@ -234,6 +244,7 @@ Item {
         font.pixelSize: 16
         horizontalAlignment: Text.AlignRight
         verticalAlignment: Text.AlignVCenter
+        font.family: "Calibri Light"
         minimumPixelSize: 10
     }
 
@@ -248,6 +259,7 @@ Item {
         font.pixelSize: 16
         horizontalAlignment: Text.AlignRight
         verticalAlignment: Text.AlignVCenter
+        font.family: "Calibri Light"
         minimumPixelSize: 10
     }
 
@@ -282,6 +294,7 @@ Item {
         font.pixelSize: 16
         horizontalAlignment: Text.AlignRight
         verticalAlignment: Text.AlignVCenter
+        font.family: "Calibri Light"
         minimumPixelSize: 10
     }
 
@@ -309,29 +322,31 @@ Item {
     Text {
         id: text21
         x: 30
-        y: 449
+        y: 450
         width: 256
         height: 19
         color: "#fefefe"
         text: qsTr("нажмите, чтобы сбросить")
-        font.pixelSize: 16
+        font.pixelSize: 15
         horizontalAlignment: Text.AlignRight
         verticalAlignment: Text.AlignVCenter
+        font.family: "Calibri Light"
         font.italic: true
         minimumPixelSize: 10
     }
 
     Text {
         id: text22
-        x: 30
-        y: 468
+        x: 29
+        y: 467
         width: 256
         height: 19
         color: "#fefefe"
         text: qsTr("все настройки")
-        font.pixelSize: 16
+        font.pixelSize: 15
         horizontalAlignment: Text.AlignRight
         verticalAlignment: Text.AlignVCenter
+        font.family: "Calibri Light"
         font.italic: true
         minimumPixelSize: 10
     }

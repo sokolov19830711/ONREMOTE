@@ -17,10 +17,11 @@ Item {
         height: 51
         color: "#fefefe"
         text: qsTr("ТЕКУЩИЙ УРОВЕНЬ ЗАЩИТЫ PWSW")
-        font.pixelSize: 20
+        font.pixelSize: 22
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
-        font.family: "Arial"
+        font.bold: true
+        font.family: "Calibri Light"
         font.weight: Font.Light
         minimumPixelSize: 16
     }
@@ -168,12 +169,13 @@ Item {
         height: 51
         color: "#fefefe"
         text: qsTr("ТЕКУЩИЙ УРОВЕНЬ ЗАПЫЛЕННОСТИ")
-        font.pixelSize: 20
+        font.pixelSize: 22
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
+        font.bold: true
         minimumPixelSize: 16
         font.weight: Font.Light
-        font.family: "Arial"
+        font.family: "Calibri Light"
     }
 
     Button {
@@ -302,7 +304,7 @@ Item {
 
     Text {
         id: text1
-        x: 53
+        x: 58
         y: 302
         width: 127
         height: 40
@@ -311,6 +313,7 @@ Item {
         font.pixelSize: 16
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
+        font.family: "Calibri Light"
     }
 
     Button {
@@ -349,7 +352,7 @@ Item {
 
     Text {
         id: text2
-        x: 226
+        x: 224
         y: 348
         width: 89
         height: 40
@@ -358,11 +361,12 @@ Item {
         font.pixelSize: 16
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
+        font.family: "Calibri Light"
     }
 
     Text {
         id: text3
-        x: 88
+        x: 90
         y: 348
         width: 89
         height: 22
@@ -371,12 +375,13 @@ Item {
         font.pixelSize: 14
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
+        font.family: "Calibri Light"
         minimumPixelSize: 10
     }
 
     Text {
         id: text4
-        x: 120
+        x: 122
         y: 366
         width: 56
         height: 22
@@ -385,6 +390,7 @@ Item {
         font.pixelSize: 14
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
+        font.family: "Calibri Light"
         minimumPixelSize: 10
     }
 
@@ -424,7 +430,7 @@ Item {
 
     Text {
         id: text5
-        x: 86
+        x: 88
         y: 394
         width: 89
         height: 40
@@ -433,11 +439,12 @@ Item {
         font.pixelSize: 16
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
+        font.family: "Calibri Light"
     }
 
     Text {
         id: text6
-        x: 224
+        x: 223
         y: 393
         width: 75
         height: 22
@@ -446,12 +453,13 @@ Item {
         font.pixelSize: 14
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
+        font.family: "Calibri Light"
         minimumPixelSize: 10
     }
 
     Text {
         id: text7
-        x: 224
+        x: 223
         y: 410
         width: 56
         height: 22
@@ -460,6 +468,7 @@ Item {
         font.pixelSize: 14
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
+        font.family: "Calibri Light"
         minimumPixelSize: 10
     }
 
@@ -478,7 +487,7 @@ Item {
 
     Text {
         id: text8
-        x: 226
+        x: 223
         y: 440
         width: 133
         height: 40
@@ -487,11 +496,12 @@ Item {
         font.pixelSize: 16
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
+        font.family: "Calibri Light"
     }
 
     Text {
         id: text9
-        x: 41
+        x: 39
         y: 439
         width: 133
         height: 20
@@ -500,12 +510,13 @@ Item {
         font.pixelSize: 14
         horizontalAlignment: Text.AlignRight
         verticalAlignment: Text.AlignVCenter
+        font.family: "Calibri Light"
         minimumPixelSize: 10
     }
 
     Text {
         id: text10
-        x: 15
+        x: 14
         y: 458
         width: 159
         height: 20
@@ -514,6 +525,7 @@ Item {
         font.pixelSize: 14
         horizontalAlignment: Text.AlignRight
         verticalAlignment: Text.AlignVCenter
+        font.family: "Calibri Light"
         minimumPixelSize: 10
     }
 
