@@ -20,7 +20,7 @@ ApplicationWindow
     Text {
         id: generalLabel1
         x: 49
-        y: 22
+        y: 8
         width: 363
         height: 45
         color: "#fefefe"
@@ -36,7 +36,7 @@ ApplicationWindow
     Text {
         id: generalLabel2
         x: 67
-        y: 60
+        y: 46
         width: 157
         height: 24
         color: "#fefefe"
@@ -167,6 +167,14 @@ ApplicationWindow
         ChangePasswordFrame {
             id: changePasswordFrame
         }
+
+        SmtpFrame {
+            id: smtpFrame
+        }
+
+        RunningHoursFrame {
+            id: runnigHoursFrame
+        }
     }
 
     Connections {
@@ -208,6 +216,16 @@ ApplicationWindow
     Connections {
         target: controlsFrame.children[0] // Кнопка "ПАРОЛЬ"
         function onClicked() {framesLayout.currentIndex = 7}
+    }
+
+    Connections {
+        target: controlsFrame.children[1] // Кнопка "SMTP"
+        function onClicked() {framesLayout.currentIndex = 8}
+    }
+
+    Connections {
+        target: controlsFrame.children[2] // Кнопка "НАРАБОТКА"
+        function onClicked() {framesLayout.currentIndex = 9}
     }
 
 //----------------------------------------------------------------------------------------------------------------------------

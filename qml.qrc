@@ -15,5 +15,7 @@
         <file>src/qml/LicenseAgreementFrame.qml</file>
         <file>src/qml/ChangePasswordFrame.qml</file>
         <file>trayIcon.png</file>
+        <file>src/qml/SmtpFrame.qml</file>
+        <file>src/qml/RunningHoursFrame.qml</file>
     </qresource>
 </RCC>
