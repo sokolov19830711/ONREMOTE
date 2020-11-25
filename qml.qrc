@@ -17,5 +17,7 @@
         <file>trayIcon.png</file>
         <file>src/qml/SmtpFrame.qml</file>
         <file>src/qml/RunningHoursFrame.qml</file>
+        <file>src/qml/ExPwswFrame.qml</file>
+        <file>src/qml/SensFrame.qml</file>
     </qresource>
 </RCC>

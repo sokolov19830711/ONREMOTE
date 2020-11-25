@@ -95,6 +95,8 @@ ApplicationWindow
             x: 276
             width: 91
             ButtonGroup.group: switchFrameButtons
+
+            onClicked: framesLayout.currentIndex = 11
         }
 
         SwitchFrameButton {
@@ -175,6 +177,14 @@ ApplicationWindow
         RunningHoursFrame {
             id: runnigHoursFrame
         }
+
+       ExPwswFrame {
+            id: exPwswFrame
+        }
+
+       SensFrame {
+           id: sensFrame
+       }
     }
 
     Connections {
@@ -226,6 +236,11 @@ ApplicationWindow
     Connections {
         target: controlsFrame.children[2] // Кнопка "НАРАБОТКА"
         function onClicked() {framesLayout.currentIndex = 9}
+    }
+
+    Connections {
+        target: pwswFrame.children[0] // Кнопка "ДОПОЛНИТЕЛЬНО"
+        function onClicked() {framesLayout.currentIndex = 10}
     }
 
 //----------------------------------------------------------------------------------------------------------------------------

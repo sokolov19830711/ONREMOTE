@@ -10,6 +10,27 @@ Item {
 
     onCurrentPwswLevelChanged: dataManager.setPowerButtonPwdLevel(currentPwswLevel)
 
+    Button {
+        id: extButton
+        x: 261
+        y: 429
+        width: 131
+        height: 34
+        text: "ДОПОЛНИТЕЛЬНО"
+        font.pointSize: 10
+        contentItem: Text {
+            color: "#fefefe"
+            text: parent.text
+            elide: Text.ElideRight
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            font: parent.font
+        }
+        background: Rectangle {
+            color: parent.pressed ? "#166999" : "#30859B"
+        }
+    }
+
     Text {
         id: setPwswLevelLabel
         x: 0
