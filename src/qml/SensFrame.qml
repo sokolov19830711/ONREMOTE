@@ -31,6 +31,7 @@ Item {
         id: minTemperatureSpinBox
         x: 0
         y: 98
+        valueFieldColor: "#808080"
     }
 
     Button {
@@ -54,20 +55,50 @@ Item {
         font.pointSize: 14
         enabled: false
         bottomPadding: 4
+
         background: Rectangle {
             color: parent.checked ? "#c05046" : "#00be94"
         }
+
         topPadding: 4
+        leftPadding: 4
+
+
         Connections {
             target: dataManager
+            function onTemperatureValueChanged(value)
+            {
+                temperatureValueButton.text = value;
+                (value < minTemperatureSpinBox.currentValue || value > maxTemperatureSpinBox.currentValue) ?
+                            temperatureValueButton.checked = false : temperatureValueButton.checked = true;
+            }
         }
-        leftPadding: 4
+
+        Connections {
+            target: minTemperatureSpinBox
+            function onCurrentValueChanged()
+            {
+                (dataManager.temperatureValue() < minTemperatureSpinBox.currentValue) ?
+                            temperatureValueButton.checked = false : temperatureValueButton.checked = true;
+            }
+        }
+
+            Connections {
+                target: maxTemperatureSpinBox
+                function onCurrentValueChanged()
+                {
+                    (dataManager.temperatureValue() > maxTemperatureSpinBox.currentValue) ?
+                                temperatureValueButton.checked = false : temperatureValueButton.checked = true;
+                }
+        }
+
     }
 
     MySpinBox {
         id: maxTemperatureSpinBox
         x: 170
         y: 98
+        valueFieldColor: "#808080"
     }
 
     OnOffButton {

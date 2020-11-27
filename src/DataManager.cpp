@@ -121,6 +121,11 @@ int DataManager::powerButtonPwdDigit3() const
 	return _mcuInData.powerButtonPwdDigit3;
 }
 
+int DataManager::temperatureValue() const
+{
+	return _mcuOutData.temperatureSensor1;
+}
+
 //------------------------------------------------------------------------------------------------
 
 void DataManager::update()

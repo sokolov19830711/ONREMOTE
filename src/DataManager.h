@@ -30,6 +30,7 @@ public:
 	Q_INVOKABLE int powerButtonPwdDigit1() const;
 	Q_INVOKABLE int powerButtonPwdDigit2() const;
 	Q_INVOKABLE int powerButtonPwdDigit3() const;
+	Q_INVOKABLE int temperatureValue() const;
 
 public slots:
 

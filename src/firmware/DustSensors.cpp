@@ -13,13 +13,13 @@ DustSensors::DustSensors()
 
 void DustSensors::init()
 {
-    digitalWrite(DUST_LED_INT, HIGH);
+
 }
 
 void DustSensors::update()
 {
     // Встроенный датчик
-    DataManager::outData().dustSensor1 = analogRead(A3);
+    DataManager::outData().dustSensor1 = analogRead(DUST_RES_INT);
     if (DataManager::outData().dustSensor1 > 250) DataManager::outData().dustSensor1 = 250;
     if (DataManager::outData().dustSensor1 > DataManager::config().dustMaxValue1)
     {

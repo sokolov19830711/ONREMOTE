@@ -52,21 +52,5 @@ void BreakInSensors::update()
 			PcPower::on();
 		}
 	}
-
-	int switch2 = !digitalRead(TERMINAL_SWITCH2);
-	DataManager::outData().breakInSensor3 = switch2;
-
-	if (switch2 != DataManager::config().breakInSensorNormalState3)
-	{
-		if (DataManager::config().breakInFlags3 & ActionsFlag::soundSignal)
-		{
-			Beeper::beep();
-		}
-
-		if (DataManager::config().breakInFlags3 & ActionsFlag::PCShutDown)
-		{
-			PcPower::on();
-		}
-	}
 }
 
