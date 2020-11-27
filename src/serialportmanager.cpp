@@ -71,7 +71,7 @@ void SerialPortManager::refresh()
 
     else
     {
-        //qDebug() << "Size of recieved bytearray:" << data.size() << "bytes; content of array:" << data;
+        //qDebug() << "Size of recieved bytearray:" << _rawData.size() << "bytes; content of array:" << _rawData;
 
         if (_rawData.size() >= sizeof(McuOutData))
         {

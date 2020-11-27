@@ -531,34 +531,6 @@ Item {
 
     onLedActiveChanged: ledButton.checked = ledActive
 
-//    Text {
-//        id: text9
-//        x: 67
-//        y: 438
-//        width: 107
-//        height: 22
-//        color: "#fefefe"
-//        text: "встроенный и"
-//        font.pixelSize: 16
-//        horizontalAlignment: Text.AlignHCenter
-//        verticalAlignment: Text.AlignVCenter
-//        minimumPixelSize: 10
-//    }
-
-//    Text {
-//        id: text10
-//        x: 16
-//        y: 456
-//        width: 158
-//        height: 22
-//        color: "#fefefe"
-//        text: "выносной светодиод"
-//        font.pixelSize: 16
-//        horizontalAlignment: Text.AlignHCenter
-//        verticalAlignment: Text.AlignVCenter
-//        minimumPixelSize: 10
-//    }
-
     Connections {
         target: dataManager
         function onDustinessValueChanged(value)

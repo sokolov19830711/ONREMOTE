@@ -3,11 +3,11 @@
 #include "SerialPortManager.h"
 #include "DataManager.h"
 #include "InternalMemoryManager.h"
-//#include "TemperatureSensors.h"
+#include "TemperatureSensors.h"
 //#include "MoistureSensors.h"
-//#include "DustSensors.h"
+#include "DustSensors.h"
 //#include "PositionVibrationSensors.h"
-//#include "BreakInSensors.h"
+#include "BreakInSensors.h"
 #include "PowerButtonWatcher.h"
 //#include "IButtonManager.h"
 
@@ -19,11 +19,11 @@
 
 static SerialPortManager portManager;
 static InternalMemoryManager internalMemoryManager;
-//static TemperatureSensors temperatureSensors;
+static TemperatureSensors temperatureSensors;
 //static MoistureSensors moistureSensors;
-//static DustSensors dustSensors;
+static DustSensors dustSensors;
 //static PositionVibrationSensors positionVibrationSensors;
-//static BreakInSensors breakInSensors;
+static BreakInSensors breakInSensors;
 //static IButtonManager iButtonManager;
 static PowerButtonWatcher powerButtonWatcher;
 
@@ -48,9 +48,9 @@ void setup()
 
     Serial.begin(19200);
 
-    //temperatureSensors.init();
+    temperatureSensors.init();
     //moistureSensors.init();
-    //dustSensors.init();
+    dustSensors.init();
     //positionVibrationSensors.init();
     powerButtonWatcher.updateConfig();
 
@@ -80,16 +80,16 @@ void loop()
       //moistureSensors.update();
 
       // Температура
-      //temperatureSensors.update();
+      temperatureSensors.update();
 
       // Датчик пыли
-      //dustSensors.update();
+      dustSensors.update();
 
       // Датчики вскрытия
-      //breakInSensors.update();
+      breakInSensors.update();
 
       //Пока датчики не работают, не забыть потом убрать!!!
-      delay(500);
+      //delay(500);
     }
 
     else
