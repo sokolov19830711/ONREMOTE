@@ -12,6 +12,9 @@ int main(int argc, char** argv)
 {
     QApplication app(argc, argv);
 
+    QTimer guiUpdateTimer;
+    guiUpdateTimer.start(200);
+
     DataManager dataManager;
     SerialPortManager portManager(dataManager);
     AccountManager accountManager(dataManager);
@@ -19,6 +22,7 @@ int main(int argc, char** argv)
     OsInteractionManager osInteractionManager(dataManager, portManager);
 
     QQmlApplicationEngine engine;
+    engine.rootContext()->setContextProperty("guiUpdateTimer", &guiUpdateTimer);
     engine.rootContext()->setContextProperty("dataManager", &dataManager);
     engine.rootContext()->setContextProperty("portManager", &portManager);
     engine.rootContext()->setContextProperty("accountManager", &accountManager);

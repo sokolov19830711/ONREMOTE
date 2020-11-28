@@ -52,7 +52,7 @@ void SerialPortManager::refresh()
 			if ((marker2Pos - marker1Pos) == 1)
 			{
                 _rawData = _rawData.mid(marker1Pos);
-                if(_rawData.at(9) == CONTROL_MARKER)
+                if(_rawData.at(6) == CONTROL_MARKER)
 				{
 					_isSync++;
                     if(_isSync == 2)

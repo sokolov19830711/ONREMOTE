@@ -54,7 +54,7 @@ void TricolorLED::update()
 
 void TricolorLED::blink(int color)
 {
-	if ( !(DataManager::config().functionsFlags & FunctionsFlag::led) )
+	if ( !(DataManager::config().ledOn) )
 		return;
 
 	if (!getInstance()._isOn)

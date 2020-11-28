@@ -25,12 +25,7 @@ void BreakInSensors::update()
 
 	if (sensor != DataManager::config().breakInSensorNormalState1)
 	{
-		if (DataManager::config().breakInFlags1 & ActionsFlag::soundSignal)
-		{
-			Beeper::beep();
-		}
-
-		if (DataManager::config().breakInFlags1 & ActionsFlag::PCShutDown)
+		if (DataManager::config().breakInFlag_pcShutdown1)
 		{
 			PcPower::on();
 		}
@@ -42,12 +37,7 @@ void BreakInSensors::update()
 
 	if (switch1 != DataManager::config().breakInSensorNormalState2)
 	{
-		if (DataManager::config().breakInFlags2 & ActionsFlag::soundSignal)
-		{
-			Beeper::beep();
-		}
-
-		if (DataManager::config().breakInFlags2 & ActionsFlag::PCShutDown)
+		if (DataManager::config().breakInFlag_pcShutdown2)
 		{
 			PcPower::on();
 		}

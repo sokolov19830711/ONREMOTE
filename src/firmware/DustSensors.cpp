@@ -19,24 +19,12 @@ void DustSensors::init()
 void DustSensors::update()
 {
     // Встроенный датчик
-    DataManager::outData().dustSensor1 = analogRead(DUST_RES_INT);
-    if (DataManager::outData().dustSensor1 > 250) DataManager::outData().dustSensor1 = 250;
-    if (DataManager::outData().dustSensor1 > DataManager::config().dustMaxValue1)
-    {
-        if (DataManager::config().dustFlags1 & ActionsFlag::soundSignal)
-        {
-            Beeper::beep();
-        }
-    }
+    DataManager::outData().dustSensor = analogRead(DUST_RES_INT);
+    if (DataManager::outData().dustSensor > 250) DataManager::outData().dustSensor = 250;
 
-	if (DataManager::outData().dustSensor1 > DataManager::config().dustMaxValue1)
+	if (DataManager::outData().dustSensor > 60)
 	{
-		if (DataManager::config().dustFlags1 & ActionsFlag::soundSignal)
-		{
-			Beeper::beep();
-		}
-
-		if (DataManager::config().dustFlags1 & ActionsFlag::PCShutDown)
+		if (DataManager::config().dustFlag_pcShutdown)
 		{
 			PcPower::on();
 		}

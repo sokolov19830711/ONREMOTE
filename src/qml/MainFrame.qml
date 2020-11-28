@@ -563,6 +563,11 @@ Item {
             }
         }
     }
+
+    function update()
+    {
+        console.log("mainFrame update() called")
+    }
 }
 
 /*##^##

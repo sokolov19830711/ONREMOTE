@@ -4,12 +4,9 @@
 #include "DataManager.h"
 #include "InternalMemoryManager.h"
 #include "TemperatureSensors.h"
-//#include "MoistureSensors.h"
 #include "DustSensors.h"
-//#include "PositionVibrationSensors.h"
 #include "BreakInSensors.h"
 #include "PowerButtonWatcher.h"
-//#include "IButtonManager.h"
 
 #include "Beeper.h"
 #include "PcPower.h"
@@ -20,11 +17,8 @@
 static SerialPortManager portManager;
 static InternalMemoryManager internalMemoryManager;
 static TemperatureSensors temperatureSensors;
-//static MoistureSensors moistureSensors;
 static DustSensors dustSensors;
-//static PositionVibrationSensors positionVibrationSensors;
 static BreakInSensors breakInSensors;
-//static IButtonManager iButtonManager;
 static PowerButtonWatcher powerButtonWatcher;
 
 static int loopsCounter = 0; // счетчик кол-ва вызовов функции loop()
@@ -41,7 +35,6 @@ void setup()
     TricolorLED::init(RED, TIMER_PERIOD, 200);
 
     internalMemoryManager.initConfig();
-    //iButtonManager.init(&internalMemoryManager);
 
     Timer2.setPeriod(TIMER_PERIOD); // Устанавливаем период таймера 20000 мкс -> 50 гц
     Timer2.enableISR(CHANNEL_A); // Или просто.enableISR(), запускаем прерывание на канале А таймера
@@ -49,27 +42,26 @@ void setup()
     Serial.begin(19200);
 
     temperatureSensors.init();
-    //moistureSensors.init();
     dustSensors.init();
-    //positionVibrationSensors.init();
     powerButtonWatcher.updateConfig();
 
-    DataManager::outData().totalRunningTime = internalMemoryManager.lastTotalRunningTimeValue();
+    //DataManager::outData().totalRunningTime = internalMemoryManager.lastTotalRunningTimeValue();
 }
 
 void loop()
 {
+    unsigned long sessionRunningTime = millis() / 1000;
   // Сохраняем текущее время с последнего запуска устройства
-    DataManager::outData().sessionRunningTime = millis() / 1000;
+    //DataManager::outData().sessionRunningTime = sessionRunningTime;
 
     static unsigned timeElapsed(0U);
-    int currentElapsedTime = DataManager::outData().sessionRunningTime - timeElapsed;
+    int currentElapsedTime = sessionRunningTime - timeElapsed;
 
     if (currentElapsedTime > RUNNING_TIME_FIXING_PERIOD)
     {
-        timeElapsed = DataManager::outData().sessionRunningTime;
+        timeElapsed = sessionRunningTime;
         internalMemoryManager.saveTotalRunningTimeValue(internalMemoryManager.lastTotalRunningTimeValue() + currentElapsedTime);
-        DataManager::outData().totalRunningTime = internalMemoryManager.lastTotalRunningTimeValue();
+        //DataManager::outData().totalRunningTime = internalMemoryManager.lastTotalRunningTimeValue();
     }
 
     if(loopsCounter > LOOPS_COUNT)

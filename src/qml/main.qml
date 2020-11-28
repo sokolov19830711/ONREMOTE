@@ -188,6 +188,14 @@ ApplicationWindow
     }
 
     Connections {
+        target: guiUpdateTimer
+        function onTimeout()
+        {
+            framesLayout.children[framesLayout.currentIndex].update()
+        }
+    }
+
+    Connections {
         target: pwswFrame
         function onCurrentPwswLevelChanged() { mainFrame.currentPwswLevel = pwswFrame.currentPwswLevel }
     }

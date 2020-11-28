@@ -9,13 +9,21 @@ DataManager::DataManager()
 	qDebug() << QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
 	_settings = QSharedPointer<QSettings>::create(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + "/settings.ini", QSettings::IniFormat);
 
-	_mcuInData.functionsFlags = _settings->value("functionsFlags", 72).toUInt();
-	_mcuInData.breakInFlags1 = _settings->value("breakInFlags").toUInt();
-	_mcuInData.dustFlags1 = _settings->value("dustFlags").toUInt();
+	_mcuInData.turnOn = _settings->value("turnOn", 1).toUInt();
+	_mcuInData.soundOn = _settings->value("soundOn", 1).toUInt();
+	_mcuInData.ledOn = _settings->value("ledOn", 1).toUInt();
 
-	_mcuInData.temperatureFlags1 = _settings->value("temperatureFlags").toUInt();
-	_mcuInData.temperatureMinValue1 = _settings->value("temperatureMinValue1").toInt();
-	_mcuInData.temperatureMaxValue1 = _settings->value("temperatureMaxValue1").toInt();
+	_mcuInData.dustFlag_pcShutdown = _settings->value("dustFlag_pcShutdown").toUInt();
+
+	_mcuInData.breakInFlag_pcShutdown1 = _settings->value("breakInFlag_pcShutdown1").toUInt();
+	_mcuInData.breakInSensorNormalState1 = _settings->value("breakInSensorNormalState1").toUInt();
+
+	_mcuInData.breakInFlag_pcShutdown2 = _settings->value("breakInFlag_pcShutdown2").toUInt();
+	_mcuInData.breakInSensorNormalState2 = _settings->value("breakInSensorNormalState2").toUInt();
+
+	_mcuInData.temperatureFlag_pcShutdown = _settings->value("temperatureFlag_pcShutdown").toUInt();
+	_mcuInData.temperatureMinValue = _settings->value("temperatureMinValue").toInt();
+	_mcuInData.temperatureMaxValue = _settings->value("temperatureMaxValue").toInt();
 
 	_mcuInData.powerButtonPwdLevel = _settings->value("PWR/powerButtonPwdLevel", 0).toInt();
 	_mcuInData.powerButtonPwdDigit1 = _settings->value("PWR/digit1").toInt();
@@ -26,20 +34,14 @@ DataManager::DataManager()
 
 DataManager::~DataManager()
 {
-	_settings->setValue("functionsFlags", _mcuInData.functionsFlags);
-	_settings->setValue("breakInFlags", _mcuInData.breakInFlags1);
-	_settings->setValue("dustFlags", _mcuInData.dustFlags1);
-
-	_settings->setValue("temperatureFlags", _mcuInData.temperatureFlags1);
-	_settings->setValue("temperatureMinValue1", _mcuInData.temperatureMinValue1);
-	_settings->setValue("temperatureMaxValue1", _mcuInData.temperatureMaxValue1);
-
-	_settings->setValue("PWR/powerButtonPwdLevel", _mcuInData.powerButtonPwdLevel);
-	_settings->setValue("PWR/digit1", _mcuInData.powerButtonPwdDigit1);
-	_settings->setValue("PWR/digit2", _mcuInData.powerButtonPwdDigit2);
-	_settings->setValue("PWR/digit3", _mcuInData.powerButtonPwdDigit3);
-
-	_settings->setValue("PWR/digitInputPeriod", _mcuInData.digitInputPeriod);
+	QStringList settingsKeys = _settingsMap.keys();
+	for (auto & key : settingsKeys)
+	{
+		if (_settingsMap[key])
+		{
+			_settings->setValue(key, *_settingsMap[key]);
+		}
+	}
 }
 
 McuInData& DataManager::inData()
@@ -61,155 +63,50 @@ void DataManager::writeMcuOutData(const QByteArray& data)
 {
 	_prevMcuOutData = _mcuOutData;
 	memcpy(&_mcuOutData, data.data(), sizeof(McuOutData));
-	update();
 }
 
-//--- Геттеры --------------------------------------------------------------------
-
-bool DataManager::isDeviceActive() const
+void DataManager::setSettingsValue(const QString& valueName, unsigned char value)
 {
-	return _mcuInData.functionsFlags & FunctionsFlag::turnOn;
-}
-
-bool DataManager::isStartOnBoot() const
-{
-	return _settings->value("startOnBoot").toBool();
-}
-
-bool DataManager::isLockOS() const
-{
-	return _settings->value("lockOS").toBool();
-}
-
-bool DataManager::isLedActive() const
-{
-	return _mcuInData.functionsFlags & FunctionsFlag::led;
-}
-
-int DataManager::powerButtonPwdLevel() const
-{
-	return _mcuInData.powerButtonPwdLevel;
-}
-
-int DataManager::digitInputPeriod() const
-{
-	return _mcuInData.digitInputPeriod;
-}
-
-int DataManager::powerButtonPwdDigit1() const
-{
-	return _mcuInData.powerButtonPwdDigit1;
-}
-
-int DataManager::powerButtonPwdDigit2() const
-{
-	return _mcuInData.powerButtonPwdDigit2;
-}
-
-int DataManager::powerButtonPwdDigit3() const
-{
-	return _mcuInData.powerButtonPwdDigit3;
-}
-
-int DataManager::temperatureValue() const
-{
-	return _mcuOutData.temperatureSensor1;
-}
-
-int DataManager::temperatureMinValue() const
-{
-	return _mcuInData.temperatureMinValue1;
-}
-
-int DataManager::temperatureMaxValue() const
-{
-	return _mcuInData.temperatureMaxValue1;
-}
-
-//------------------------------------------------------------------------------------------------
-
-void DataManager::update()
-{
-	if (_mcuOutData.breakInSensor1 != _prevMcuOutData.breakInSensor1)
+	if (!_settingsMap.contains(valueName))
 	{
-		emit breakIn1ValueChanged(_mcuOutData.breakInSensor1);
+		return;
 	}
 
-	if (_mcuOutData.breakInSensor2 != _prevMcuOutData.breakInSensor2)
+	if(_settingsMap[valueName])
 	{
-		emit breakIn2ValueChanged(_mcuOutData.breakInSensor2);
+		*_settingsMap[valueName] = value;
 	}
 
-	if (_mcuOutData.temperatureSensor1 != _prevMcuOutData.temperatureSensor1)
+	else
 	{
-		emit temperatureValueChanged(_mcuOutData.temperatureSensor1);
-		emit temperatureSettingsChanged();
-	}
-
-	if (_mcuOutData.dustSensor1 != _prevMcuOutData.dustSensor1)
-	{
-		emit dustinessValueChanged(_mcuOutData.dustSensor1);
+		_settings->setValue(valueName, value);
 	}
 }
 
-//--- public slots ----------------------------------------------------------------------------
-
-void DataManager::setDeviceActive(bool state)
+unsigned char DataManager::getSettingsValue(const QString& valueName) const
 {
-	setBit(_mcuInData.functionsFlags, FunctionsFlag::turnOn, state);
-	emit deviceActiveChanged(state);
-}
-
-void DataManager::setLedActive(bool state)
-{
-	setBit(_mcuInData.functionsFlags, FunctionsFlag::led, state);
-	emit ledActiveChanged(state);
-}
-
-void DataManager::setPowerButtonPwdLevel(int value)
-{
-	if(_mcuInData.powerButtonPwdLevel != value)
-		_mcuInData.powerButtonPwdLevel = value;
-}
-
-void DataManager::setDigitInputPeriod(int value)
-{
-	if(_mcuInData.digitInputPeriod != value)
-		_mcuInData.digitInputPeriod = value;
-}
-
-void DataManager::setPowerButtonPwdDigit1(int value)
-{
-	if (_mcuInData.powerButtonPwdDigit1 != value)
-		_mcuInData.powerButtonPwdDigit1 = value;
-}
-
-void DataManager::setPowerButtonPwdDigit2(int value)
-{
-	if (_mcuInData.powerButtonPwdDigit2 != value)
-		_mcuInData.powerButtonPwdDigit2 = value;
-}
-
-void DataManager::setPowerButtonPwdDigit3(int value)
-{
-	if (_mcuInData.powerButtonPwdDigit3 != value)
-		_mcuInData.powerButtonPwdDigit3 = value;
-}
-
-void DataManager::setTemperatureMinValue(int value)
-{
-	if (_mcuInData.temperatureMinValue1 != value)
+	if (!_settingsMap.contains(valueName))
 	{
-		_mcuInData.temperatureMinValue1 = value;
-		emit temperatureSettingsChanged();
-	}	
-}
-
-void DataManager::setTemperatureMaxValue(int value)
-{
-	if (_mcuInData.temperatureMaxValue1 != value)
-	{
-		_mcuInData.temperatureMaxValue1 = value;
-		emit temperatureSettingsChanged();
+		return 0;
 	}
+
+	else if (_settingsMap[valueName])
+	{
+		return *_settingsMap[valueName];
+	}
+
+	else
+	{
+		return _settings->value(valueName).toUInt();
+	}
+}
+
+unsigned char DataManager::getMcuValue(const QString& valueName) const
+{
+	if (_mcuValuesMap.contains(valueName))
+	{
+		return *_mcuValuesMap[valueName];
+	}
+
+	return 0;
 }

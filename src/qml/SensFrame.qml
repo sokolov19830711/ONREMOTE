@@ -34,7 +34,7 @@ Item {
         valueFieldColor: "#808080"
         currentValue: dataManager.temperatureMinValue()
 
-        onCurrentValueChanged: dataManager.setTemperatureMinValue(currentValue)
+        onCurrentValueChanged: dataManager.setValue("temperatureMinValue", currentValue)
     }
 
     Button {
@@ -67,7 +67,7 @@ Item {
 
         function checkTemperatureState()
         {
-            if((dataManager.temperatureValue() < minTemperatureSpinBox.currentValue) || (dataManager.temperatureValue() > maxTemperatureSpinBox.currentValue))
+            if((dataManager.getMcuValue("temperature") < minTemperatureSpinBox.currentValue) || (dataManager.getMcuValue("temperature") > maxTemperatureSpinBox.currentValue))
             {
                 temperatureValueButton.checked = true;
             }
@@ -81,7 +81,7 @@ Item {
             target: dataManager
             function onTemperatureValueChanged(value)
             {
-                temperatureValueButton.text = value;
+                temperatureValueButton.text = dataManager.getMcuValue("temperature");
                 temperatureValueButton.checkTemperatureState();
             }
         }
@@ -111,7 +111,7 @@ Item {
         valueFieldColor: "#808080"
         currentValue: dataManager.temperatureMaxValue()
 
-        onCurrentValueChanged: dataManager.setTemperatureMaxValue(currentValue)
+        onCurrentValueChanged: dataManager.setValue("temperatureMaxValue", currentValue)
     }
 
     OnOffButton {

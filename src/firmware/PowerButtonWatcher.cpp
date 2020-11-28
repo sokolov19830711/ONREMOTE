@@ -11,9 +11,6 @@ PowerButtonWatcher::PowerButtonWatcher()
 
 void PowerButtonWatcher::update(int dt)
 {
-	if (!DataManager::config().isPWRavaliable)
-		return;
-
 	bool currentButtonState = digitalRead(PC_POWER_BUTTON);
 	if (_isWatching)
 	{
@@ -55,7 +52,7 @@ void PowerButtonWatcher::update(int dt)
 	{
 		if (_isPressed && !currentButtonState) // кнопку нажали и отпустили
 		{
-			if(_pwdLevel && (DataManager::config().functionsFlags & FunctionsFlag::turnOn))
+			if(_pwdLevel && (DataManager::config().turnOn))
 			{
 				_isWatching = true;
 				_counter = 1;
