@@ -21,7 +21,7 @@ OsInteractionManager::~OsInteractionManager()
 
 void OsInteractionManager::setStartOnBoot(bool state) const
 {
-	_dataManager.settings()->setValue("startOnBoot", state);
+	_dataManager.settings()->setValue("startOnBoot", static_cast<int>(state));
 
 #ifdef Q_OS_WIN32
 	QSettings settings("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat);
@@ -40,7 +40,7 @@ void OsInteractionManager::setStartOnBoot(bool state) const
 
 void OsInteractionManager::setLockOS(bool state) const
 {
-	_dataManager.settings()->setValue("lockOS", state);
+	_dataManager.settings()->setValue("lockOS", static_cast<int>(state));
 }
 
 void OsInteractionManager::lockOS() const

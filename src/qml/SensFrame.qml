@@ -6,10 +6,6 @@ Item {
     width: 400
     height: 500
 
-    property int currentPwswLevel: 0
-
-    onCurrentPwswLevelChanged: dataManager.setPowerButtonPwdLevel(currentPwswLevel)
-
     Text {
         id: setPwswLevelLabel
         x: 0
@@ -32,9 +28,8 @@ Item {
         x: 0
         y: 98
         valueFieldColor: "#808080"
-        currentValue: dataManager.temperatureMinValue()
-
-        onCurrentValueChanged: dataManager.setValue("temperatureMinValue", currentValue)
+        currentValue: dataManager.getSettingsValue("temperatureMinValue")
+        onCurrentValueChanged: dataManager.setSettingsValue("temperatureMinValue", currentValue)
     }
 
     Button {
@@ -64,44 +59,6 @@ Item {
         background: Rectangle {
             color: parent.checked ? "#c05046" : "#00be94"
         }  
-
-        function checkTemperatureState()
-        {
-            if((dataManager.getMcuValue("temperature") < minTemperatureSpinBox.currentValue) || (dataManager.getMcuValue("temperature") > maxTemperatureSpinBox.currentValue))
-            {
-                temperatureValueButton.checked = true;
-            }
-            else
-            {
-                temperatureValueButton.checked = false;
-            }
-        }
-
-        Connections {
-            target: dataManager
-            function onTemperatureValueChanged(value)
-            {
-                temperatureValueButton.text = dataManager.getMcuValue("temperature");
-                temperatureValueButton.checkTemperatureState();
-            }
-        }
-
-        Connections {
-            target: minTemperatureSpinBox
-            function onCurrentValueChanged()
-            {
-                temperatureValueButton.checkTemperatureState();
-            }
-        }
-
-        Connections {
-            target: maxTemperatureSpinBox
-            function onCurrentValueChanged()
-            {
-                temperatureValueButton.checkTemperatureState();
-            }
-        }
-
     }
 
     MySpinBox {
@@ -109,23 +66,28 @@ Item {
         x: 170
         y: 98
         valueFieldColor: "#808080"
-        currentValue: dataManager.temperatureMaxValue()
-
-        onCurrentValueChanged: dataManager.setValue("temperatureMaxValue", currentValue)
+        currentValue: dataManager.getSettingsValue("temperatureMaxValue")
+        onCurrentValueChanged: dataManager.setSettingsValue("temperatureMaxValue", currentValue)
     }
 
     OnOffButton {
-        id: onOffButton
+        id: shutdownButton1
         x: 309
         y: 98
         width: 40
         height: 40
+
+        checked: dataManager.getSettingsValue("temperatureFlag_pcShutdown")
+        onCheckedChanged: dataManager.setSettingsValue("temperatureFlag_pcShutdown", checked)
     }
 
     OnOffButton {
-        id: onOffButton1
+        id: notificationButton1
         x: 360
         y: 98
+
+        checked: dataManager.getSettingsValue("temperatureFlag_notification")
+        onCheckedChanged: dataManager.setSettingsValue("temperatureFlag_notification", checked)
     }
 
     Text {
@@ -219,6 +181,17 @@ Item {
 
     ButtonGroup {
         id: intButtons
+        onClicked:
+        {
+            if (button == intOnButton)
+            {
+                dataManager.setSettingsValue("breakInSensorNormalState1", 1)
+            }
+            else
+            {
+                dataManager.setSettingsValue("breakInSensorNormalState1", 0)
+            }
+        }
     }
 
     Button {
@@ -228,6 +201,10 @@ Item {
         width: 108
         height: 40
         text: "ОТКРЫТ"
+        enabled: true
+        checkable: true
+        checked: dataManager.getSettingsValue("breakInSensorNormalState1") === 1
+
         contentItem: Text {
             color: "#fefefe"
             text: parent.text
@@ -237,18 +214,13 @@ Item {
             font.pointSize: 12
         }
         rightPadding: 4
-        checkable: true
         bottomPadding: 4
-        enabled: true
         font.pointSize: 14
         layer.enabled: false
         background: Rectangle {
             color: parent.checked ? "#c05046" : "#636363"
         }
         topPadding: 4
-        Connections {
-            target: dataManager
-        }
         leftPadding: 4
 
         ButtonGroup.group: intButtons
@@ -278,6 +250,9 @@ Item {
         width: 108
         height: 40
         text: "ЗАКРЫТ"
+        checkable: true
+        checked: dataManager.getSettingsValue("breakInSensorNormalState2") === 0
+
         contentItem: Text {
             color: "#fefefe"
             text: parent.text
@@ -287,7 +262,6 @@ Item {
             font.pointSize: 12
         }
         rightPadding: 4
-        checkable: true
         layer.enabled: false
         font.pointSize: 14
         enabled: true
@@ -305,17 +279,23 @@ Item {
     }
 
     OnOffButton {
-        id: onOffButton2
+        id: shutdownButton2
         x: 309
         y: 201
         width: 40
         height: 40
+
+        checked: dataManager.getSettingsValue("breakInFlag_pcShutdown1")
+        onCheckedChanged: dataManager.setSettingsValue("breakInFlag_pcShutdown1", checked)
     }
 
     OnOffButton {
-        id: onOffButton3
+        id: notificationButton2
         x: 360
         y: 201
+
+        checked: dataManager.getSettingsValue("breakInFlag_notification1")
+        onCheckedChanged: dataManager.setSettingsValue("breakInFlag_notification1", checked)
     }
 
     Text {
@@ -337,6 +317,17 @@ Item {
 
     ButtonGroup {
         id: outButtons
+        onClicked:
+        {
+            if (button == outOnButton)
+            {
+                dataManager.setSettingsValue("breakInSensorNormalState2", 1)
+            }
+            else
+            {
+                dataManager.setSettingsValue("breakInSensorNormalState2", 0)
+            }
+        }
     }
 
     Button {
@@ -346,6 +337,9 @@ Item {
         width: 108
         height: 40
         text: "ОТКРЫТ"
+        checkable: true
+        checked: dataManager.getSettingsValue("breakInSensorNormalState2") === 1
+
         contentItem: Text {
             color: "#fefefe"
             text: parent.text
@@ -355,7 +349,6 @@ Item {
             font.pointSize: 12
         }
         rightPadding: 4
-        checkable: true
         layer.enabled: false
         font.pointSize: 14
         bottomPadding: 4
@@ -396,6 +389,9 @@ Item {
         width: 108
         height: 40
         text: "ЗАКРЫТ"
+        checkable: true
+        checked: dataManager.getSettingsValue("breakInSensorNormalState2") === 0
+
         contentItem: Text {
             color: "#fefefe"
             text: parent.text
@@ -405,7 +401,6 @@ Item {
             font.pointSize: 12
         }
         rightPadding: 4
-        checkable: true
         bottomPadding: 4
         font.pointSize: 14
         layer.enabled: false
@@ -423,17 +418,23 @@ Item {
     }
 
     OnOffButton {
-        id: onOffButton4
+        id: shutdownButton3
         x: 309
         y: 298
         width: 40
         height: 40
+
+        checked: dataManager.getSettingsValue("breakInFlag_pcShutdown2")
+        onCheckedChanged: dataManager.setSettingsValue("breakInFlag_pcShutdown2", checked)
     }
 
     OnOffButton {
-        id: onOffButton5
+        id: notificationButton3
         x: 360
         y: 298
+
+        checked: dataManager.getSettingsValue("breakInFlag_notification2")
+        onCheckedChanged: dataManager.setSettingsValue("breakInFlag_notification2", checked)
     }
 
     Text {
@@ -485,17 +486,23 @@ Item {
     }
 
     OnOffButton {
-        id: onOffButton6
+        id: shutdownButton4
         x: 309
         y: 395
         width: 40
         height: 40
+
+        checked: dataManager.getSettingsValue("dustFlag_pcShutdown")
+        onCheckedChanged: dataManager.setSettingsValue("dustFlag_pcShutdown", checked)
     }
 
     OnOffButton {
-        id: onOffButton7
+        id: notificationButton4
         x: 360
         y: 395
+
+        checked: dataManager.getSettingsValue("dustFlag_notification")
+        onCheckedChanged: dataManager.setSettingsValue("dustFlag_notification", checked)
     }
 
     Button {
@@ -561,6 +568,20 @@ Item {
     }
 
     //-------------------------------------------------------------------------------------------------
+
+    function update()
+    {
+        var currentTempereture = dataManager.getMcuValue("temperatureSensor");
+        temperatureValueButton.text = currentTempereture;
+        if(currentTempereture < minTemperatureSpinBox.currentValue || currentTempereture > maxTemperatureSpinBox.currentValue)
+        {
+            temperatureValueButton.checked = true;
+        }
+        else
+        {
+            temperatureValueButton.checked = false;
+        }
+    }
 }
 
 /*##^##

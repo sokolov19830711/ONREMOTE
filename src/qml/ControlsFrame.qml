@@ -76,8 +76,8 @@ Item {
         x: 352
         y: 0
         enabled: true
-        checked: !dataManager.isDeviceActive()
-        onCheckedChanged: dataManager.setDeviceActive(!checked)
+        checked: !dataManager.getSettingsValue("turnOn")
+        onCheckedChanged: dataManager.setSettingsValue("turnOn", !checked)
     }
 
     Text {
@@ -114,7 +114,7 @@ Item {
         id: startOnBootButton
         x: 352
         y: 46
-        checked: dataManager.isStartOnBoot()
+        checked: dataManager.getSettingsValue("startOnBoot")
         enabled: true
 
         onToggled: osInteractionManager.setStartOnBoot(startOnBootButton.checked)
@@ -154,7 +154,7 @@ Item {
         id: lockOSButton
         x: 352
         y: 92
-        checked: dataManager.isLockOS()
+        checked: dataManager.getSettingsValue("lockOS")
         enabled: true
 
         onToggled: osInteractionManager.setLockOS(lockOSButton.checked)
@@ -195,6 +195,8 @@ Item {
         x: 352
         y: 138
         enabled: true
+        checked: dataManager.getSettingsValue("soundOn")
+        onCheckedChanged: dataManager.setSettingsValue("soundOn", checked)
     }
 
     Text {
@@ -217,8 +219,8 @@ Item {
         x: 352
         y: 184
         enabled: true
-        checked: dataManager.isLedActive()
-        onCheckedChanged: dataManager.setLedActive(checked)
+        checked: dataManager.getSettingsValue("ledOn")
+        onCheckedChanged: dataManager.setSettingsValue("ledOn", checked)
     }
 
     Text {
@@ -273,6 +275,8 @@ Item {
         x: 352
         y: 276
         enabled: true
+        checked: dataManager.getSettingsValue("lockApp")
+        onCheckedChanged: dataManager.setSettingsValue("lockApp", checked)
     }
 
     Text {

@@ -6,10 +6,6 @@ Item {
     width: 400
     height: 500
 
-    property int currentPwswLevel: 0
-
-    onCurrentPwswLevelChanged: dataManager.setPowerButtonPwdLevel(currentPwswLevel)
-
     Button {
         id: extButton
         x: 261
@@ -54,7 +50,7 @@ Item {
         width: 112
         height: 60
         text: qsTr("НИЗКИЙ")
-        checked: dataManager.powerButtonPwdLevel() === 1
+        checked: dataManager.getSettingsValue("PWR/powerButtonPwdLevel") === 1
         enabled: true
         checkable: true
         font.pointSize: 13
@@ -82,7 +78,7 @@ Item {
         width: 112
         height: 60
         text: qsTr("СРЕДНИЙ")
-        checked: dataManager.powerButtonPwdLevel() === 2
+        checked: dataManager.getSettingsValue("PWR/powerButtonPwdLevel") === 2
         enabled: true
         checkable: true
         font.pointSize: 13
@@ -110,7 +106,7 @@ Item {
         width: 112
         height: 60
         text: qsTr("ВЫСОКИЙ")
-        checked: dataManager.powerButtonPwdLevel() === 3
+        checked: dataManager.getSettingsValue("PWR/powerButtonPwdLevel") === 3
         enabled: true
         checkable: true
         font.pointSize: 13
@@ -138,7 +134,7 @@ Item {
         width: 56
         height: 60
         text: qsTr("OFF")
-        checked: dataManager.powerButtonPwdLevel() === 0
+        checked: dataManager.getSettingsValue("PWR/powerButtonPwdLevel") === 0
         enabled: true
         checkable: true
         font.pointSize: 13
@@ -163,10 +159,10 @@ Item {
         id: setPwswButtons
 
         onClicked: {
-            if(button == setPwswLowButton) pwswFrame.currentPwswLevel = 1;
-            else if(button == setPwswMediumButton) pwswFrame.currentPwswLevel = 2;
-            else if(button == setPwswHighButton) pwswFrame.currentPwswLevel = 3;
-            else pwswFrame.currentPwswLevel = 0;
+            if(button == setPwswLowButton) dataManager.setSettingsValue("PWR/powerButtonPwdLevel", 1);
+            else if(button == setPwswMediumButton) dataManager.setSettingsValue("PWR/powerButtonPwdLevel", 2);
+            else if(button == setPwswHighButton) dataManager.setSettingsValue("PWR/powerButtonPwdLevel", 3);
+            else dataManager.setSettingsValue("PWR/powerButtonPwdLevel", 0);
         }
     }
 
@@ -176,9 +172,8 @@ Item {
         x: 292
         y: 113
 
-        currentValue: dataManager.digitInputPeriod()
-
-        onCurrentValueChanged: dataManager.setDigitInputPeriod(currentValue)
+        currentValue: dataManager.getSettingsValue("PWR/digitInputPeriod")
+        onCurrentValueChanged: dataManager.setSettingsValue("PWR/digitInputPeriod", currentValue)
     }
 
     MySpinBox {
@@ -317,26 +312,24 @@ Item {
         id: digitValueWidget1
         x: 5
         y: 305
-        currentValue: dataManager.powerButtonPwdDigit1()
-
-        onCurrentValueChanged: dataManager.setPowerButtonPwdDigit1(currentValue)
+        currentValue: dataManager.getSettingsValue("PWR/digit1")
+        onCurrentValueChanged: dataManager.setSettingsValue("PWR/digit1", currentValue)
     }
 
     DigitValueWidget {
         id: digitValueWidget2
         x: 145
         y: 304
-        currentValue: dataManager.powerButtonPwdDigit2()
-        onCurrentValueChanged: dataManager.setPowerButtonPwdDigit2(currentValue)
+        currentValue: dataManager.getSettingsValue("PWR/digit2")
+        onCurrentValueChanged: dataManager.setSettingsValue("PWR/digit2", currentValue)
     }
 
     DigitValueWidget {
         id: digitValueWidget3
         x: 283
         y: 304
-        currentValue: dataManager.powerButtonPwdDigit3()
-
-        onCurrentValueChanged: dataManager.setPowerButtonPwdDigit3(currentValue)
+        currentValue: dataManager.getSettingsValue("PWR/digit3")
+        onCurrentValueChanged: dataManager.setSettingsValue("PWR/digit3", currentValue)
     }
 }
 

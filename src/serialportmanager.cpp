@@ -84,11 +84,11 @@ void SerialPortManager::refresh()
         _noConnectionTimer->start(_connectionWaitingTime);
     }
 
-    if (counter < 100)
+    if (counter < 50)
     {
         counter++;
     }
-    else // Отсылаем настройки контроллеру на каждый 100 цикл (~раз в 1 сек)
+    else // Отсылаем настройки контроллеру на каждый 50 цикл (~раз в 1 сек)
     {
         counter = 0;
         _port.write(reinterpret_cast<const char*>(&(_dataManager.inData())), sizeof(McuInData));

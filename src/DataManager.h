@@ -22,7 +22,9 @@ public:
 	void writeMcuOutData(const QByteArray& data);
 
 	Q_INVOKABLE void setSettingsValue(const QString& valueName, unsigned char value);
+	Q_INVOKABLE void setSettingsStringValue(const QString& valueName, const QString& value);
 	Q_INVOKABLE unsigned char getSettingsValue(const QString& valueName) const;
+	Q_INVOKABLE QString getSettingsStringValue(const QString& valueName) const;
 	Q_INVOKABLE unsigned char getMcuValue(const QString& valueName) const;
 
 private:
@@ -42,15 +44,19 @@ private:
 		{"ledOn", &_mcuInData.ledOn},
 
 		{"dustFlag_pcShutdown", &_mcuInData.dustFlag_pcShutdown},
+		{"dustFlag_notification", nullptr},
 
 		{"temperatureFlag_pcShutdown", &_mcuInData.temperatureFlag_pcShutdown},
+		{"temperatureFlag_notification", nullptr},
 		{"temperatureMinValue", &_mcuInData.temperatureMinValue},
 		{"temperatureMaxValue", &_mcuInData.temperatureMaxValue},
 
 		{"breakInFlag_pcShutdown1", &_mcuInData.breakInFlag_pcShutdown1},
+		{"breakInFlag_notification1", nullptr},
 		{"breakInSensorNormalState1", &_mcuInData.breakInSensorNormalState1},
 
 		{"breakInFlag_pcShutdown2", &_mcuInData.breakInFlag_pcShutdown2},
+		{"breakInFlag_notification2", nullptr},
 		{"breakInSensorNormalState2", &_mcuInData.breakInSensorNormalState2},
 
 		{"PWR/powerButtonPwdLevel", &_mcuInData.powerButtonPwdLevel},
@@ -59,8 +65,17 @@ private:
 		{"PWR/digit3", &_mcuInData.powerButtonPwdDigit3},
 		{"PWR/digitInputPeriod", &_mcuInData.digitInputPeriod},
 
-		{"SerialPort/name", nullptr}
+		{"startOnBoot", nullptr},
+		{"lockOS", nullptr},
+		{"lockApp", nullptr},
+		{"SerialPort/name", nullptr},
 
+		{"SMTP/server", nullptr},
+		{"SMTP/port", nullptr},
+		{"SMTP/user", nullptr},
+		{"SMTP/password", nullptr},
+		{"SMTP/recipient", nullptr},
+		{"SMTP/deviceName", nullptr}
 	};
 
 	QMap<QString, unsigned char*> _mcuValuesMap

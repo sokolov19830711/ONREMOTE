@@ -22,7 +22,7 @@ static BreakInSensors breakInSensors;
 static PowerButtonWatcher powerButtonWatcher;
 
 static int loopsCounter = 0; // счетчик кол-ва вызовов функции loop()
-const int LOOPS_COUNT = 100; // кол-во циклов, через которое мы снимаем показания с "тяжелых" датчиков.
+const int LOOPS_COUNT = 50; // кол-во циклов, через которое мы снимаем показания с "тяжелых" датчиков.
 const int TIMER_PERIOD = 20000; // в микросекундах
 const int RUNNING_TIME_FIXING_PERIOD = 660; // С какой периодичностью обновляется запись о суммарном кол-ве отработаннного времени, в сек
 
@@ -50,27 +50,24 @@ void setup()
 
 void loop()
 {
-    unsigned long sessionRunningTime = millis() / 1000;
-  // Сохраняем текущее время с последнего запуска устройства
-    //DataManager::outData().sessionRunningTime = sessionRunningTime;
+  //  unsigned long sessionRunningTime = millis() / 1000;
+  //// Сохраняем текущее время с последнего запуска устройства
+  //  DataManager::outData().sessionRunningTime = sessionRunningTime;
 
-    static unsigned timeElapsed(0U);
-    int currentElapsedTime = sessionRunningTime - timeElapsed;
+  //  static unsigned timeElapsed(0U);
+  //  int currentElapsedTime = sessionRunningTime - timeElapsed;
 
-    if (currentElapsedTime > RUNNING_TIME_FIXING_PERIOD)
-    {
-        timeElapsed = sessionRunningTime;
-        internalMemoryManager.saveTotalRunningTimeValue(internalMemoryManager.lastTotalRunningTimeValue() + currentElapsedTime);
-        //DataManager::outData().totalRunningTime = internalMemoryManager.lastTotalRunningTimeValue();
-    }
+  //  if (currentElapsedTime > RUNNING_TIME_FIXING_PERIOD)
+  //  {
+  //      timeElapsed = sessionRunningTime;
+  //      internalMemoryManager.saveTotalRunningTimeValue(internalMemoryManager.lastTotalRunningTimeValue() + currentElapsedTime);
+  //      DataManager::outData().totalRunningTime = internalMemoryManager.lastTotalRunningTimeValue();
+    //}
 
     if(loopsCounter > LOOPS_COUNT)
     {
       loopsCounter = 0;
       
-      // Влажность
-      //moistureSensors.update();
-
       // Температура
       temperatureSensors.update();
 
@@ -80,27 +77,19 @@ void loop()
       // Датчики вскрытия
       breakInSensors.update();
 
-      //Пока датчики не работают, не забыть потом убрать!!!
-      //delay(500);
+      portManager.update();
+
+      if (portManager.mode() == SerialPortManager::Mode::normal && portManager.needToUpdateConfig())
+      {
+          DataManager::config() = *(portManager.inData());
+          internalMemoryManager.saveConfig();
+          powerButtonWatcher.updateConfig();
+      }
     }
 
     else
     {
         loopsCounter++;
-
-        //positionVibrationSensors.update();
-
-
-        portManager.update();
-
-        if (portManager.mode() == SerialPortManager::Mode::normal && portManager.needToUpdateConfig())
-        {
-            DataManager::config() = *(portManager.inData());
-			internalMemoryManager.saveConfig();
-			powerButtonWatcher.updateConfig();
-        }
-
-        //iButtonManager.update();
     }
 }
 

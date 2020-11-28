@@ -15,6 +15,16 @@ Item {
         text: "СОХРАНИТЬ"
         font.pointSize: 10
 
+        onClicked:
+        {
+            dataManager.setSettingsStringValue("SMTP/server", serverField.text);
+            dataManager.setSettingsStringValue("SMTP/port", portField.text);
+            dataManager.setSettingsStringValue("SMTP/user", userField.text);
+            dataManager.setSettingsStringValue("SMTP/password", passwordField.text);
+            dataManager.setSettingsStringValue("SMTP/recipient", recipientField.text);
+            dataManager.setSettingsStringValue("SMTP/deviceName", deviceNameField.text);
+        }
+
         background: Rectangle {
             color: parent.pressed ? "#166999" : "#30859B"
         }
@@ -90,6 +100,7 @@ Item {
             color: "#636363"
         }
         placeholderText: ""
+        text: dataManager.getSettingsStringValue("SMTP/server")
     }
 
     Text {
@@ -137,6 +148,7 @@ Item {
             color: "#636363"
         }
         placeholderText: ""
+        text: dataManager.getSettingsStringValue("SMTP/port")
     }
 
     Text {
@@ -184,6 +196,7 @@ Item {
             color: "#636363"
         }
         placeholderText: ""
+        text: dataManager.getSettingsStringValue("SMTP/user")
     }
 
     Text {
@@ -216,6 +229,7 @@ Item {
             color: "#636363"
         }
         placeholderText: ""
+        text: dataManager.getSettingsStringValue("SMTP/password")
     }
 
     Text {
@@ -247,6 +261,7 @@ Item {
             color: "#636363"
         }
         placeholderText: ""
+        text: dataManager.getSettingsStringValue("SMTP/recipient")
     }
 
     Text {
@@ -278,6 +293,7 @@ Item {
             color: "#636363"
         }
         placeholderText: ""
+        text: dataManager.getSettingsStringValue("SMTP/deviceName")
     }
 
     OnOffButton {

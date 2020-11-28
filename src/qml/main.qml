@@ -196,11 +196,6 @@ ApplicationWindow
     }
 
     Connections {
-        target: pwswFrame
-        function onCurrentPwswLevelChanged() { mainFrame.currentPwswLevel = pwswFrame.currentPwswLevel }
-    }
-
-    Connections {
         target: enterActivationKeyFrame.children[2] // Кнопка "АКТИВИРОВАТЬ"
         function onClicked() {if(accountManager.licenseKeyActivated()) framesLayout.currentIndex = 5}
     }

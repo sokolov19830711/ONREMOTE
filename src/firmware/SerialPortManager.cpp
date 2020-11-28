@@ -2,6 +2,7 @@
 
 #include <Arduino.h>
 #include "DataManager.h"
+#include "Beeper.h"
 
 SerialPortManager::SerialPortManager()
 {

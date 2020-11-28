@@ -83,6 +83,11 @@ void DataManager::setSettingsValue(const QString& valueName, unsigned char value
 	}
 }
 
+void DataManager::setSettingsStringValue(const QString& valueName, const QString& value)
+{
+	_settings->setValue(valueName, value);
+}
+
 unsigned char DataManager::getSettingsValue(const QString& valueName) const
 {
 	if (!_settingsMap.contains(valueName))
@@ -99,6 +104,11 @@ unsigned char DataManager::getSettingsValue(const QString& valueName) const
 	{
 		return _settings->value(valueName).toUInt();
 	}
+}
+
+QString DataManager::getSettingsStringValue(const QString& valueName) const
+{
+	return _settings->value(valueName).toString();
 }
 
 unsigned char DataManager::getMcuValue(const QString& valueName) const

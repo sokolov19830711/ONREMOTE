@@ -6,9 +6,6 @@ Item {
     width: 400
     height: 500
 
-    property int currentPwswLevel: 0
-    property bool ledActive: false
-
     Text {
         id: currentPwswLevelLabel
         x: 0
@@ -140,24 +137,6 @@ Item {
 
     ButtonGroup {
         id: pwswButtons
-    }
-
-    onCurrentPwswLevelChanged: {
-        switch (currentPwswLevel)
-        {
-        case 1:
-            lowPwswButton.checked = true;
-            break;
-        case 2:
-            mediumPwswButton.checked = true;
-            break;
-        case 3:
-            highPwswButton.checked = true;
-            break;
-        case 0:
-            pwswOffButton.checked = true;
-            break;
-        }
     }
 
 //----------------------------------------------------------------------------------------------
@@ -294,24 +273,6 @@ Item {
             verticalAlignment: Text.AlignVCenter
             elide: Text.ElideRight
         }
-
-        Connections {
-            target: dataManager
-            function onTemperatureSettingsChanged()
-            {
-                temperatureButton.text = dataManager.temperatureValue();
-
-                if((dataManager.temperatureValue() < dataManager.temperatureMinValue()) || (dataManager.temperatureValue() >dataManager.temperatureMaxValue()))
-                {
-                    temperatureButton.checked = true;
-                }
-                else
-                {
-                    temperatureButton.checked = false;
-                }
-            }
-        }
-
     }
 
     Text {
@@ -355,11 +316,6 @@ Item {
         layer.enabled: false
         checkable: true
         bottomPadding: 4
-
-        Connections {
-            target: dataManager
-            function onBreakIn1ValueChanged(value) {breakInButton1.checked = !value}
-        }
     }
 
     Text {
@@ -433,11 +389,6 @@ Item {
         checkable: true
         layer.enabled: false
         bottomPadding: 4
-
-        Connections {
-            target: dataManager
-            function onBreakIn2ValueChanged(value) {breakInButton2.checked = value}
-        }
     }
 
     Text {
@@ -490,11 +441,6 @@ Item {
         y: 440
         enabled: false
         checked: dataManager.isLedActive()
-
-        Connections {
-            target: dataManager
-            function onLedActiveChanged(state) {ledButton.checked = state}
-        }
     }
 
     Text {
@@ -541,32 +487,60 @@ Item {
         minimumPixelSize: 10
     }
 
-    onLedActiveChanged: ledButton.checked = ledActive
-
-    Connections {
-        target: dataManager
-        function onDustinessValueChanged(value)
-        {
-            if(value < 40)
-            {
-                lowDustinessButton.checked = true
-            }
-
-            else if (value < 60)
-            {
-                mediumDustinessButton.checked = true
-            }
-
-            else
-            {
-                highDustinessButton.checked = true
-            }
-        }
-    }
-
     function update()
     {
-        console.log("mainFrame update() called")
+        var currentPwswLevel = dataManager.getSettingsValue("PWR/powerButtonPwdLevel");
+        switch (currentPwswLevel)
+        {
+        case 1:
+            lowPwswButton.checked = true;
+            break;
+        case 2:
+            mediumPwswButton.checked = true;
+            break;
+        case 3:
+            highPwswButton.checked = true;
+            break;
+        case 0:
+            pwswOffButton.checked = true;
+            break;
+        }
+        //----------------------------------------------------------
+
+        var dustinessValue = dataManager.getMcuValue("dustSensor");
+        if(dustinessValue < 40)
+        {
+            lowDustinessButton.checked = true
+        }
+
+        else if (dustinessValue < 60)
+        {
+            mediumDustinessButton.checked = true
+        }
+
+        else
+        {
+            highDustinessButton.checked = true
+        }
+
+        //--------------------------------------------
+
+        temperatureButton.text = dataManager.getMcuValue("temperatureSensor");
+
+        if((dataManager.getMcuValue("temperatureSensor") < dataManager.getSettingsValue("temperatureMinValue")) || (dataManager.getMcuValue("temperatureSensor") > dataManager.getSettingsValue("temperatureMaxValue")))
+        {
+            temperatureButton.checked = true;
+        }
+        else
+        {
+            temperatureButton.checked = false;
+        }
+
+        //-----------------------------------------------
+
+        breakInButton1.checked = (dataManager.getMcuValue("breakInSensor1") !== dataManager.getSettingsValue("breakInSensorNormalState1"))
+        breakInButton2.checked = (dataManager.getMcuValue("breakInSensor2") !== dataManager.getSettingsValue("breakInSensorNormalState2"))
+        ledButton.checked = dataManager.getSettingsValue("ledOn")
     }
 }
 
