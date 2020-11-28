@@ -6,22 +6,16 @@
 
 DataManager::DataManager()
 {
-	//_settings = QSharedPointer<QSettings>::create(QCoreApplication::applicationDirPath() + "/settings.ini", QSettings::IniFormat);
-
 	qDebug() << QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
 	_settings = QSharedPointer<QSettings>::create(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + "/settings.ini", QSettings::IniFormat);
 
 	_mcuInData.functionsFlags = _settings->value("functionsFlags", 72).toUInt();
-	/*_mcuInData.breakInFlags1 = _settings->value("breakInFlags").toUInt();
-	_mcuInData.dustFlags1 = _settings->value("dustFlags").toUInt();*/
+	_mcuInData.breakInFlags1 = _settings->value("breakInFlags").toUInt();
+	_mcuInData.dustFlags1 = _settings->value("dustFlags").toUInt();
 
-	/*_mcuInData.temperatureFlags1 = _settings->value("temperatureFlags").toUInt();
+	_mcuInData.temperatureFlags1 = _settings->value("temperatureFlags").toUInt();
 	_mcuInData.temperatureMinValue1 = _settings->value("temperatureMinValue1").toInt();
-	_mcuInData.temperatureMaxValue1 = _settings->value("temperatureMaxValue1").toInt();*/
-
-	/*_mcuInData.moistureFlags = _settings->value("moistureFlags").toUInt();
-	_mcuInData.moistureMinValue = _settings->value("moistureMinValue").toInt();
-	_mcuInData.moistureMaxValue = _settings->value("moistureMaxValue").toInt();*/
+	_mcuInData.temperatureMaxValue1 = _settings->value("temperatureMaxValue1").toInt();
 
 	_mcuInData.powerButtonPwdLevel = _settings->value("PWR/powerButtonPwdLevel", 0).toInt();
 	_mcuInData.powerButtonPwdDigit1 = _settings->value("PWR/digit1").toInt();
@@ -33,16 +27,12 @@ DataManager::DataManager()
 DataManager::~DataManager()
 {
 	_settings->setValue("functionsFlags", _mcuInData.functionsFlags);
-	/*_settings->setValue("breakInFlags", _mcuInData.breakInFlags1);
+	_settings->setValue("breakInFlags", _mcuInData.breakInFlags1);
 	_settings->setValue("dustFlags", _mcuInData.dustFlags1);
 
 	_settings->setValue("temperatureFlags", _mcuInData.temperatureFlags1);
 	_settings->setValue("temperatureMinValue1", _mcuInData.temperatureMinValue1);
 	_settings->setValue("temperatureMaxValue1", _mcuInData.temperatureMaxValue1);
-
-	_settings->setValue("moistureFlags", _mcuInData.moistureFlags);
-	_settings->setValue("moistureMinValue", _mcuInData.moistureMinValue);
-	_settings->setValue("moistureMaxValue", _mcuInData.moistureMaxValue);*/
 
 	_settings->setValue("PWR/powerButtonPwdLevel", _mcuInData.powerButtonPwdLevel);
 	_settings->setValue("PWR/digit1", _mcuInData.powerButtonPwdDigit1);
@@ -126,6 +116,16 @@ int DataManager::temperatureValue() const
 	return _mcuOutData.temperatureSensor1;
 }
 
+int DataManager::temperatureMinValue() const
+{
+	return _mcuInData.temperatureMinValue1;
+}
+
+int DataManager::temperatureMaxValue() const
+{
+	return _mcuInData.temperatureMaxValue1;
+}
+
 //------------------------------------------------------------------------------------------------
 
 void DataManager::update()
@@ -143,6 +143,7 @@ void DataManager::update()
 	if (_mcuOutData.temperatureSensor1 != _prevMcuOutData.temperatureSensor1)
 	{
 		emit temperatureValueChanged(_mcuOutData.temperatureSensor1);
+		emit temperatureSettingsChanged();
 	}
 
 	if (_mcuOutData.dustSensor1 != _prevMcuOutData.dustSensor1)
@@ -193,4 +194,22 @@ void DataManager::setPowerButtonPwdDigit3(int value)
 {
 	if (_mcuInData.powerButtonPwdDigit3 != value)
 		_mcuInData.powerButtonPwdDigit3 = value;
+}
+
+void DataManager::setTemperatureMinValue(int value)
+{
+	if (_mcuInData.temperatureMinValue1 != value)
+	{
+		_mcuInData.temperatureMinValue1 = value;
+		emit temperatureSettingsChanged();
+	}	
+}
+
+void DataManager::setTemperatureMaxValue(int value)
+{
+	if (_mcuInData.temperatureMaxValue1 != value)
+	{
+		_mcuInData.temperatureMaxValue1 = value;
+		emit temperatureSettingsChanged();
+	}
 }

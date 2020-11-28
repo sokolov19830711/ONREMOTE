@@ -297,7 +297,19 @@ Item {
 
         Connections {
             target: dataManager
-            function onTemperatureValueChanged(value) {temperatureButton.text = value}
+            function onTemperatureSettingsChanged()
+            {
+                temperatureButton.text = dataManager.temperatureValue();
+
+                if((dataManager.temperatureValue() < dataManager.temperatureMinValue()) || (dataManager.temperatureValue() >dataManager.temperatureMaxValue()))
+                {
+                    temperatureButton.checked = true;
+                }
+                else
+                {
+                    temperatureButton.checked = false;
+                }
+            }
         }
 
     }

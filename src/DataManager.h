@@ -31,6 +31,8 @@ public:
 	Q_INVOKABLE int powerButtonPwdDigit2() const;
 	Q_INVOKABLE int powerButtonPwdDigit3() const;
 	Q_INVOKABLE int temperatureValue() const;
+	Q_INVOKABLE int temperatureMinValue() const;
+	Q_INVOKABLE int temperatureMaxValue() const;
 
 public slots:
 
@@ -41,6 +43,8 @@ public slots:
 	void setPowerButtonPwdDigit1(int value);
 	void setPowerButtonPwdDigit2(int value);
 	void setPowerButtonPwdDigit3(int value);
+	void setTemperatureMinValue(int value);
+	void setTemperatureMaxValue(int value);
 
 signals:
 
@@ -49,6 +53,7 @@ signals:
 	void breakIn1ValueChanged(int value);
 	void breakIn2ValueChanged(int value);
 	void temperatureValueChanged(int value);
+	void temperatureSettingsChanged();
 	void dustinessValueChanged(int value);
 
 private:

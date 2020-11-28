@@ -32,6 +32,9 @@ Item {
         x: 0
         y: 98
         valueFieldColor: "#808080"
+        currentValue: dataManager.temperatureMinValue()
+
+        onCurrentValueChanged: dataManager.setTemperatureMinValue(currentValue)
     }
 
     Button {
@@ -40,6 +43,10 @@ Item {
         y: 98
         width: 40
         height: 40
+        topPadding: 4
+        leftPadding: 4
+        rightPadding: 4
+        bottomPadding: 4
         text: "0"
         contentItem: Text {
             color: "#fefefe"
@@ -49,28 +56,33 @@ Item {
             verticalAlignment: Text.AlignVCenter
             font: parent.font
         }
-        rightPadding: 4
         checkable: true
         layer.enabled: false
         font.pointSize: 14
         enabled: false
-        bottomPadding: 4
 
         background: Rectangle {
             color: parent.checked ? "#c05046" : "#00be94"
+        }  
+
+        function checkTemperatureState()
+        {
+            if((dataManager.temperatureValue() < minTemperatureSpinBox.currentValue) || (dataManager.temperatureValue() > maxTemperatureSpinBox.currentValue))
+            {
+                temperatureValueButton.checked = true;
+            }
+            else
+            {
+                temperatureValueButton.checked = false;
+            }
         }
-
-        topPadding: 4
-        leftPadding: 4
-
 
         Connections {
             target: dataManager
             function onTemperatureValueChanged(value)
             {
                 temperatureValueButton.text = value;
-                (value < minTemperatureSpinBox.currentValue || value > maxTemperatureSpinBox.currentValue) ?
-                            temperatureValueButton.checked = false : temperatureValueButton.checked = true;
+                temperatureValueButton.checkTemperatureState();
             }
         }
 
@@ -78,18 +90,16 @@ Item {
             target: minTemperatureSpinBox
             function onCurrentValueChanged()
             {
-                (dataManager.temperatureValue() < minTemperatureSpinBox.currentValue) ?
-                            temperatureValueButton.checked = false : temperatureValueButton.checked = true;
+                temperatureValueButton.checkTemperatureState();
             }
         }
 
-            Connections {
-                target: maxTemperatureSpinBox
-                function onCurrentValueChanged()
-                {
-                    (dataManager.temperatureValue() > maxTemperatureSpinBox.currentValue) ?
-                                temperatureValueButton.checked = false : temperatureValueButton.checked = true;
-                }
+        Connections {
+            target: maxTemperatureSpinBox
+            function onCurrentValueChanged()
+            {
+                temperatureValueButton.checkTemperatureState();
+            }
         }
 
     }
@@ -99,6 +109,9 @@ Item {
         x: 170
         y: 98
         valueFieldColor: "#808080"
+        currentValue: dataManager.temperatureMaxValue()
+
+        onCurrentValueChanged: dataManager.setTemperatureMaxValue(currentValue)
     }
 
     OnOffButton {
