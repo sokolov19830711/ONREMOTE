@@ -39,6 +39,29 @@ Item {
         }
     }
 
+    Button {
+        id: testButton
+        x: 27
+        y: 447
+        width: 125
+        height: 40
+        text: "ТЕСТ"
+        font.pointSize: 10
+        background: Rectangle {
+            color: parent.pressed ? "#166999" : "#30859B"
+        }
+        contentItem: Text {
+            color: "#fefefe"
+            text: parent.text
+            elide: Text.ElideRight
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            font: parent.font
+        }
+
+        onClicked: smtpManager.sentTestMessage()
+    }
+
     Text {
         id: text16
         x: 158
@@ -315,27 +338,6 @@ Item {
         verticalAlignment: Text.AlignVCenter
         font.family: "Calibri Light"
         textFormat: Text.RichText
-    }
-
-    Button {
-        id: testButton
-        x: 27
-        y: 447
-        width: 125
-        height: 40
-        text: "ТЕСТ"
-        font.pointSize: 10
-        background: Rectangle {
-            color: parent.pressed ? "#166999" : "#30859B"
-        }
-        contentItem: Text {
-            color: "#fefefe"
-            text: parent.text
-            elide: Text.ElideRight
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-            font: parent.font
-        }
     }
 
     Text {

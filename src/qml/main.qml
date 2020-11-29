@@ -188,7 +188,7 @@ ApplicationWindow
     }
 
     Connections {
-        target: guiUpdateTimer
+        target:updateTimer
         function onTimeout()
         {
             framesLayout.children[framesLayout.currentIndex].update()
