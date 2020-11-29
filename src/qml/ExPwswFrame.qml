@@ -6,10 +6,6 @@ Item {
     width: 400
     height: 500
 
-    property int currentPwswLevel: 0
-
-    onCurrentPwswLevelChanged: dataManager.setPowerButtonPwdLevel(currentPwswLevel)
-
     Text {
         id: setPwswLevelLabel
         x: 20
@@ -24,17 +20,6 @@ Item {
         font.family: "Calibri Light"
         font.weight: Font.Light
         minimumPixelSize: 16
-    }
-
-    ButtonGroup {
-        id: setPwswButtons
-
-        onClicked: {
-            if(button == setPwswLowButton) pwswFrame.currentPwswLevel = 1;
-            else if(button == setPwswMediumButton) pwswFrame.currentPwswLevel = 2;
-            else if(button == setPwswHighButton) pwswFrame.currentPwswLevel = 3;
-            else pwswFrame.currentPwswLevel = 0;
-        }
     }
 
     OnOffButton {
@@ -113,6 +98,8 @@ Item {
         background: Rectangle {
             color: parent.pressed ? "#166999" : "#30859B"
         }
+
+        onClicked: osInteractionManager.shutdown()
     }
 
     Button {
@@ -134,6 +121,8 @@ Item {
         background: Rectangle {
             color: parent.pressed ? "#166999" : "#30859B"
         }
+
+        onClicked: osInteractionManager.reset()
     }
 
     Button {
@@ -155,6 +144,8 @@ Item {
         background: Rectangle {
             color: parent.pressed ? "#166999" : "#30859B"
         }
+
+        onClicked: osInteractionManager.hybernate()
     }
 
     Text {

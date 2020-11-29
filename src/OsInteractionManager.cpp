@@ -2,6 +2,7 @@
 
 #include <QDir>
 #include <QCoreApplication>
+#include <QProcess>
 
 #ifdef Q_OS_WIN32
 #include <windows.h>
@@ -41,6 +42,27 @@ void OsInteractionManager::setStartOnBoot(bool state) const
 void OsInteractionManager::setLockOS(bool state) const
 {
 	_dataManager.settings()->setValue("lockOS", static_cast<int>(state));
+}
+
+void OsInteractionManager::shutdown() const
+{
+#ifdef Q_OS_WIN32
+	QProcess::execute("shutdown", { "/p" });
+#endif
+}
+
+void OsInteractionManager::reset() const
+{
+#ifdef Q_OS_WIN32
+	QProcess::execute("shutdown", { "/r" });
+#endif
+}
+
+void OsInteractionManager::hybernate() const
+{
+#ifdef Q_OS_WIN32
+	QProcess::execute("shutdown", { "/h" });
+#endif
 }
 
 void OsInteractionManager::lockOS() const

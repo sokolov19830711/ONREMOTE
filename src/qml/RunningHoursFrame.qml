@@ -58,22 +58,13 @@ Item {
         background: Rectangle {
             color: parent.pressed ? "#166999" : "#30859B"
         }
-    }
 
-    TextField {
-        id: totalRunningField3
-        x: 249
-        y: 101
-        width: 40
-        height: 40
-        color: "#fefefe"
-        horizontalAlignment: Text.AlignHCenter
-        font.pointSize: 15
-        background: Rectangle {
-            color: "#636363"
+        onClicked:
+        {
+            totalHwHoursNotification.text = ""
+            totalHwMinutesNotification.text = ""
+            totalHwSecondsNotification.text = ""
         }
-        placeholderText: "00"
-        validator: RegExpValidator{regExp: /^[0-9]+$/}
     }
 
     Text {
@@ -159,6 +150,13 @@ Item {
         font.pointSize: 10
         background: Rectangle {
             color: parent.pressed ? "#166999" : "#30859B"
+        }
+
+        onClicked:
+        {
+            sessionHwHoursNotification.text = ""
+            sessionHwMinutesNotification.text = ""
+            sessionHwSecondsNotification.text = ""
         }
     }
 
@@ -246,6 +244,13 @@ Item {
         background: Rectangle {
             color: parent.pressed ? "#166999" : "#30859B"
         }
+
+        onClicked:
+        {
+            totalSwHoursNotification.text = ""
+            totalSwMinutesNotification.text = ""
+            totalSwSecondsNotification.text = ""
+        }
     }
 
     Text {
@@ -278,6 +283,236 @@ Item {
         font.family: "Calibri Light"
         minimumPixelSize: 10
         font.italic: false
+    }
+
+    TextField {
+        id: totalHwHoursNotification
+        x: 249
+        y: 101
+        width: 40
+        height: 40
+        color: "#fefefe"
+        horizontalAlignment: Text.AlignHCenter
+        leftPadding: 6
+        font.pointSize: 15
+        background: Rectangle {
+            color: "#636363"
+        }
+        placeholderText: "00"
+        validator: RegExpValidator{regExp: /^[0-9]+$/}
+        text: dataManager.getSettingsStringValue("totalHwHoursNotification")
+        onTextChanged:
+        {
+            dataManager.setSettingsStringValue("totalHwHoursNotification", text)
+            if(text === "0") text = ""
+        }
+    }
+
+    TextField {
+        id: totalHwMinutesNotification
+        x: 295
+        y: 101
+        width: 40
+        height: 40
+        color: "#fefefe"
+        horizontalAlignment: Text.AlignHCenter
+        font.pointSize: 15
+        leftPadding: 6
+        validator: RegExpValidator {
+            regExp: /^[0-9]+$/
+        }
+        background: Rectangle {
+            color: "#636363"
+        }
+        placeholderText: "00"
+        text: dataManager.getSettingsStringValue("totalHwMinutesNotification")
+        onTextChanged:
+        {
+            dataManager.setSettingsStringValue("totalHwMinutesNotification", text)
+            if(text === "0") text = ""
+        }
+    }
+
+    TextField {
+        id: totalHwSecondsNotification
+        x: 341
+        y: 101
+        width: 40
+        height: 40
+        color: "#fefefe"
+        horizontalAlignment: Text.AlignHCenter
+        font.pointSize: 15
+        leftPadding: 6
+        validator: RegExpValidator {
+            regExp: /^[0-9]+$/
+        }
+        background: Rectangle {
+            color: "#636363"
+        }
+        placeholderText: "00"
+        text: dataManager.getSettingsStringValue("totalHwSecondsNotification")
+        onTextChanged:
+        {
+            dataManager.setSettingsStringValue("totalHwSecondsNotification", text)
+            if(text === "0") text = ""
+        }
+    }
+
+    TextField {
+        id: sessionHwHoursNotification
+        x: 8
+        y: 267
+        width: 40
+        height: 40
+        color: "#fefefe"
+        horizontalAlignment: Text.AlignHCenter
+        font.pointSize: 15
+        leftPadding: 6
+        validator: RegExpValidator {
+            regExp: /^[0-9]+$/
+        }
+        background: Rectangle {
+            color: "#636363"
+        }
+        placeholderText: "00"
+        text: dataManager.getSettingsStringValue("sessionHwHoursNotification")
+        onTextChanged:
+        {
+            dataManager.setSettingsStringValue("sessionHwHoursNotification", text)
+            if(text === "0") text = ""
+        }
+    }
+
+    TextField {
+        id: sessionHwMinutesNotification
+        x: 54
+        y: 267
+        width: 40
+        height: 40
+        color: "#fefefe"
+        horizontalAlignment: Text.AlignHCenter
+        font.pointSize: 15
+        leftPadding: 6
+        validator: RegExpValidator {
+            regExp: /^[0-9]+$/
+        }
+        background: Rectangle {
+            color: "#636363"
+        }
+        placeholderText: "00"
+        text: dataManager.getSettingsStringValue("sessionHwMinutesNotification")
+        onTextChanged:
+        {
+            dataManager.setSettingsStringValue("sessionHwMinutesNotification", text)
+            if(text === "0") text = ""
+        }
+    }
+
+    TextField {
+        id: sessionHwSecondsNotification
+        x: 100
+        y: 267
+        width: 40
+        height: 40
+        color: "#fefefe"
+        horizontalAlignment: Text.AlignHCenter
+        font.pointSize: 15
+        leftPadding: 6
+        validator: RegExpValidator {
+            regExp: /^[0-9]+$/
+        }
+        background: Rectangle {
+            color: "#636363"
+        }
+        placeholderText: "00"
+        text: dataManager.getSettingsStringValue("sessionHwSecondsNotification")
+        onTextChanged:
+        {
+            dataManager.setSettingsStringValue("sessionHwSecondsNotification", text)
+            if(text === "0") text = ""
+        }
+    }
+
+    TextField {
+        id: totalSwHoursNotification
+        x: 249
+        y: 430
+        width: 40
+        height: 40
+        color: "#fefefe"
+        horizontalAlignment: Text.AlignHCenter
+        font.pointSize: 15
+        leftPadding: 6
+        validator: RegExpValidator {
+            regExp: /^[0-9]+$/
+        }
+        background: Rectangle {
+            color: "#636363"
+        }
+        placeholderText: "00"
+        text: dataManager.getSettingsStringValue("totalSwHoursNotification")
+        onTextChanged:
+        {
+            dataManager.setSettingsStringValue("totalSwHoursNotification", text)
+            if(text === "0") text = ""
+        }
+    }
+
+    TextField {
+        id: totalSwMinutesNotification
+        x: 295
+        y: 430
+        width: 40
+        height: 40
+        color: "#fefefe"
+        horizontalAlignment: Text.AlignHCenter
+        font.pointSize: 15
+        leftPadding: 6
+        validator: RegExpValidator {
+            regExp: /^[0-9]+$/
+        }
+        background: Rectangle {
+            color: "#636363"
+        }
+        placeholderText: "00"
+        text: dataManager.getSettingsStringValue("totalSwMinutesNotification")
+        onTextChanged:
+        {
+            dataManager.setSettingsStringValue("totalSwMinutesNotification", text)
+            if(text === "0") text = ""
+        }
+    }
+
+    TextField {
+        id: totalSwSecondsNotification
+        x: 341
+        y: 430
+        width: 40
+        height: 40
+        color: "#fefefe"
+        horizontalAlignment: Text.AlignHCenter
+        font.pointSize: 15
+        leftPadding: 6
+        validator: RegExpValidator {
+            regExp: /^[0-9]+$/
+        }
+        background: Rectangle {
+            color: "#636363"
+        }
+        placeholderText: "00"
+        text: dataManager.getSettingsStringValue("totalSwSecondsNotification")
+        onTextChanged:
+        {
+            dataManager.setSettingsStringValue("totalSwSecondsNotification", text)
+            if(text === "0") text = ""
+        }
+    }
+
+    function update()
+    {
+        totalRunningField.text = dataManager.getDeviceTotalTime()
+        sessionRunningField.text = dataManager.getDeviceSessionTime()
+        swTotalRunningField.text = dataManager.getPcTotalTime()
     }
 }
 

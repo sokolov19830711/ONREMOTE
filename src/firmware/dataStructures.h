@@ -22,16 +22,16 @@ struct  McuOutData
     unsigned char controlMarker = CONTROL_MARKER;
 
     // Суммарное время работы устройства
-    unsigned char totalDays;
-    unsigned char totalHours;
-    unsigned char totalMinutes;
-    unsigned char totalSeconds;
+    unsigned char totalTime1;
+    unsigned char totalTime2;
+    unsigned char totalTime3;
+    unsigned char totalTime4;
 
     // Время работы устройства за сессию
-	unsigned char sessionDays;
-	unsigned char sessionHours;
-	unsigned char sessionMinutes;
-	unsigned char sessionSeconds;
+	unsigned char sessionTime1;
+	unsigned char sessionTime2;
+	unsigned char sessionTime3;
+	unsigned char sessionTime4;
 };  // Итого получаем 15 байт
 
 struct McuInData

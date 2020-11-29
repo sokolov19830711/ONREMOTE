@@ -3,10 +3,12 @@
 #include <QDebug>
 #include <QCoreApplication>
 #include <QStandardPaths>
+#include <QTime>
 
 DataManager::DataManager()
 {
-	qDebug() << QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
+	_appStartedTime = QDateTime::currentDateTime();
+
 	_settings = QSharedPointer<QSettings>::create(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + "/settings.ini", QSettings::IniFormat);
 
 	_mcuInData.turnOn = _settings->value("turnOn", 1).toUInt();
@@ -34,6 +36,8 @@ DataManager::DataManager()
 
 DataManager::~DataManager()
 {
+	updatePcTotalRunningTime();
+
 	QStringList settingsKeys = _settingsMap.keys();
 	for (auto & key : settingsKeys)
 	{
@@ -119,4 +123,36 @@ unsigned char DataManager::getMcuValue(const QString& valueName) const
 	}
 
 	return 0;
+}
+
+QString DataManager::getDeviceSessionTime() const
+{
+	int sessionTime;
+	memcpy(&sessionTime, &(_mcuOutData.sessionTime1), 4);
+
+	QTime time(0, 0);
+	return time.addSecs(sessionTime).toString("hh ч mm мин ss сек");
+}
+
+QString DataManager::getDeviceTotalTime() const
+{
+	int totalTime;
+	memcpy(&totalTime, &(_mcuOutData.totalTime1), 4);
+
+	QTime time(0, 0);
+	return time.addSecs(totalTime).toString("hh ч mm мин");
+}
+
+QString DataManager::getPcTotalTime()
+{
+	updatePcTotalRunningTime();
+	QTime time(0, 0);
+	return time.addSecs(_settings->value("OS_totalRunningTime").toUInt()).toString("hh ч mm мин ss сек");
+}
+
+void DataManager::updatePcTotalRunningTime()
+{
+	static unsigned prevSessionTotalRunningTime(_settings->value("OS_totalRunningTime").toUInt());
+	unsigned elapsedTime = static_cast<unsigned>(_appStartedTime.secsTo(QDateTime::currentDateTime()));
+	_settings->setValue("OS_totalRunningTime", prevSessionTotalRunningTime + elapsedTime);
 }

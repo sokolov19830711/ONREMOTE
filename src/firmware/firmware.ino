@@ -50,19 +50,20 @@ void setup()
 
 void loop()
 {
-  //  unsigned long sessionRunningTime = millis() / 1000;
-  //// Сохраняем текущее время с последнего запуска устройства
-  //  DataManager::outData().sessionRunningTime = sessionRunningTime;
+    unsigned long sessionRunningTime = millis() / 1000;
+  // Сохраняем текущее время с последнего запуска устройства
+    memcpy(&DataManager::outData().sessionTime1, &sessionRunningTime, 4);
 
-  //  static unsigned timeElapsed(0U);
-  //  int currentElapsedTime = sessionRunningTime - timeElapsed;
+    static unsigned timeElapsed(0U);
+    int currentElapsedTime = sessionRunningTime - timeElapsed;
 
-  //  if (currentElapsedTime > RUNNING_TIME_FIXING_PERIOD)
-  //  {
-  //      timeElapsed = sessionRunningTime;
-  //      internalMemoryManager.saveTotalRunningTimeValue(internalMemoryManager.lastTotalRunningTimeValue() + currentElapsedTime);
-  //      DataManager::outData().totalRunningTime = internalMemoryManager.lastTotalRunningTimeValue();
-    //}
+    if (currentElapsedTime > RUNNING_TIME_FIXING_PERIOD)
+    {
+        timeElapsed = sessionRunningTime;
+        internalMemoryManager.saveTotalRunningTimeValue(internalMemoryManager.lastTotalRunningTimeValue() + currentElapsedTime);
+        unsigned long totalRunningTime = internalMemoryManager.lastTotalRunningTimeValue();
+        memcpy(&DataManager::outData().totalTime1, &totalRunningTime, 4);
+    }
 
     if(loopsCounter > LOOPS_COUNT)
     {

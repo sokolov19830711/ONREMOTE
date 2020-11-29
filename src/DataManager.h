@@ -5,6 +5,7 @@
 #include <QObject>
 #include <QSettings>
 #include <QSharedPointer>
+#include <QDateTime>
 
 class DataManager : public QObject
 {
@@ -27,8 +28,17 @@ public:
 	Q_INVOKABLE QString getSettingsStringValue(const QString& valueName) const;
 	Q_INVOKABLE unsigned char getMcuValue(const QString& valueName) const;
 
+	Q_INVOKABLE QString getDeviceSessionTime() const;
+	Q_INVOKABLE QString getDeviceTotalTime() const;
+	Q_INVOKABLE QString getPcTotalTime();
+
+public slots:
+
+	void updatePcTotalRunningTime();
+
 private:
 
+	QDateTime _appStartedTime;
 	QSharedPointer<QSettings> _settings;
 
 	McuInData _mcuInData;
@@ -75,7 +85,21 @@ private:
 		{"SMTP/user", nullptr},
 		{"SMTP/password", nullptr},
 		{"SMTP/recipient", nullptr},
-		{"SMTP/deviceName", nullptr}
+		{"SMTP/deviceName", nullptr},
+
+		{"OS_totalRunningTime", nullptr},
+
+		{"totalHwHoursNotification", nullptr},
+		{"totalHwMinutesNotification", nullptr},
+		{"totalHwSecondsNotification", nullptr},
+
+		{"sessionHwHoursNotification", nullptr},
+		{"sessionHwMinutesNotification", nullptr},
+		{"sessionHwSecondsNotification", nullptr},
+
+		{"totalSwHoursNotification", nullptr},
+		{"totalSwMinutesNotification", nullptr},
+		{"totalSwSecondsNotification", nullptr}
 	};
 
 	QMap<QString, unsigned char*> _mcuValuesMap
@@ -84,14 +108,6 @@ private:
 		{"temperatureSensor", &_mcuOutData.temperatureSensor},
 		{"breakInSensor1", &_mcuOutData.breakInSensor1},
 		{"breakInSensor2", &_mcuOutData.breakInSensor2},
-		{"totalDays", &_mcuOutData.totalDays},
-		{"totalHours", &_mcuOutData.totalHours},
-		{"totalMinutes", &_mcuOutData.totalMinutes},
-		{"totalSeconds", &_mcuOutData.totalSeconds},
-		{"sessionDays", &_mcuOutData.sessionDays},
-		{"sessionHours", &_mcuOutData.sessionHours},
-		{"sessionMinutes", &_mcuOutData.sessionMinutes},
-		{"sessionSeconds", &_mcuOutData.sessionSeconds}
 	};
 
 };

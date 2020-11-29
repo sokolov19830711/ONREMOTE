@@ -14,6 +14,9 @@ public:
 
 	Q_INVOKABLE void setStartOnBoot(bool state) const;
 	Q_INVOKABLE void setLockOS(bool state) const;
+	Q_INVOKABLE void shutdown() const;
+	Q_INVOKABLE void reset() const;
+	Q_INVOKABLE void hybernate() const;
 
 public slots:
 

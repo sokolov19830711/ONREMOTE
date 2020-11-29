@@ -30,7 +30,6 @@ Item {
         width: 112
         height: 60
         text: qsTr("НИЗКИЙ")
-        checked: dataManager.powerButtonPwdLevel() === 1
         enabled: false
         checkable: true
         font.pointSize: 13
@@ -58,7 +57,6 @@ Item {
         width: 112
         height: 60
         text: qsTr("СРЕДНИЙ")
-        checked: dataManager.powerButtonPwdLevel() === 2
         enabled: false
         checkable: true
         font.pointSize: 13
@@ -86,7 +84,6 @@ Item {
         width: 112
         height: 60
         text: qsTr("ВЫСОКИЙ")
-        checked: dataManager.powerButtonPwdLevel() === 3
         enabled: false
         checkable: true
         font.pointSize: 13
@@ -114,7 +111,6 @@ Item {
         width: 56
         height: 60
         text: qsTr("OFF")
-        checked: dataManager.powerButtonPwdLevel() === 0
         enabled: false
         checkable: true
         font.pointSize: 13
@@ -440,7 +436,6 @@ Item {
         x: 180
         y: 440
         enabled: false
-        checked: dataManager.isLedActive()
     }
 
     Text {
