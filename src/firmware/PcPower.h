@@ -6,6 +6,7 @@ public:
 	static void init(int pin, int timerPeriod, int duration);
 	static void update();
 	static void on();
+	static void off();
 
 private:
 

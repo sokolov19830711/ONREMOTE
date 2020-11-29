@@ -27,7 +27,7 @@ void BreakInSensors::update()
 	{
 		if (DataManager::config().breakInFlag_pcShutdown1)
 		{
-			PcPower::on();
+			PcPower::off();
 		}
 	}
 
@@ -39,7 +39,7 @@ void BreakInSensors::update()
 	{
 		if (DataManager::config().breakInFlag_pcShutdown2)
 		{
-			PcPower::on();
+			PcPower::off();
 		}
 	}
 }

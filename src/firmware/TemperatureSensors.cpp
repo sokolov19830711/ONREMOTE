@@ -36,7 +36,7 @@ void TemperatureSensors::update()
 	{
 		if (DataManager::config().temperatureFlag_pcShutdown)
 		{
-			PcPower::on();
+			PcPower::off();
 		}
 	}
 }

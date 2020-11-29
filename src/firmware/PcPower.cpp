@@ -49,3 +49,14 @@ void PcPower::on()
 		TricolorLED::blink(GREEN);
 	}
 }
+
+void PcPower::off()
+{
+	if (!getInstance()._isOn && analogRead(SYS_FAN) < 300)
+	{
+		getInstance().getInstance()._cyclesCounter = 0;
+		getInstance()._isOn = true;
+		digitalWrite(getInstance()._pin, HIGH);
+		TricolorLED::blink(RED);
+	}
+}

@@ -15,8 +15,6 @@ const int TERMINAL_SWITCH1 = 4;
 const int PC_POWER = A3;
 const int PC_RESET = A4;
 
-const int SYS_FAN = A7;
-
 const int DEFAULT_PIN = 3;
 
 const int PC_POWER_BUTTON = 2;
@@ -27,6 +25,7 @@ const int BEEPER = A2;
 // Аналоговые вводы/выводы:
 
 const int DUST_RES_INT = A1; // Приемник встроенного датчика пыли
+const int SYS_FAN = A7;
 
 // ШИМ
 const int RED = 10;

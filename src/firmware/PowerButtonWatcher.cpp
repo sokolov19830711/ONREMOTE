@@ -63,7 +63,6 @@ void PowerButtonWatcher::update(int dt)
 			else // Пароль на кнопку питания отключен
 			{
 				PcPower::on();
-				TricolorLED::blink(GREEN);
 			}
 		}
 	}

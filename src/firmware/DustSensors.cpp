@@ -26,7 +26,7 @@ void DustSensors::update()
 	{
 		if (DataManager::config().dustFlag_pcShutdown)
 		{
-			PcPower::on();
+			PcPower::off();
 		}
 	}
 }

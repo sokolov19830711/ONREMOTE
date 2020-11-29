@@ -44,8 +44,6 @@ void setup()
     temperatureSensors.init();
     dustSensors.init();
     powerButtonWatcher.updateConfig();
-
-    //DataManager::outData().totalRunningTime = internalMemoryManager.lastTotalRunningTimeValue();
 }
 
 void loop()
