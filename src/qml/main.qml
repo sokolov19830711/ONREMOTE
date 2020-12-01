@@ -9,7 +9,7 @@ ApplicationWindow
     id: applicationWindow
     width: 460
     height: 700
-    visible: true
+    visible: false
     color: "#585858"
     maximumWidth: 460
     maximumHeight: 700
