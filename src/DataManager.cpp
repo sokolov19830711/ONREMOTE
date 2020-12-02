@@ -8,7 +8,6 @@ DataManager::DataManager()
 {
 	//_settings = QSharedPointer<QSettings>::create(QCoreApplication::applicationDirPath() + "/settings.ini", QSettings::IniFormat);
 
-	qDebug() << QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
 	_settings = QSharedPointer<QSettings>::create(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + "/settings.ini", QSettings::IniFormat);
 
 	_mcuInData.functionsFlags = _settings->value("functionsFlags", 72).toUInt();
@@ -74,7 +73,7 @@ void DataManager::writeMcuOutData(const QByteArray& data)
 	update();
 }
 
-//--- Геттеры --------------------------------------------------------------------
+//--- Р“РµС‚С‚РµСЂС‹ --------------------------------------------------------------------
 
 bool DataManager::isDeviceActive() const
 {

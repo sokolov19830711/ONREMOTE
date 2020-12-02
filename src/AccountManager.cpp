@@ -51,7 +51,7 @@ bool AccountManager::attemptLicenseKey(const QString& key) const
 bool AccountManager::attemptPassword(const QString& password)
 {
 	if (
-		(password.isEmpty() && !_dataManager.settings()->contains("password")) || // Ïàðîëü íå óñòàíîâëåí
+		(password.isEmpty() && !_dataManager.settings()->contains("password")) || // Ñ•Ð°Ñ€Ð¾Ð»ÑŒ Ð½Ðµ ÑƒÑÑ‚Ð°Ð½Ð¾Ð²Ð»ÐµÐ½
 		((_dataManager.settings()->value("password")).toByteArray() == QCryptographicHash::hash(QString(password + "q[fdfj").toUtf8(), QCryptographicHash::Algorithm::Md5))
 		)
 	{
@@ -69,7 +69,7 @@ bool AccountManager::attemptPassword(const QString& password)
 bool AccountManager::checkPassword(const QString& password) const
 {
 	if (
-		(password.isEmpty() && !_dataManager.settings()->contains("password")) || // Ïàðîëü íå óñòàíîâëåí
+		(password.isEmpty() && !_dataManager.settings()->contains("password")) || // Ñ•Ð°Ñ€Ð¾Ð»ÑŒ Ð½Ðµ ÑƒÑÑ‚Ð°Ð½Ð¾Ð²Ð»ÐµÐ½
 		((_dataManager.settings()->value("password")).toByteArray() == QCryptographicHash::hash(QString(password + "q[fdfj").toUtf8(), QCryptographicHash::Algorithm::Md5))
 		)
 	{
