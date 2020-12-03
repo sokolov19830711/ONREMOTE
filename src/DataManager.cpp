@@ -31,24 +31,7 @@ DataManager::DataManager()
 
 DataManager::~DataManager()
 {
-	_settings->setValue("functionsFlags", _mcuInData.functionsFlags);
-	/*_settings->setValue("breakInFlags", _mcuInData.breakInFlags1);
-	_settings->setValue("dustFlags", _mcuInData.dustFlags1);
-
-	_settings->setValue("temperatureFlags", _mcuInData.temperatureFlags1);
-	_settings->setValue("temperatureMinValue1", _mcuInData.temperatureMinValue1);
-	_settings->setValue("temperatureMaxValue1", _mcuInData.temperatureMaxValue1);
-
-	_settings->setValue("moistureFlags", _mcuInData.moistureFlags);
-	_settings->setValue("moistureMinValue", _mcuInData.moistureMinValue);
-	_settings->setValue("moistureMaxValue", _mcuInData.moistureMaxValue);*/
-
-	_settings->setValue("PWR/powerButtonPwdLevel", _mcuInData.powerButtonPwdLevel);
-	_settings->setValue("PWR/digit1", _mcuInData.powerButtonPwdDigit1);
-	_settings->setValue("PWR/digit2", _mcuInData.powerButtonPwdDigit2);
-	_settings->setValue("PWR/digit3", _mcuInData.powerButtonPwdDigit3);
-
-	_settings->setValue("PWR/digitInputPeriod", _mcuInData.digitInputPeriod);
+	syncSettings();
 }
 
 McuInData& DataManager::inData()
@@ -145,46 +128,77 @@ void DataManager::update()
 	}
 }
 
+void DataManager::syncSettings()
+{
+	_settings->setValue("functionsFlags", _mcuInData.functionsFlags);
+	/*_settings->setValue("breakInFlags", _mcuInData.breakInFlags1);
+	_settings->setValue("dustFlags", _mcuInData.dustFlags1);
+
+	_settings->setValue("temperatureFlags", _mcuInData.temperatureFlags1);
+	_settings->setValue("temperatureMinValue1", _mcuInData.temperatureMinValue1);
+	_settings->setValue("temperatureMaxValue1", _mcuInData.temperatureMaxValue1);
+
+	_settings->setValue("moistureFlags", _mcuInData.moistureFlags);
+	_settings->setValue("moistureMinValue", _mcuInData.moistureMinValue);
+	_settings->setValue("moistureMaxValue", _mcuInData.moistureMaxValue);*/
+
+	_settings->setValue("PWR/powerButtonPwdLevel", _mcuInData.powerButtonPwdLevel);
+	_settings->setValue("PWR/digit1", _mcuInData.powerButtonPwdDigit1);
+	_settings->setValue("PWR/digit2", _mcuInData.powerButtonPwdDigit2);
+	_settings->setValue("PWR/digit3", _mcuInData.powerButtonPwdDigit3);
+
+	_settings->setValue("PWR/digitInputPeriod", _mcuInData.digitInputPeriod);
+
+	_settings->sync();
+}
+
 //--- public slots ----------------------------------------------------------------------------
 
 void DataManager::setDeviceActive(bool state)
 {
 	setBit(_mcuInData.functionsFlags, FunctionsFlag::turnOn, state);
 	emit deviceActiveChanged(state);
+	syncSettings();
 }
 
 void DataManager::setLedActive(bool state)
 {
 	setBit(_mcuInData.functionsFlags, FunctionsFlag::led, state);
 	emit ledActiveChanged(state);
+	syncSettings();
 }
 
 void DataManager::setPowerButtonPwdLevel(int value)
 {
 	if(_mcuInData.powerButtonPwdLevel != value)
 		_mcuInData.powerButtonPwdLevel = value;
+	syncSettings();
 }
 
 void DataManager::setDigitInputPeriod(int value)
 {
 	if(_mcuInData.digitInputPeriod != value)
 		_mcuInData.digitInputPeriod = value;
+	syncSettings();
 }
 
 void DataManager::setPowerButtonPwdDigit1(int value)
 {
 	if (_mcuInData.powerButtonPwdDigit1 != value)
 		_mcuInData.powerButtonPwdDigit1 = value;
+	syncSettings();
 }
 
 void DataManager::setPowerButtonPwdDigit2(int value)
 {
 	if (_mcuInData.powerButtonPwdDigit2 != value)
 		_mcuInData.powerButtonPwdDigit2 = value;
+	syncSettings();
 }
 
 void DataManager::setPowerButtonPwdDigit3(int value)
 {
 	if (_mcuInData.powerButtonPwdDigit3 != value)
 		_mcuInData.powerButtonPwdDigit3 = value;
+	syncSettings();
 }

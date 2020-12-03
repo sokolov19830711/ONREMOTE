@@ -53,6 +53,7 @@ signals:
 private:
 
 	void update();
+	void syncSettings();
 
 	QSharedPointer<QSettings> _settings;
 
