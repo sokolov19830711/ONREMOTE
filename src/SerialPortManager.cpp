@@ -101,7 +101,7 @@ void SerialPortManager::setPort(const QString &name)
     auto ports = QSerialPortInfo::availablePorts();
     for (auto & i : ports)
     {
-        if(i.portName() == name)
+        if((i.portName() == name) && (i.description().contains("CH340", Qt::CaseInsensitive)))
         {
             if (_port.isOpen())
             {
@@ -115,7 +115,27 @@ void SerialPortManager::setPort(const QString &name)
             _rawData.clear();
 
             emit connectedToPort(name);
-            break;
+            return;
         }
     }
+
+	for (auto& i : ports)
+	{
+		if (i.description().contains("CH340", Qt::CaseInsensitive))
+		{
+			if (_port.isOpen())
+			{
+				_port.close();
+			}
+			_port.setPort(i);
+			_port.setBaudRate(19200);
+			_port.open(QIODevice::ReadWrite);
+
+			_isSync = 0;
+			_rawData.clear();
+
+			emit connectedToPort(name);
+			return;
+		}
+	}
 }
