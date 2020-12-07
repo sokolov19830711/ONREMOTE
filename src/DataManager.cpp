@@ -85,11 +85,14 @@ void DataManager::setSettingsValue(const QString& valueName, unsigned char value
 	{
 		_settings->setValue(valueName, value);
 	}
+
+	_settings->sync();
 }
 
 void DataManager::setSettingsStringValue(const QString& valueName, const QString& value)
 {
 	_settings->setValue(valueName, value);
+	_settings->sync();
 }
 
 unsigned char DataManager::getSettingsValue(const QString& valueName) const
