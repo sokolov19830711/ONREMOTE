@@ -39,6 +39,9 @@ void setup()
     Timer2.setPeriod(TIMER_PERIOD); // Устанавливаем период таймера 20000 мкс -> 50 гц
     Timer2.enableISR(CHANNEL_A); // Или просто.enableISR(), запускаем прерывание на канале А таймера
 
+    /*Timer1.setFrequency(1);
+    Timer1.enableISR(CHANNEL_A);*/
+
     Serial.begin(19200);
 
     temperatureSensors.init();
@@ -76,14 +79,14 @@ void loop()
       // Датчики вскрытия
       breakInSensors.update();
 
-      portManager.update();
-
       if (portManager.mode() == SerialPortManager::Mode::normal && portManager.needToUpdateConfig())
       {
           DataManager::config() = *(portManager.inData());
           internalMemoryManager.saveConfig();
           powerButtonWatcher.updateConfig();
+          portManager.setConfigUpdated();
       }
+
     }
 
     else
@@ -92,11 +95,24 @@ void loop()
     }
 }
 
-// Прерывание А таймера 5
+// Прерывание А таймера 2
 ISR(TIMER2_A)
 {
     Beeper::update();
     PcPower::update();
     TricolorLED::update();
     powerButtonWatcher.update(TIMER_PERIOD / 1000);
+    portManager.update(TIMER_PERIOD / 1000);
 }
+
+//ISR(TIMER1_A)
+//{
+//    portManager.update();
+//
+//    if (portManager.mode() == SerialPortManager::Mode::normal && portManager.needToUpdateConfig())
+//    {
+//        DataManager::config() = *(portManager.inData());
+//        internalMemoryManager.saveConfig();
+//        powerButtonWatcher.updateConfig();
+//    }
+//}

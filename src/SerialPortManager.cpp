@@ -40,8 +40,6 @@ QStringList SerialPortManager::avaliablePortsNames() const
 
 void SerialPortManager::refresh()
 {
-    static int counter = 0;
-
     if (_isSync != 2)
     {
         _rawData.append(_port.read(sizeof(McuOutData)));
@@ -84,16 +82,8 @@ void SerialPortManager::refresh()
         _noConnectionTimer->start(_connectionWaitingTime);
     }
 
-    if (counter < 50)
-    {
-        counter++;
-    }
-    else // Отсылаем настройки контроллеру на каждый 50 цикл (~раз в 1 сек)
-    {
-        counter = 0;
         _port.write(reinterpret_cast<const char*>(&(_dataManager.inData())), sizeof(McuInData));
         _port.waitForBytesWritten(10);
-    }
 }
 
 void SerialPortManager::setPort(const QString &name)

@@ -14,9 +14,16 @@ void SerialPortManager::init(int baudRate)
 	Serial.begin(baudRate);
 }
 
-void SerialPortManager::update()
+void SerialPortManager::update(int dt)
 {
-	_needToUpdateSettings = false;
+
+	if (_counter < _updateInterval)
+	{
+		_counter += dt;
+		return;
+	}
+
+	_counter = 0;
 
 	switch (_mode)
 	{
@@ -62,6 +69,11 @@ void SerialPortManager::update()
 bool SerialPortManager::needToUpdateConfig() const
 {
 	return _needToUpdateSettings;
+}
+
+void SerialPortManager::setConfigUpdated()
+{
+	_needToUpdateSettings = false;
 }
 
 SerialPortManager::Mode SerialPortManager::mode() const
