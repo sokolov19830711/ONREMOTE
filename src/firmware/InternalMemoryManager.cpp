@@ -66,5 +66,4 @@ unsigned InternalMemoryManager::lastTotalRunningTimeValue() const
 void InternalMemoryManager::saveTotalRunningTimeValue(unsigned value) const
 {
 	eeprom_write_block((void*)(&value), 96, sizeof(unsigned));
-	Beeper::beep();
 }

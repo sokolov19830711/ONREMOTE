@@ -13,6 +13,7 @@ class DataManager : public QObject
 
 public:
 
+	enum LicenseType {full, button_only, dust_only};
 	DataManager();
 	virtual ~DataManager();
 
@@ -99,7 +100,10 @@ private:
 
 		{"totalSwHoursNotification", nullptr},
 		{"totalSwMinutesNotification", nullptr},
-		{"totalSwSecondsNotification", nullptr}
+		{"totalSwSecondsNotification", nullptr},
+
+		{"license/activated", nullptr},
+		{"license/type", nullptr}
 	};
 
 	QMap<QString, unsigned char*> _mcuValuesMap
