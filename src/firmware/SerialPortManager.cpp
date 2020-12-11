@@ -3,6 +3,7 @@
 #include <Arduino.h>
 #include "DataManager.h"
 #include "Beeper.h"
+#include "PcPower.h"
 
 SerialPortManager::SerialPortManager()
 {
@@ -39,6 +40,14 @@ void SerialPortManager::update(int dt)
 			{
 				if ((_inData.startMarker1 == START_MARKER1) && (_inData.startMarker2 == START_MARKER2))
 				{
+					// обрабатываем команды
+					if (_inData.shutdownPc)
+					{
+						_inData.shutdownPc = 0;
+						PcPower::off();
+					}
+					//----------------------------------------------
+
 					const char* tmpPtr1 = reinterpret_cast<const char*>(&DataManager::config());
 					const char* tmpPtr2 = reinterpret_cast<const char*>(&_inData);
 					
