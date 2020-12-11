@@ -9,7 +9,7 @@ Item {
     Text {
         id: currentPwswLevelLabel
         x: 0
-        y: 24
+        y: 8
         width: 401
         height: 51
         color: "#fefefe"
@@ -26,7 +26,7 @@ Item {
     Button {
         id: lowPwswButton
         x: 0
-        y: 82
+        y: 66
         width: 112
         height: 60
         text: qsTr("НИЗКИЙ")
@@ -53,7 +53,7 @@ Item {
     Button {
         id: mediumPwswButton
         x: 115
-        y: 82
+        y: 66
         width: 112
         height: 60
         text: qsTr("СРЕДНИЙ")
@@ -80,7 +80,7 @@ Item {
     Button {
         id: highPwswButton
         x: 230
-        y: 82
+        y: 66
         width: 112
         height: 60
         text: qsTr("ВЫСОКИЙ")
@@ -107,7 +107,7 @@ Item {
     Button {
         id: pwswOffButton
         x: 345
-        y: 82
+        y: 66
         width: 56
         height: 60
         text: qsTr("OFF")
@@ -139,7 +139,7 @@ Item {
     Text {
         id: currentDustinessLevelLabel
         x: 0
-        y: 152
+        y: 136
         width: 401
         height: 51
         color: "#fefefe"
@@ -156,7 +156,7 @@ Item {
     Button {
         id: lowDustinessButton
         x: 0
-        y: 211
+        y: 195
         width: 131
         height: 60
         text: qsTr("НИЗКИЙ")
@@ -183,7 +183,7 @@ Item {
     Button {
         id: mediumDustinessButton
         x: 134
-        y: 211
+        y: 195
         width: 132
         height: 60
         text: qsTr("СРЕДНИЙ")
@@ -210,7 +210,7 @@ Item {
     Button {
         id: highDustinessButton
         x: 269
-        y: 211
+        y: 195
         width: 131
         height: 60
         text: qsTr("ВЫСОКИЙ")
@@ -242,8 +242,8 @@ Item {
 
     Button {
         id: temperatureButton
-        x: 180
-        y: 302
+        x: 181
+        y: 271
         text: "0"
         width: 40
         height: 40
@@ -273,8 +273,8 @@ Item {
 
     Text {
         id: text1
-        x: 58
-        y: 302
+        x: 59
+        y: 271
         width: 127
         height: 40
         color: "#fefefe"
@@ -287,8 +287,8 @@ Item {
 
     Button {
         id: breakInButton1
-        x: 180
-        y: 348
+        x: 181
+        y: 317
         width: 40
         height: 40
         text: "txt"
@@ -316,8 +316,8 @@ Item {
 
     Text {
         id: text2
-        x: 224
-        y: 348
+        x: 225
+        y: 317
         width: 89
         height: 40
         color: "#fefefe"
@@ -330,8 +330,8 @@ Item {
 
     Text {
         id: text3
-        x: 90
-        y: 348
+        x: 91
+        y: 317
         width: 89
         height: 22
         color: "#fefefe"
@@ -345,8 +345,8 @@ Item {
 
     Text {
         id: text4
-        x: 122
-        y: 366
+        x: 123
+        y: 335
         width: 56
         height: 22
         color: "#fefefe"
@@ -360,8 +360,8 @@ Item {
 
     Button {
         id: breakInButton2
-        x: 180
-        y: 394
+        x: 181
+        y: 363
         width: 40
         height: 40
         text: "txt"
@@ -389,8 +389,8 @@ Item {
 
     Text {
         id: text5
-        x: 88
-        y: 394
+        x: 89
+        y: 363
         width: 89
         height: 40
         color: "#fefefe"
@@ -403,8 +403,8 @@ Item {
 
     Text {
         id: text6
-        x: 223
-        y: 393
+        x: 224
+        y: 362
         width: 75
         height: 22
         color: "#fefefe"
@@ -418,8 +418,8 @@ Item {
 
     Text {
         id: text7
-        x: 223
-        y: 410
+        x: 224
+        y: 379
         width: 56
         height: 22
         color: "#fefefe"
@@ -433,15 +433,15 @@ Item {
 
     OnOffButton {
         id: ledButton
-        x: 180
-        y: 440
+        x: 181
+        y: 409
         enabled: false
     }
 
     Text {
         id: text8
-        x: 223
-        y: 440
+        x: 224
+        y: 409
         width: 133
         height: 40
         color: "#fefefe"
@@ -454,8 +454,8 @@ Item {
 
     Text {
         id: text9
-        x: 39
-        y: 439
+        x: 40
+        y: 408
         width: 133
         height: 20
         color: "#fefefe"
@@ -469,14 +469,66 @@ Item {
 
     Text {
         id: text10
-        x: 14
-        y: 458
+        x: 15
+        y: 427
         width: 159
         height: 20
         color: "#fefefe"
         text: qsTr("выносной светодиод")
         font.pixelSize: 14
         horizontalAlignment: Text.AlignRight
+        verticalAlignment: Text.AlignVCenter
+        font.family: "Calibri Light"
+        minimumPixelSize: 10
+    }
+
+    OnOffButton {
+        id: linkButton
+        x: 181
+        y: 455
+        text: "Текст кнопки"
+        enabled: false
+    }
+
+    Text {
+        id: text11
+        x: 83
+        y: 455
+        width: 89
+        height: 40
+        color: "#fefefe"
+        text: qsTr("СВЯЗЬ")
+        font.pixelSize: 16
+        horizontalAlignment: Text.AlignRight
+        verticalAlignment: Text.AlignVCenter
+        font.family: "Calibri Light"
+    }
+
+    Text {
+        id: text12
+        x: 227
+        y: 453
+        width: 96
+        height: 22
+        color: "#fefefe"
+        text: "наличие связи"
+        font.pixelSize: 14
+        horizontalAlignment: Text.AlignLeft
+        verticalAlignment: Text.AlignVCenter
+        font.family: "Calibri Light"
+        minimumPixelSize: 10
+    }
+
+    Text {
+        id: text13
+        x: 227
+        y: 470
+        width: 90
+        height: 22
+        color: "#fefefe"
+        text: "с устройством"
+        font.pixelSize: 14
+        horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter
         font.family: "Calibri Light"
         minimumPixelSize: 10
@@ -536,6 +588,7 @@ Item {
         breakInButton1.checked = (dataManager.getMcuValue("breakInSensor1") !== dataManager.getSettingsValue("breakInSensorNormalState1"))
         breakInButton2.checked = (dataManager.getMcuValue("breakInSensor2") !== dataManager.getSettingsValue("breakInSensorNormalState2"))
         ledButton.checked = dataManager.getSettingsValue("ledOn")
+        linkButton.checked = portManager.isConnected()
     }
 }
 

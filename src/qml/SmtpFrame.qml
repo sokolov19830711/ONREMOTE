@@ -23,6 +23,7 @@ Item {
             dataManager.setSettingsStringValue("SMTP/password", passwordField.text);
             dataManager.setSettingsStringValue("SMTP/recipient", recipientField.text);
             dataManager.setSettingsStringValue("SMTP/deviceName", deviceNameField.text);
+            dataManager.setSettingsValue("SMTP/ssl", sslButton.checked);
         }
 
         background: Rectangle {
@@ -323,6 +324,7 @@ Item {
         id: sslButton
         x: 352
         y: 336
+        checked: dataManager.getSettingsValue("SMTP/ssl")
     }
 
     Text {

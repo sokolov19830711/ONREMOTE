@@ -32,7 +32,7 @@ struct  McuOutData
 	unsigned char sessionTime2;
 	unsigned char sessionTime3;
 	unsigned char sessionTime4;
-};  // Итого получаем 15 байт
+};
 
 struct McuInData
 {
@@ -59,6 +59,8 @@ struct McuInData
     unsigned char powerButtonPwdDigit1 = 1;
     unsigned char powerButtonPwdDigit2 = 2;
     unsigned char powerButtonPwdDigit3 = 3;
+
+    unsigned char shutdownPc = 0;
 };
 
 #endif

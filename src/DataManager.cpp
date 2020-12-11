@@ -128,6 +128,22 @@ unsigned char DataManager::getMcuValue(const QString& valueName) const
 	return 0;
 }
 
+void DataManager::sendCommand(const QString& commandName)
+{
+	if (_settingsMap.contains(commandName))
+	{
+		*_settingsMap[commandName] = 1;
+	}
+}
+
+void DataManager::clearCommands()
+{
+	for (auto& i : _commandsMap)
+	{
+		*i = 0;
+	}
+}
+
 QString DataManager::getDeviceSessionTime() const
 {
 	int sessionTime;

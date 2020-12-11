@@ -18,6 +18,7 @@ public:
 
     Q_INVOKABLE QString getPortName() const;
     Q_INVOKABLE QStringList avaliablePortsNames() const;
+    Q_INVOKABLE bool isConnected() const;
 
 
 signals:
@@ -36,8 +37,9 @@ private:
 
     QSerialPort _port;
 	int _isSync = 0;
+    bool _isConnected = false;
 	QByteArray _rawData;
 
     QTimer* _noConnectionTimer;
-    const int _connectionWaitingTime = 10000; // Сколько ждем, прежде чем шлем сигнал об отсутствии связи с устройством (мс)
+    const int _connectionWaitingTime = 5000; // Сколько ждем, прежде чем шлем сигнал об отсутствии связи с устройством (мс)
 };

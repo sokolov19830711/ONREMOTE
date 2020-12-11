@@ -251,7 +251,7 @@ Item {
         height: 40
         text: "ЗАКРЫТ"
         checkable: true
-        checked: dataManager.getSettingsValue("breakInSensorNormalState2") === 0
+        checked: dataManager.getSettingsValue("breakInSensorNormalState1") !== 1
 
         contentItem: Text {
             color: "#fefefe"

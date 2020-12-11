@@ -12,6 +12,11 @@ SerialPortManager::SerialPortManager(DataManager& dataManager, QObject* parent) 
 
     _noConnectionTimer = new QTimer(this);
 	connect(_noConnectionTimer, SIGNAL(timeout()), this, SIGNAL(noConnection()));
+    connect(_noConnectionTimer, &QTimer::timeout, this, [=]()
+        {
+            _isConnected = false;
+            setPort(_dataManager.settings()->value("SerialPort/name").toString());
+        });
     _noConnectionTimer->start(_connectionWaitingTime);
 
     setPort(_dataManager.settings()->value("SerialPort/name").toString());
@@ -36,6 +41,11 @@ QStringList SerialPortManager::avaliablePortsNames() const
         portsNames.push_back(i.portName());
     }
     return portsNames;
+}
+
+bool SerialPortManager::isConnected() const
+{
+    return _isConnected;
 }
 
 void SerialPortManager::refresh()
@@ -80,6 +90,7 @@ void SerialPortManager::refresh()
         _rawData.append(_port.read(sizeof(McuOutData)));
 
         _noConnectionTimer->start(_connectionWaitingTime);
+        _isConnected = true;
     }
 
         _port.write(reinterpret_cast<const char*>(&(_dataManager.inData())), sizeof(McuInData));

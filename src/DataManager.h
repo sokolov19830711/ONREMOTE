@@ -29,6 +29,9 @@ public:
 	Q_INVOKABLE QString getSettingsStringValue(const QString& valueName) const;
 	Q_INVOKABLE unsigned char getMcuValue(const QString& valueName) const;
 
+	Q_INVOKABLE void sendCommand(const QString& commandName);
+	void clearCommands();
+
 	Q_INVOKABLE QString getDeviceSessionTime() const;
 	Q_INVOKABLE QString getDeviceTotalTime() const;
 	Q_INVOKABLE QString getPcTotalTime();
@@ -87,6 +90,7 @@ private:
 		{"SMTP/password", nullptr},
 		{"SMTP/recipient", nullptr},
 		{"SMTP/deviceName", nullptr},
+		{"SMTP/ssl", nullptr},
 
 		{"OS_totalRunningTime", nullptr},
 
@@ -114,4 +118,8 @@ private:
 		{"breakInSensor2", &_mcuOutData.breakInSensor2},
 	};
 
+	QMap<QString, unsigned char*> _commandsMap
+	{
+		{"shutdownPc", &_mcuInData.shutdownPc}
+	};
 };

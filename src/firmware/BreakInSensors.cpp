@@ -20,7 +20,7 @@ void BreakInSensors::update()
 {
 	// Встроенный датчик вскрытия
 
-	int sensor = !digitalRead(BREAK_IN_SENSOR_INT);
+	int sensor = digitalRead(BREAK_IN_SENSOR_INT);
 	DataManager::outData().breakInSensor1 = sensor;
 
 	if (sensor != DataManager::config().breakInSensorNormalState1)
@@ -32,7 +32,7 @@ void BreakInSensors::update()
 	}
 
 	// Концевые выключатели
-	int switch1 = !digitalRead(TERMINAL_SWITCH1);
+	int switch1 = digitalRead(TERMINAL_SWITCH1);
 	DataManager::outData().breakInSensor2 = switch1;
 
 	if (switch1 != DataManager::config().breakInSensorNormalState2)

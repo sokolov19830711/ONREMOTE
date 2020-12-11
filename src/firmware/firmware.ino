@@ -21,8 +21,6 @@ static DustSensors dustSensors;
 static BreakInSensors breakInSensors;
 static PowerButtonWatcher powerButtonWatcher;
 
-static int loopsCounter = 0; // счетчик кол-ва вызовов функции loop()
-const int LOOPS_COUNT = 50; // кол-во циклов, через которое мы снимаем показания с "тяжелых" датчиков.
 const int TIMER_PERIOD = 20000; // в микросекундах
 const int RUNNING_TIME_FIXING_PERIOD = 660; // С какой периодичностью обновляется запись о суммарном кол-ве отработаннного времени, в сек
 
@@ -31,16 +29,13 @@ void setup()
     portManager.init(19200);
     DataManager::init();
     Beeper::init(BEEPER, TIMER_PERIOD, 100);
-    PcPower::init(PC_POWER, TIMER_PERIOD, 300);
+    PcPower::init(PC_POWER);
     TricolorLED::init(RED, TIMER_PERIOD, 200);
 
     internalMemoryManager.initConfig();
 
     Timer2.setPeriod(TIMER_PERIOD); // Устанавливаем период таймера 20000 мкс -> 50 гц
     Timer2.enableISR(CHANNEL_A); // Или просто.enableISR(), запускаем прерывание на канале А таймера
-
-    /*Timer1.setFrequency(1);
-    Timer1.enableISR(CHANNEL_A);*/
 
     Serial.begin(19200);
 
@@ -65,10 +60,6 @@ void loop()
         unsigned long totalRunningTime = internalMemoryManager.lastTotalRunningTimeValue();
         memcpy(&DataManager::outData().totalTime1, &totalRunningTime, 4);
     }
-
-    if(loopsCounter > LOOPS_COUNT)
-    {
-      loopsCounter = 0;
       
       // Температура
       temperatureSensors.update();
@@ -86,33 +77,14 @@ void loop()
           powerButtonWatcher.updateConfig();
           portManager.setConfigUpdated();
       }
-
-    }
-
-    else
-    {
-        loopsCounter++;
-    }
 }
 
 // Прерывание А таймера 2
 ISR(TIMER2_A)
 {
     Beeper::update();
-    PcPower::update();
+    PcPower::update(TIMER_PERIOD / 1000);
     TricolorLED::update();
     powerButtonWatcher.update(TIMER_PERIOD / 1000);
     portManager.update(TIMER_PERIOD / 1000);
 }
-
-//ISR(TIMER1_A)
-//{
-//    portManager.update();
-//
-//    if (portManager.mode() == SerialPortManager::Mode::normal && portManager.needToUpdateConfig())
-//    {
-//        DataManager::config() = *(portManager.inData());
-//        internalMemoryManager.saveConfig();
-//        powerButtonWatcher.updateConfig();
-//    }
-//}
