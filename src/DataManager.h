@@ -120,6 +120,7 @@ private:
 
 	QMap<QString, unsigned char*> _commandsMap
 	{
-		{"shutdownPc", &_mcuInData.shutdownPc}
+		{"shutdownPc", &_mcuInData.shutdownPc},
+		{"resetPc", &_mcuInData.resetPc}
 	};
 };

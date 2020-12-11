@@ -95,6 +95,7 @@ void SerialPortManager::refresh()
 
         _port.write(reinterpret_cast<const char*>(&(_dataManager.inData())), sizeof(McuInData));
         _port.waitForBytesWritten(10);
+        _dataManager.clearCommands();
 }
 
 void SerialPortManager::setPort(const QString &name)

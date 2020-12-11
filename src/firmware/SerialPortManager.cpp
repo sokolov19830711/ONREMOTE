@@ -4,6 +4,7 @@
 #include "DataManager.h"
 #include "Beeper.h"
 #include "PcPower.h"
+#include "PcReset.h"
 
 SerialPortManager::SerialPortManager()
 {
@@ -45,6 +46,12 @@ void SerialPortManager::update(int dt)
 					{
 						_inData.shutdownPc = 0;
 						PcPower::off();
+					}
+
+					if (_inData.resetPc)
+					{
+						_inData.resetPc = 0;
+						PcReset::on();
 					}
 					//----------------------------------------------
 

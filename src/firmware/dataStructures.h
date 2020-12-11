@@ -61,6 +61,7 @@ struct McuInData
     unsigned char powerButtonPwdDigit3 = 3;
 
     unsigned char shutdownPc = 0;
+    unsigned char resetPc = 0;
 };
 
 #endif

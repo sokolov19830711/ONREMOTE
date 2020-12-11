@@ -130,9 +130,9 @@ unsigned char DataManager::getMcuValue(const QString& valueName) const
 
 void DataManager::sendCommand(const QString& commandName)
 {
-	if (_settingsMap.contains(commandName))
+	if (_commandsMap.contains(commandName))
 	{
-		*_settingsMap[commandName] = 1;
+		*_commandsMap[commandName] = 1;
 	}
 }
 

@@ -183,6 +183,8 @@ Item {
         background: Rectangle {
             color: parent.pressed ? "#166999" : "#30859B"
         }
+
+        onClicked: dataManager.sendCommand("shutdownPc")
     }
 
     Button {
@@ -204,6 +206,8 @@ Item {
         background: Rectangle {
             color: parent.pressed ? "#166999" : "#30859B"
         }
+
+        onClicked: dataManager.sendCommand("resetPc")
     }
 
     //-------------------------------------------------------------------------------------------------
