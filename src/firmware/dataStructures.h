@@ -56,7 +56,7 @@ struct McuInData
     unsigned char startMarker1 = START_MARKER1;
     unsigned char startMarker2 = START_MARKER2;
 
-    unsigned char functionsFlags = 0x48;
+    unsigned char functionsFlags = 88;
 
     unsigned char vibrationFlags1 = 0;
     unsigned char vibrationFlags2 = 0;

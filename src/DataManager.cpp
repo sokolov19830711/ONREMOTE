@@ -78,6 +78,11 @@ bool DataManager::isLedActive() const
 	return _mcuInData.functionsFlags & FunctionsFlag::led;
 }
 
+bool DataManager::isSoundActive() const
+{
+	return _mcuInData.functionsFlags & FunctionsFlag::sound;
+}
+
 int DataManager::powerButtonPwdLevel() const
 {
 	return _mcuInData.powerButtonPwdLevel;
@@ -165,6 +170,13 @@ void DataManager::setLedActive(bool state)
 {
 	setBit(_mcuInData.functionsFlags, FunctionsFlag::led, state);
 	emit ledActiveChanged(state);
+	syncSettings();
+}
+
+void DataManager::setSoundActive(bool state)
+{
+	setBit(_mcuInData.functionsFlags, FunctionsFlag::sound, state);
+	emit soundActiveChanged(state);
 	syncSettings();
 }
 

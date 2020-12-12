@@ -25,6 +25,7 @@ public:
 	Q_INVOKABLE bool isStartOnBoot() const;
 	Q_INVOKABLE bool isLockOS() const;
 	Q_INVOKABLE bool isLedActive() const;
+	Q_INVOKABLE bool isSoundActive() const;
 	Q_INVOKABLE int powerButtonPwdLevel() const;
 	Q_INVOKABLE int digitInputPeriod() const;
 	Q_INVOKABLE int powerButtonPwdDigit1() const;
@@ -35,6 +36,7 @@ public slots:
 
 	void setDeviceActive(bool state);
 	void setLedActive(bool state);
+	void setSoundActive(bool state);
 	void setPowerButtonPwdLevel(int value);
 	void setDigitInputPeriod(int value);
 	void setPowerButtonPwdDigit1(int value);
@@ -45,6 +47,7 @@ signals:
 
 	void deviceActiveChanged(bool state);
 	void ledActiveChanged(bool state);
+	void soundActiveChanged(bool state);
 	void breakIn1ValueChanged(int value);
 	void breakIn2ValueChanged(int value);
 	void temperatureValueChanged(int value);

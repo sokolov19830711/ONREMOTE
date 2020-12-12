@@ -1,6 +1,7 @@
 #include "Beeper.h"
 
 #include <Arduino.h>
+#include "DataManager.h"
 
 Beeper::Beeper()
 {
@@ -39,7 +40,7 @@ void Beeper::update()
 
 void Beeper::beep()
 {
-	if (!getInstance()._isOn)
+	if (!getInstance()._isOn && (DataManager::config().functionsFlags & FunctionsFlag::sound))
 	{
 		getInstance().getInstance()._cyclesCounter = 0;
 		getInstance()._isOn = true;

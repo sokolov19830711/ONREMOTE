@@ -3,6 +3,7 @@
 #include <Arduino.h>
 #include "Krakeenone_pinout.h"
 #include "TricolorLED.h"
+#include "Beeper.h"
 
 PcPower::PcPower()
 {
@@ -47,5 +48,6 @@ void PcPower::on()
 		getInstance()._isOn = true;
 		digitalWrite(getInstance()._pin, HIGH);
 		TricolorLED::blink(GREEN);
+		Beeper::beep();
 	}
 }

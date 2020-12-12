@@ -147,6 +147,8 @@ Item {
         x: 352
         y: 162
         enabled: true
+        checked: dataManager.isSoundActive()
+        onCheckedChanged: dataManager.setSoundActive(checked)
     }
 
     Text {

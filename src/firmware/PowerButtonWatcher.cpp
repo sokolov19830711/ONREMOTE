@@ -4,6 +4,7 @@
 #include "DataManager.h"
 #include "TricolorLED.h"
 #include "PcPower.h"
+#include "Beeper.h"
 
 PowerButtonWatcher::PowerButtonWatcher()
 {
@@ -41,6 +42,7 @@ void PowerButtonWatcher::update(int dt)
 					_currentDigit++;
 					_counter = 0;
 					TricolorLED::blink(BLUE);
+					Beeper::beep();
 				}
 			}
 
@@ -66,7 +68,6 @@ void PowerButtonWatcher::update(int dt)
 			else // Пароль на кнопку питания отключен
 			{
 				PcPower::on();
-				TricolorLED::blink(GREEN);
 			}
 		}
 	}
