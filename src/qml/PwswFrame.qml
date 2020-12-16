@@ -177,15 +177,21 @@ Item {
     }
 
     MySpinBox {
-        id: wrongKeyUsageForPowerOffSpinBox
+        id: attemptsSpinBox
         x: 292
         y: 159
+
+        currentValue: dataManager.getSettingsValue("PWR/attempts")
+        onCurrentValueChanged: dataManager.setSettingsValue("PWR/attempts", currentValue)
     }
 
     MySpinBox {
-        id: blockingPeriodSpinBox
+        id: attemptsResetTimeSpinBox
         x: 292
         y: 205
+
+        currentValue: dataManager.getSettingsValue("PWR/attemptsResetTime")
+        onCurrentValueChanged: dataManager.setSettingsValue("PWR/attemptsResetTime", currentValue)
     }
 
     Text {
@@ -330,6 +336,34 @@ Item {
         y: 304
         currentValue: dataManager.getSettingsValue("PWR/digit3")
         onCurrentValueChanged: dataManager.setSettingsValue("PWR/digit3", currentValue)
+    }
+
+    function syncWithSettings()
+    {
+        var currentPwswLevel = dataManager.getSettingsValue("PWR/powerButtonPwdLevel");
+        switch (currentPwswLevel)
+        {
+        case 1:
+            setPwswLowButton.checked = true;
+            break;
+        case 2:
+            setPwswMediumButton.checked = true;
+            break;
+        case 3:
+            setPwswHighButton.checked = true;
+            break;
+        case 0:
+            setPwswOffButton.checked = true;
+            break;
+        }
+
+        digitValueWidget1.currentValue = dataManager.getSettingsValue("PWR/digit1");
+        digitValueWidget2.currentValue = dataManager.getSettingsValue("PWR/digit2");
+        digitValueWidget3.currentValue = dataManager.getSettingsValue("PWR/digit3");
+
+        digitInputPeriodSpinBox.currentValue = dataManager.getSettingsValue("PWR/digitInputPeriod");
+        attemptsSpinBox.currentValue = dataManager.getSettingsValue("PWR/attempts");
+        attemptsResetTimeSpinBox.currentValue = dataManager.getSettingsValue("PWR/attemptsResetTime");
     }
 }
 

@@ -363,6 +363,12 @@ Item {
             font: parent.font
         }
         font.pointSize: 10
+
+        onClicked:
+        {
+            dataManager.resetToDefault();
+            parent.syncWithSettings();
+        }
     }
 
     Text {
@@ -459,6 +465,16 @@ Item {
         minimumPixelSize: 10
         font.italic: true
         font.family: "Calibri Light"
+    }
+
+    function syncWithSettings()
+    {
+        bypassButton.checked = !dataManager.getSettingsValue("turnOn");
+        startOnBootButton.checked = dataManager.getSettingsValue("startOnBoot");
+        lockOSButton.checked = dataManager.getSettingsValue("lockOS");
+        soundSignaltButton.checked = dataManager.getSettingsValue("soundOn");
+        ledButton.checked = dataManager.getSettingsValue("ledOn");
+        lockAppButton.checked = dataManager.getSettingsValue("lockApp");
     }
 }
 

@@ -18,7 +18,7 @@ void Beeper::init(int pin, int timerPeriod, int duration)
 	getInstance()._pin = pin;
 	getInstance()._timerPeriod = timerPeriod;
 	getInstance()._duration = duration;
-	getInstance()._cyclesCount = getInstance()._duration / (getInstance()._timerPeriod / 1000);
+	getInstance()._cyclesCount = getInstance()._duration / (getInstance()._timerPeriod);
 	pinMode(getInstance()._pin, OUTPUT);
 }
 

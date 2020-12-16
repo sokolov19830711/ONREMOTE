@@ -24,7 +24,7 @@ static BreakInSensors breakInSensors;
 static PowerButtonWatcher powerButtonWatcher;
 static ResetButtonWatcher resetButtonWatcher;
 
-const int TIMER_PERIOD = 20000; // в микросекундах
+const int TIMER_PERIOD = 20; // в милисекундах
 const int RUNNING_TIME_FIXING_PERIOD = 660; // С какой периодичностью обновляется запись о суммарном кол-ве отработаннного времени, в сек
 
 void setup()
@@ -38,7 +38,7 @@ void setup()
 
     internalMemoryManager.initConfig();
 
-    Timer2.setPeriod(TIMER_PERIOD); // Устанавливаем период таймера 20000 мкс -> 50 гц
+    Timer2.setPeriod(TIMER_PERIOD * 1000); // Устанавливаем период таймера 20000 мкс -> 50 гц
     Timer2.enableISR(CHANNEL_A); // Или просто.enableISR(), запускаем прерывание на канале А таймера
 
     Serial.begin(19200);
@@ -87,10 +87,10 @@ void loop()
 ISR(TIMER2_A)
 {
     Beeper::update();
-    PcPower::update(TIMER_PERIOD / 1000);
-    PcReset::update(TIMER_PERIOD / 1000);
+    PcPower::update(TIMER_PERIOD);
+    PcReset::update(TIMER_PERIOD);
     TricolorLED::update();
-    powerButtonWatcher.update(TIMER_PERIOD / 1000);
+    powerButtonWatcher.update(TIMER_PERIOD);
     resetButtonWatcher.update();
-    portManager.update(TIMER_PERIOD / 1000);
+    portManager.update(TIMER_PERIOD);
 }

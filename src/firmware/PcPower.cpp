@@ -57,7 +57,7 @@ void PcPower::on()
 
 void PcPower::off()
 {
-	if (!getInstance()._isOn && !getInstance()._offDelayTimer /*&& analogRead(SYS_FAN) > 300*/)
+	if (!getInstance()._isOn && !getInstance()._offDelayTimer && analogRead(SYS_FAN) > 300)
 	{
 		getInstance().getInstance()._timer = 0;
 		getInstance()._offDelayTimer = 1;

@@ -86,7 +86,11 @@ ApplicationWindow
             x: 184
             ButtonGroup.group: switchFrameButtons
 
-            onClicked: framesLayout.currentIndex = 2
+            onClicked:
+            {
+                framesLayout.currentIndex = 2;
+                framesLayout.children[2].syncWithSettings();
+            }
         }
 
         SwitchFrameButton {

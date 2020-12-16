@@ -32,6 +32,8 @@ DataManager::DataManager()
 	_mcuInData.powerButtonPwdDigit2 = _settings->value("PWR/digit2").toInt();
 	_mcuInData.powerButtonPwdDigit3 = _settings->value("PWR/digit3").toInt();
 	_mcuInData.digitInputPeriod = _settings->value("PWR/digitInputPeriod", 3).toInt();
+	_mcuInData.attempts = _settings->value("PWR/attempts", 0).toInt();
+	_mcuInData.attemptsResetTime = _settings->value("PWR/attemptsResetTime", 0).toInt();
 }
 
 DataManager::~DataManager()
@@ -126,6 +128,68 @@ unsigned char DataManager::getMcuValue(const QString& valueName) const
 	}
 
 	return 0;
+}
+
+void DataManager::resetToDefault()
+{
+	McuInData defaultMcuSettings;
+	_mcuInData = defaultMcuSettings;
+
+	_settings->setValue("turnOn", 1);
+	_settings->setValue("soundOn", 1);
+	_settings->setValue("ledOn", 1);
+
+	_settings->setValue("dustFlag_pcShutdown", 0);
+	_settings->setValue("dustFlag_notification", 0);
+
+	_settings->setValue("temperatureFlag_pcShutdown", 0);
+	_settings->setValue("temperatureFlag_notification", 0);
+
+	_settings->setValue("temperatureMinValue", 10);
+	_settings->setValue("temperatureMaxValue", 40);
+
+	_settings->setValue("breakInFlag_pcShutdown1", 0);
+	_settings->setValue("breakInFlag_notification1", 0);
+	_settings->setValue("breakInSensorNormalState1", 0);
+
+	_settings->setValue("breakInFlag_pcShutdown2", 0);
+	_settings->setValue("breakInFlag_notification2", 0);
+	_settings->setValue("breakInSensorNormalState2", 0);
+
+	_settings->setValue("PWR/powerButtonPwdLevel", 0);
+	_settings->setValue("PWR/digit1", 1);
+	_settings->setValue("PWR/digit2", 1);
+	_settings->setValue("PWR/digit3", 1);
+	_settings->setValue("PWR/digitInputPeriod", 3);
+	_settings->setValue("PWR/attempts", 3);
+	_settings->setValue("PWR/attemptsResetTime", 3);
+
+	_settings->setValue("startOnBoot", 0);
+	_settings->setValue("lockOS", 0);
+	_settings->setValue("lockApp", 0);
+	_settings->setValue("SerialPort/name", "");
+
+	_settings->setValue("SMTP/server", "");
+	_settings->setValue("SMTP/port", "");
+	_settings->setValue("SMTP/user", "");
+	_settings->setValue("SMTP/password", "");
+	_settings->setValue("SMTP/recipient", "");
+	_settings->setValue("SMTP/deviceName", "");
+	_settings->setValue("SMTP/ssl", 1);
+
+	_settings->setValue("totalHwHoursNotification", 0);
+	_settings->setValue("totalHwMinutesNotification", 0);
+	_settings->setValue("totalHwSecondsNotification", 0);
+
+	_settings->setValue("sessionHwHoursNotification", 0);
+	_settings->setValue("sessionHwMinutesNotification", 0);
+	_settings->setValue("sessionHwSecondsNotification", 0);
+
+	_settings->setValue("totalSwHoursNotification", 0);
+	_settings->setValue("totalSwMinutesNotification", 0);
+	_settings->setValue("totalSwSecondsNotification", 0);
+
+	_settings->sync();
 }
 
 void DataManager::sendCommand(const QString& commandName)

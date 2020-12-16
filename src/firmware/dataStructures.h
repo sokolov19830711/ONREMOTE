@@ -46,8 +46,8 @@ struct McuInData
     unsigned char dustFlag_pcShutdown = 0;
 
     unsigned char temperatureFlag_pcShutdown = 0;
-    unsigned char temperatureMaxValue = 10;
-    unsigned char temperatureMinValue = 0;
+    unsigned char temperatureMaxValue = 40;
+    unsigned char temperatureMinValue = 10;
 
     unsigned char breakInFlag_pcShutdown1 = 0;
     unsigned char breakInFlag_pcShutdown2 = 0;
@@ -57,8 +57,10 @@ struct McuInData
     unsigned char powerButtonPwdLevel = 0;
     unsigned char digitInputPeriod = 3;
     unsigned char powerButtonPwdDigit1 = 1;
-    unsigned char powerButtonPwdDigit2 = 2;
-    unsigned char powerButtonPwdDigit3 = 3;
+    unsigned char powerButtonPwdDigit2 = 1;
+    unsigned char powerButtonPwdDigit3 = 1;
+    unsigned char attempts = 0;
+    unsigned char attemptsResetTime = 1;
 
     unsigned char shutdownPc = 0;
     unsigned char resetPc = 0;

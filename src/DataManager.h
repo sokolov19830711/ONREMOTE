@@ -28,6 +28,7 @@ public:
 	Q_INVOKABLE unsigned char getSettingsValue(const QString& valueName) const;
 	Q_INVOKABLE QString getSettingsStringValue(const QString& valueName) const;
 	Q_INVOKABLE unsigned char getMcuValue(const QString& valueName) const;
+	Q_INVOKABLE void resetToDefault();
 
 	Q_INVOKABLE void sendCommand(const QString& commandName);
 	void clearCommands();
@@ -78,6 +79,8 @@ private:
 		{"PWR/digit2", &_mcuInData.powerButtonPwdDigit2},
 		{"PWR/digit3", &_mcuInData.powerButtonPwdDigit3},
 		{"PWR/digitInputPeriod", &_mcuInData.digitInputPeriod},
+		{"PWR/attempts", &_mcuInData.attempts},
+		{"PWR/attemptsResetTime", &_mcuInData.attemptsResetTime},
 
 		{"startOnBoot", nullptr},
 		{"lockOS", nullptr},
