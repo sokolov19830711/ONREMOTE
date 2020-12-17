@@ -23,4 +23,5 @@ private:
 
 	DataManager& _dataManager;
 	bool _isPasswordAttempted = false;
+	int _attempts = 0;
 };

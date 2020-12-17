@@ -226,6 +226,7 @@ ApplicationWindow
             {
                 framesLayout.currentIndex = 0;
                 switchFrameButtonsItem.visible = true;
+                mainFrameButton.checked = true;
             }
         }
     }

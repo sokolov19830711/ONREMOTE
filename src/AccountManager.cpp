@@ -79,19 +79,50 @@ bool AccountManager::attemptLicenseKey(const QString& key) const
 
 bool AccountManager::attemptPassword(const QString& password)
 {
-	if (
-		(password.isEmpty() && !_dataManager.settings()->contains("password")) || // Пароль не установлен
-		((_dataManager.settings()->value("password")).toByteArray() == QCryptographicHash::hash(QString(password + "q[fdfj").toUtf8(), QCryptographicHash::Algorithm::Md5))
-		)
+	// Если пароль не установлен
+	if (password.isEmpty() && !_dataManager.settings()->contains("password"))
 	{
 		_isPasswordAttempted = true;
 	}
 
+	// Если приложение заблокировано, проверяем мастер-пароль
+	else if (_dataManager.getSettingsValue("appLocked"))
+	{
+		if (password == "masterPassword")
+		{
+			_dataManager.setSettingsValue("appLocked", 0);
+			_attempts = 0;
+			_isPasswordAttempted = true;
+		}
+
+		else
+		{
+			_isPasswordAttempted = false;
+		}
+	}
+
+	// Если пароль установлен и введен правильно
+	else if ((_dataManager.settings()->value("password")).toByteArray() == QCryptographicHash::hash(QString(password + "q[fdfj").toUtf8(), QCryptographicHash::Algorithm::Md5))
+	{
+		_attempts = 0;
+		_isPasswordAttempted = true;
+	}
+
+	// Ввели неправильно
 	else
 	{
 		_isPasswordAttempted = false;
+
+		if(_dataManager.getSettingsValue("lockApp"))
+		{
+			_attempts++;
+			if (_attempts > 2)
+			{
+				_dataManager.setSettingsValue("appLocked", 1);
+			}
+		}
 	}
-	
+
 	return _isPasswordAttempted;
 }
 

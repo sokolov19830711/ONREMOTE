@@ -7,7 +7,7 @@ Item {
     height: 500
 
     Text {
-        id: text1
+        id: titleText
         x: 8
         y: 13
         width: 384
@@ -61,7 +61,17 @@ Item {
         onClicked: { if (accountManager.attemptPassword(passwordField.text)) passwordField.clear()}
     }
 
-
+    function update()
+    {
+        if(dataManager.getSettingsValue("appLocked"))
+        {
+            titleText.text = "ПРИЛОЖЕНИЕ ЗАБЛОКИРОВАНО! ВВЕДИТЕ МАСТЕР-ПАРОЛЬ";
+        }
+        else
+        {
+            titleText.text = "ВВЕДИТЕ ПАРОЛЬ";
+        }
+    }
 }
 
 /*##^##

@@ -82,6 +82,7 @@ private:
 		{"PWR/attempts", &_mcuInData.attempts},
 		{"PWR/attemptsResetTime", &_mcuInData.attemptsResetTime},
 
+		{"appLocked", nullptr},
 		{"startOnBoot", nullptr},
 		{"lockOS", nullptr},
 		{"lockApp", nullptr},
