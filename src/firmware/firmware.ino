@@ -34,7 +34,7 @@ void setup()
     Beeper::init(BEEPER, TIMER_PERIOD, 100);
     PcPower::init(PC_POWER);
     PcReset::init(PC_RESET);
-    TricolorLED::init(RED, TIMER_PERIOD, 200);
+    TricolorLED::init();
 
     internalMemoryManager.initConfig();
 
@@ -89,7 +89,7 @@ ISR(TIMER2_A)
     Beeper::update();
     PcPower::update(TIMER_PERIOD);
     PcReset::update(TIMER_PERIOD);
-    TricolorLED::update();
+    TricolorLED::update(TIMER_PERIOD);
     powerButtonWatcher.update(TIMER_PERIOD);
     resetButtonWatcher.update();
     portManager.update(TIMER_PERIOD);

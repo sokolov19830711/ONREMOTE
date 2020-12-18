@@ -15,39 +15,49 @@ TricolorLED& TricolorLED::getInstance()
 	return instance;
 }
 
-void TricolorLED::init(int pin, int timerPeriod, int duration)
+void TricolorLED::init()
 {
-
-	getInstance()._pin = pin;
-	getInstance()._timerPeriod = timerPeriod;
-	getInstance()._duration = duration;
-	getInstance()._cyclesCount = getInstance()._duration / (getInstance()._timerPeriod);
-
-	pinMode(getInstance()._pin, OUTPUT);
-	digitalWrite(getInstance()._pin, HIGH);
-
-	getInstance()._pin = BLUE;
-	pinMode(getInstance()._pin, OUTPUT);
-	digitalWrite(getInstance()._pin, HIGH);
-
-	getInstance()._pin = GREEN;
-	pinMode(getInstance()._pin, OUTPUT);
-	digitalWrite(getInstance()._pin, HIGH);
-
-	getInstance()._pin = RED;
+	pinMode(RED, OUTPUT);
+	pinMode(BLUE, OUTPUT);
+	pinMode(GREEN, OUTPUT);
+	digitalWrite(RED, HIGH);
+	digitalWrite(BLUE, HIGH);
+	digitalWrite(GREEN, HIGH);
 }
 
-
-void TricolorLED::update()
+void TricolorLED::update(int dt)
 {
-	if (getInstance()._isOn)
+	if (getInstance()._isBlinking)
 	{
-		getInstance()._cyclesCounter++;
-		if (getInstance()._cyclesCounter > getInstance()._cyclesCount)
+		getInstance()._timer += dt;
+
+		switch (getInstance()._blinkingState)
 		{
-			getInstance()._cyclesCounter = 0;
-			getInstance()._isOn = false;
-			digitalWrite(getInstance()._pin, HIGH);
+		case beforePause:
+			if (getInstance()._timer > getInstance()._pauseDuration)
+			{
+				getInstance()._blinkingState = blinkingOn;
+				getInstance()._timer = 0;
+				digitalWrite(getInstance()._currentPin, LOW);
+			}
+			break;
+
+		case blinkingOn:
+			if (getInstance()._timer > getInstance()._blinkDuration)
+			{
+				getInstance()._blinkingState = afterPause;
+				getInstance()._timer = 0;
+				digitalWrite(getInstance()._currentPin, HIGH);
+			}
+			break;
+
+		case afterPause:
+			if (getInstance()._timer > getInstance()._pauseDuration)
+			{
+				getInstance()._timer = 0;
+				getInstance()._isBlinking = false;
+			}
+			break;
 		}
 	}
 }
@@ -57,11 +67,14 @@ void TricolorLED::blink(int color)
 	if ( !(DataManager::config().ledOn) )
 		return;
 
-	if (!getInstance()._isOn)
+	if (!getInstance()._isBlinking)
 	{
-		getInstance()._pin = color;
-		getInstance().getInstance()._cyclesCounter = 0;
-		getInstance()._isOn = true;
-		digitalWrite(getInstance()._pin, LOW);
+		getInstance()._currentPin = color;
+		getInstance()._timer = 0;
+		getInstance()._isBlinking = true;
+		getInstance()._blinkingState = beforePause;
+		digitalWrite(RED, HIGH);
+		digitalWrite(BLUE, HIGH);
+		digitalWrite(GREEN, HIGH);
 	}
 }

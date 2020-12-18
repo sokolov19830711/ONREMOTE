@@ -1,10 +1,12 @@
 #pragma once
+
+enum BlinkingState{beforePause, blinkingOn, afterPause};
 class TricolorLED
 {
 public:
 
-	static void init(int pin, int timerPeriod, int duration);
-	static void update();
+	static void init();
+	static void update(int dt);
 	static void blink(int color);
 
 private:
@@ -12,11 +14,11 @@ private:
 	TricolorLED();
 	static TricolorLED& getInstance();
 
-	int _pin;
-	int _timerPeriod; // период вызова таймера в микросекундах
-	int _duration; // длительность звукового сигнала в милисекундах
-	int _cyclesCount;
-	int _cyclesCounter = 0;
-	bool _isOn = false;
+	int _currentPin;
+	int _timer = 0;
+	const int _blinkDuration = 300; // длительность моргания в милисекундах
+	const int _pauseDuration = 200; // длительность паузы перед и после моргания в милисекундах
+	BlinkingState _blinkingState = beforePause;
+	bool _isBlinking = false;
 };
 
