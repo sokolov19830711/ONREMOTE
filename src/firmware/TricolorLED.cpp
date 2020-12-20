@@ -3,7 +3,7 @@
 #include <Arduino.h>
 
 #include "DataManager.h"
-#include "Krakeenone_pinout.h"
+#include "Pinout.h"
 
 TricolorLED::TricolorLED()
 {

@@ -5,7 +5,7 @@
 
 #include "DataManager.h"
 #include "Beeper.h"
-#include "Krakeenone_pinout.h"
+#include "Pinout.h"
 
 InternalMemoryManager::InternalMemoryManager()
 {

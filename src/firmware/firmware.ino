@@ -8,13 +8,14 @@
 #include "BreakInSensors.h"
 #include "PowerButtonWatcher.h"
 #include "ResetButtonWatcher.h"
+#include "ResetButtonPin.h"
 
 #include "Beeper.h"
 #include "PcPower.h"
 #include "PcReset.h"
 #include "TricolorLED.h"
 
-#include "Krakeenone_pinout.h"
+#include "Pinout.h"
 
 static SerialPortManager portManager;
 static InternalMemoryManager internalMemoryManager;
@@ -22,7 +23,8 @@ static TemperatureSensors temperatureSensors;
 static DustSensors dustSensors;
 static BreakInSensors breakInSensors;
 static PowerButtonWatcher powerButtonWatcher;
-static ResetButtonWatcher resetButtonWatcher;
+//static ResetButtonWatcher resetButtonWatcher;
+static ResetButtonPin resetButton(PC_RESET_BUTTON);
 
 const int TIMER_PERIOD = 20; // в милисекундах
 const int RUNNING_TIME_FIXING_PERIOD = 660; // С какой периодичностью обновляется запись о суммарном кол-ве отработаннного времени, в сек
@@ -74,6 +76,8 @@ void loop()
       // Датчики вскрытия
       breakInSensors.update();
 
+      resetButton.process();
+
       if (portManager.mode() == SerialPortManager::Mode::normal && portManager.needToUpdateConfig())
       {
           DataManager::config() = *(portManager.inData());
@@ -91,6 +95,7 @@ ISR(TIMER2_A)
     PcReset::update(TIMER_PERIOD);
     TricolorLED::update(TIMER_PERIOD);
     powerButtonWatcher.update(TIMER_PERIOD);
-    resetButtonWatcher.update();
+    //resetButtonWatcher.update
+    Pin::updatePins(TIMER_PERIOD);
     portManager.update(TIMER_PERIOD);
 }

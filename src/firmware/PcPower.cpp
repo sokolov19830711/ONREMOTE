@@ -1,7 +1,7 @@
 #include "PcPower.h"
 
 #include <Arduino.h>
-#include "Krakeenone_pinout.h"
+#include "Pinout.h"
 #include "TricolorLED.h"
 
 PcPower::PcPower()

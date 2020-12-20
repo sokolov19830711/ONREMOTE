@@ -2,7 +2,7 @@
 
 #include "DustSensors.h"
 #include "DataManager.h"
-#include "Krakeenone_pinout.h"
+#include "Pinout.h"
 #include "Beeper.h"
 #include "PcPower.h"
 

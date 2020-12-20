@@ -1,7 +1,7 @@
 #include "PcReset.h"
 
 #include <Arduino.h>
-#include "Krakeenone_pinout.h"
+#include "Pinout.h"
 #include "TricolorLED.h"
 
 PcReset::PcReset()
