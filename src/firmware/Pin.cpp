@@ -26,6 +26,17 @@ Pin::Pin(int pin, SignalType signalType, int pinMode) :
 			currentPin++;
 		}
 	}
+
+	// считываем начальное состояние пина
+	switch (_signalType)
+	{
+	case Pin::digital:
+		_currentValue = digitalRead(_pin);
+		break;
+	case Pin::analog:
+		_currentValue = analogRead(_pin);
+		break;
+	}
 }
 
 void Pin::update(int dt)
@@ -59,6 +70,10 @@ void Pin::update(int dt)
 		break; // INPUT mode
 
 	case OUTPUT:
+		if (_signalsSequence)
+		{
+
+		}
 		break; // OUTPUT mode
 	}
 }
@@ -89,4 +104,28 @@ void Pin::process()
 int Pin::currentValueTimer() const
 {
 	return _currentValueTimer;
+}
+
+void Pin::runSequence(Signal* sequence, int sequenceSize, bool repeat)
+{
+	if (_signalsSequence)
+	{
+		return;
+	}
+
+	_signalsSequence = sequence;
+	_sequenceSize = sequenceSize;
+	_sequenceStage = 0;
+	_isSequenceRepeated = repeat;
+	_sequenceStageTimer = 0;
+
+	switch (_signalType)
+	{
+	case Pin::digital:
+		digitalWrite(_pin, _signalsSequence->value);
+		break;
+	case Pin::analog:
+		analogWrite(_pin, _signalsSequence->value);
+		break;
+	}
 }
