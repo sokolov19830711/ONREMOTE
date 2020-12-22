@@ -2,7 +2,7 @@
 
 #include <Arduino.h>
 
-Beeper::Beeper()
+Beeper::Beeper() : Pin(0)
 {
 }
 
@@ -12,38 +12,27 @@ Beeper& Beeper::getInstance()
 	return instance;
 }
 
-void Beeper::init(int pin, int timerPeriod, int duration)
+void Beeper::init(int pin)
 {
-	
-	getInstance()._pin = pin;
-	getInstance()._timerPeriod = timerPeriod;
-	getInstance()._duration = duration;
-	getInstance()._cyclesCount = getInstance()._duration / (getInstance()._timerPeriod);
-	pinMode(getInstance()._pin, OUTPUT);
-}
-
-
-void Beeper::update()
-{
-	if (getInstance()._isOn)
-	{
-		getInstance()._cyclesCounter++;
-		if (getInstance()._cyclesCounter > getInstance()._cyclesCount)
-		{
-			getInstance()._cyclesCounter = 0;
-			getInstance()._isOn = false;
-			digitalWrite(getInstance()._pin, LOW);
-		}
-	}
+	getInstance().setPin(pin);
+	getInstance().setPinMode(OUTPUT);
+	getInstance().setupSequence(new Signal[2]{
+		{HIGH, 150},
+		{LOW, 150}
+		/*{HIGH, 150},
+		{LOW, 150},
+		{HIGH, 150},
+		{LOW, 150},
+		{HIGH, 500},
+		{LOW, 150},
+		{HIGH, 500},
+		{LOW, 150},
+		{HIGH, 500},
+		{LOW, 150}*/
+		}, 2);
 }
 
 void Beeper::beep()
 {
-	if (!getInstance()._isOn)
-	{
-		getInstance().getInstance()._cyclesCounter = 0;
-		getInstance()._isOn = true;
-		digitalWrite(getInstance()._pin, HIGH);
-	}
-
+	getInstance().runSequence();
 }

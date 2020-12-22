@@ -33,7 +33,7 @@ void setup()
 {
     portManager.init(19200);
     DataManager::init();
-    Beeper::init(BEEPER, TIMER_PERIOD, 100);
+    Beeper::init(BEEPER);
     PcPower::init(PC_POWER);
     PcReset::init(PC_RESET);
     TricolorLED::init();
@@ -90,7 +90,7 @@ void loop()
 // Прерывание А таймера 2
 ISR(TIMER2_A)
 {
-    Beeper::update();
+    //Beeper::update();
     PcPower::update(TIMER_PERIOD);
     PcReset::update(TIMER_PERIOD);
     TricolorLED::update(TIMER_PERIOD);
