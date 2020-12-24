@@ -60,6 +60,12 @@ void Pin::setPinMode(int mode)
 	pinMode(_pin, mode);
 }
 
+void Pin::setIdleValue(int value)
+{
+	_idleValue = value;
+	write(_idleValue);
+}
+
 void Pin::update(int dt)
 {
 	if(_pinMode == INPUT)

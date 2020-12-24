@@ -22,6 +22,7 @@ public:
 	void setPin(int pin);
 
 	void setPinMode(int mode);
+	void setIdleValue(int value);
 
 	void update(int dt);
 	static void updatePins(int dt);
@@ -31,10 +32,10 @@ public:
 	int currentValue() const;
 	int currentValueTimer() const;
 
-protected:
-
 	void setupSequence(Signal* sequence, int sequenceSize, bool repeat = false);
 	void runSequence();
+
+protected:
 
 	int _currentValue = UNDEFINED_VALUE;
 	int _idleValue = LOW;
