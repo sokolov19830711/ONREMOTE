@@ -26,15 +26,21 @@ Pin::Pin(int pin, int idleValue, SignalType signalType, int pinMode) :
 				break;
 			}
 
-			currentPin++;
+			currentPin = currentPin->_next;
 		}
 	}
+
+	setPinMode(pinMode);
 
 	switch (_pinMode)
 	{
 	case INPUT:
 		// считываем начальное состояние пина
 		_currentValue = read();
+		break;
+
+	case OUTPUT:
+		write(_idleValue);
 		break;
 	}
 }
@@ -52,6 +58,11 @@ int Pin::getPin() const
 void Pin::setPin(int pin)
 {
 	_pin = pin;
+}
+
+void Pin::setSignalType(SignalType signalType)
+{
+	_signalType = signalType;
 }
 
 void Pin::setPinMode(int mode)

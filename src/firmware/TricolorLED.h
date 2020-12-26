@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Pin.h"
+#include "Pinout.h"
 
 //enum BlinkingState{beforePause, blinkingOn, afterPause};
 class TricolorLED

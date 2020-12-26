@@ -33,17 +33,14 @@ void setup()
 {
     portManager.init(19200);
     DataManager::init();
-    Beeper::init(BEEPER);
+    Beeper::init(BEEPER, LOW, Pin::SignalType::digital, OUTPUT);
     PcPower::init(PC_POWER);
     PcReset::init(PC_RESET);
-    //TricolorLED::init();
 
     internalMemoryManager.initConfig();
 
     Timer2.setPeriod(TIMER_PERIOD * 1000); // Устанавливаем период таймера 20000 мкс -> 50 гц
     Timer2.enableISR(CHANNEL_A); // Или просто.enableISR(), запускаем прерывание на канале А таймера
-
-    Serial.begin(19200);
 
     temperatureSensors.init();
     dustSensors.init();
@@ -97,5 +94,5 @@ ISR(TIMER2_A)
     powerButtonWatcher.update(TIMER_PERIOD);
     //resetButtonWatcher.update
     Pin::updatePins(TIMER_PERIOD);
-    portManager.update(TIMER_PERIOD);
+    //portManager.update(TIMER_PERIOD);
 }

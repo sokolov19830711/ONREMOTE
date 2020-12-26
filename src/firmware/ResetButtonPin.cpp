@@ -4,9 +4,9 @@
 #include "TricolorLED.h"
 #include "Beeper.h"
 
-ResetButtonPin::ResetButtonPin(int pin) : Pin(pin)
+ResetButtonPin::ResetButtonPin(int pin) : Pin(pin, HIGH)
 {
-	_idleValue = HIGH;
+
 }
 
 void ResetButtonPin::process()

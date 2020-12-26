@@ -21,6 +21,7 @@ public:
 	int getPin() const;
 	void setPin(int pin);
 
+	void setSignalType(SignalType signalType);
 	void setPinMode(int mode);
 	void setIdleValue(int value);
 

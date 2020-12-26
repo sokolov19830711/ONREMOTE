@@ -6,16 +6,11 @@
 #include "Pinout.h"
 
 TricolorLED::TricolorLED() :
-	_redPin(RED),
-	_greenPin(GREEN),
-	_bluePin(BLUE)
+	_redPin(RED, HIGH, Pin::SignalType::digital, OUTPUT),
+	_greenPin(GREEN, HIGH, Pin::SignalType::digital, OUTPUT),
+	_bluePin(BLUE, HIGH, Pin::SignalType::digital, OUTPUT)
 {
-	_redPin.setPinMode(OUTPUT);
-	_greenPin.setPinMode(OUTPUT);
-	_bluePin.setPinMode(OUTPUT);
-	_redPin.setIdleValue(HIGH);
-	_greenPin.setIdleValue(HIGH);
-	_bluePin.setIdleValue(HIGH);
+	
 }
 
 TricolorLED& TricolorLED::getInstance()

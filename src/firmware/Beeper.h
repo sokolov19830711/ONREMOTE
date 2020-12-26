@@ -1,17 +1,17 @@
 #pragma once
 
-#include "Pin.h"
+#include "PinSingletonInterface.h"
 
-class Beeper : public Pin
+class Beeper : private PinSingletonInterface
 {
 public:
 
-	static void init(int pin);
+	static void init(int pin, int idleValue = LOW, SignalType signalType = digital, int pinMode = INPUT);
 	static void beep();
 
 private:
 
 	Beeper();
-	static Beeper& getInstance();
+//	static Beeper& getInstance();
 };
 
