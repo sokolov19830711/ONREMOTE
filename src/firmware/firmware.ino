@@ -6,9 +6,8 @@
 #include "TemperatureSensors.h"
 #include "DustSensors.h"
 #include "BreakInSensors.h"
-#include "PowerButtonWatcher.h"
-#include "ResetButtonWatcher.h"
-#include "ResetButtonPin.h"
+#include "ResetButton.h"
+#include "PowerButton.h"
 
 #include "Beeper.h"
 #include "PcPower.h"
@@ -22,9 +21,7 @@ static InternalMemoryManager internalMemoryManager;
 static TemperatureSensors temperatureSensors;
 static DustSensors dustSensors;
 static BreakInSensors breakInSensors;
-static PowerButtonWatcher powerButtonWatcher;
-//static ResetButtonWatcher resetButtonWatcher;
-static ResetButtonPin resetButton(PC_RESET_BUTTON);
+//static PowerButtonWatcher powerButtonWatcher;
 
 const int TIMER_PERIOD = 20; // в милисекундах
 const int RUNNING_TIME_FIXING_PERIOD = 660; // С какой периодичностью обновляется запись о суммарном кол-ве отработаннного времени, в сек
@@ -33,7 +30,6 @@ void setup()
 {
     portManager.init(19200);
     DataManager::init();
-    Beeper::init(BEEPER, LOW, Pin::SignalType::digital, OUTPUT);
     PcPower::init(PC_POWER);
     PcReset::init(PC_RESET);
 
@@ -44,7 +40,7 @@ void setup()
 
     temperatureSensors.init();
     dustSensors.init();
-    powerButtonWatcher.updateConfig();
+    PowerButton::updateConfig();
 }
 
 void loop()
@@ -73,13 +69,13 @@ void loop()
       // Датчики вскрытия
       breakInSensors.update();
 
-      resetButton.process();
+      ResetButton::process();
 
       if (portManager.mode() == SerialPortManager::Mode::normal && portManager.needToUpdateConfig())
       {
           DataManager::config() = *(portManager.inData());
           internalMemoryManager.saveConfig();
-          powerButtonWatcher.updateConfig();
+          PowerButton::updateConfig();
           portManager.setConfigUpdated();
       }
 }
@@ -87,12 +83,9 @@ void loop()
 // Прерывание А таймера 2
 ISR(TIMER2_A)
 {
-    //Beeper::update();
     PcPower::update(TIMER_PERIOD);
     PcReset::update(TIMER_PERIOD);
-    //TricolorLED::update(TIMER_PERIOD);
-    powerButtonWatcher.update(TIMER_PERIOD);
-    //resetButtonWatcher.update
     Pin::updatePins(TIMER_PERIOD);
-    //portManager.update(TIMER_PERIOD);
+    portManager.update(TIMER_PERIOD);
+    PowerButton::process(TIMER_PERIOD);
 }

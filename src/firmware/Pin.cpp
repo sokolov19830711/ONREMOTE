@@ -151,19 +151,34 @@ void Pin::updatePins(int dt)
 	}
 }
 
-void Pin::process()
+void Pin::resetValueChanged()
 {
 	_valueChanged = false;
 }
 
-int Pin::currentValue() const
+bool Pin::isValueChanged() const
+{
+	return _valueChanged;
+}
+
+int Pin::getCurrentValue() const
 {
 	return _currentValue;
+}
+
+int Pin::getIdleValue() const
+{
+	return _idleValue;
 }
 
 int Pin::currentValueTimer() const
 {
 	return _currentValueTimer;
+}
+
+void Pin::resetCurrentValueTimer()
+{
+	_currentValueTimer = 0;
 }
 
 void Pin::setupSequence(Signal* sequence, int sequenceSize, bool repeat)

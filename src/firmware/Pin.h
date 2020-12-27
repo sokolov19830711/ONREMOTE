@@ -24,14 +24,16 @@ public:
 	void setSignalType(SignalType signalType);
 	void setPinMode(int mode);
 	void setIdleValue(int value);
+	int getIdleValue() const;
 
 	void update(int dt);
 	static void updatePins(int dt);
 
-	void process();
-
-	int currentValue() const;
+	bool isValueChanged() const;
+	void resetValueChanged();
+	int getCurrentValue() const;
 	int currentValueTimer() const;
+	void resetCurrentValueTimer();
 
 	void setupSequence(Signal* sequence, int sequenceSize, bool repeat = false);
 	void runSequence();
