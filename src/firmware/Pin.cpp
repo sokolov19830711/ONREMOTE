@@ -203,6 +203,12 @@ void Pin::runSequence()
 	write(_signalsSequence->value);
 }
 
+void Pin::runSequence(Signal* sequence, int sequenceSize, bool repeat)
+{
+	setupSequence(sequence, sequenceSize, repeat);
+	runSequence();
+}
+
 int Pin::read() const
 {
 	int currentValue;

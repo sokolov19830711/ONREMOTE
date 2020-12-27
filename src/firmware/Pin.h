@@ -37,6 +37,7 @@ public:
 
 	void setupSequence(Signal* sequence, int sequenceSize, bool repeat = false);
 	void runSequence();
+	void runSequence(Signal* sequence, int sequenceSize, bool repeat = false);
 
 protected:
 

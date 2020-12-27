@@ -12,8 +12,8 @@
 
 #define TERMINAL_SWITCH1 4
 
-#define PC_POWER A3
-#define PC_RESET A4
+#define PC_POWER 17
+#define PC_RESET 18
 
 #define PC_POWER_BUTTON 2
 #define PC_RESET_BUTTON 3

@@ -21,7 +21,6 @@ static InternalMemoryManager internalMemoryManager;
 static TemperatureSensors temperatureSensors;
 static DustSensors dustSensors;
 static BreakInSensors breakInSensors;
-//static PowerButtonWatcher powerButtonWatcher;
 
 const int TIMER_PERIOD = 20; // в милисекундах
 const int RUNNING_TIME_FIXING_PERIOD = 660; // С какой периодичностью обновляется запись о суммарном кол-ве отработаннного времени, в сек
@@ -31,7 +30,6 @@ void setup()
     portManager.init(19200);
     DataManager::init();
     PcPower::init(PC_POWER);
-    PcReset::init(PC_RESET);
 
     internalMemoryManager.initConfig();
 
@@ -84,7 +82,6 @@ void loop()
 ISR(TIMER2_A)
 {
     PcPower::update(TIMER_PERIOD);
-    PcReset::update(TIMER_PERIOD);
     Pin::updatePins(TIMER_PERIOD);
     portManager.update(TIMER_PERIOD);
     PowerButton::process(TIMER_PERIOD);
