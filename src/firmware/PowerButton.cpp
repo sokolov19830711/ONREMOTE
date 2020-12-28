@@ -15,13 +15,27 @@ void PowerButton::process(int dt)
 			getInstance()._counter++;
 		}
 
-		if (getInstance()._timer > getInstance()._digitInputPeriod)
+		if (getInstance()._timer > DataManager::config().digitInputPeriod * 1000)
 		{
 			getInstance()._timer = 0;
 
-			if (getInstance()._counter == getInstance()._digit[getInstance()._currentDigit - 1])
+			int currentDigitValue;
+			switch (getInstance()._currentDigit)
 			{
-				if (getInstance()._currentDigit == getInstance()._pwdLevel) // Проверили последний разряд
+			case 1:
+				currentDigitValue = DataManager::config().powerButtonPwdDigit1;
+				break;
+			case 2:
+				currentDigitValue = DataManager::config().powerButtonPwdDigit2;
+				break;
+			case 3:
+				currentDigitValue = DataManager::config().powerButtonPwdDigit3;
+				break;
+			}
+
+			if (getInstance()._counter == currentDigitValue)
+			{
+				if (getInstance()._currentDigit == DataManager::config().powerButtonPwdLevel) // Проверили последний разряд
 				{
 					PcPower::on();
 					getInstance()._isWatching = false;
@@ -46,7 +60,7 @@ void PowerButton::process(int dt)
 	{
 		if (getInstance().isValueChanged() && getInstance().getCurrentValue() != getInstance().getIdleValue()) // кнопку нажали и отпустили
 		{
-			if (getInstance()._pwdLevel && (DataManager::config().turnOn))
+			if (DataManager::config().powerButtonPwdLevel && (DataManager::config().turnOn))
 			{
 				getInstance()._isWatching = true;
 				getInstance()._counter = 1;
@@ -74,13 +88,4 @@ PowerButton& PowerButton::getInstance()
 {
 	static PowerButton instance;
 	return instance;
-}
-
-void PowerButton::updateConfig()
-{
-	getInstance()._pwdLevel = DataManager::config().powerButtonPwdLevel;
-	getInstance()._digitInputPeriod = DataManager::config().digitInputPeriod * 1000;
-	getInstance()._digit[0] = DataManager::config().powerButtonPwdDigit1;
-	getInstance()._digit[1] = DataManager::config().powerButtonPwdDigit2;
-	getInstance()._digit[2] = DataManager::config().powerButtonPwdDigit3;
 }

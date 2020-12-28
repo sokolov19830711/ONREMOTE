@@ -31,12 +31,11 @@ void setup()
     DataManager::init();
     internalMemoryManager.initConfig();
 
-    Timer2.setPeriod(TIMER_PERIOD * 1000); // Устанавливаем период таймера 20000 мкс -> 50 гц
-    Timer2.enableISR(CHANNEL_A); // Или просто.enableISR(), запускаем прерывание на канале А таймера
+    Timer2.setPeriod(TIMER_PERIOD * 1000); // Устанавливаем период таймера в мкс
+    Timer2.enableISR(CHANNEL_A); // запускаем прерывание на канале А таймера
 
     temperatureSensors.init();
     dustSensors.init();
-    PowerButton::updateConfig();
 }
 
 void loop()
@@ -71,7 +70,6 @@ void loop()
       {
           DataManager::config() = *(portManager.inData());
           internalMemoryManager.saveConfig();
-          PowerButton::updateConfig();
           portManager.setConfigUpdated();
       }
 }
