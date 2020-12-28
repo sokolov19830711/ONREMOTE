@@ -20,7 +20,7 @@ void PcPower::off()
 
 void PcPower::forcedOff()
 {
-	//if (analogRead(SYS_FAN) > 300)
+	if (analogRead(SYS_FAN) > 300)
 	{
 		getInstance().runSequence(new Signal[2]{ {HIGH, 5000}, {LOW, 300} }, 2);
 		TricolorLED::blink(RED);

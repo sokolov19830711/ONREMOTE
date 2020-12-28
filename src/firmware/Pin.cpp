@@ -205,6 +205,10 @@ void Pin::runSequence()
 
 void Pin::runSequence(Signal* sequence, int sequenceSize, bool repeat)
 {
+	if (_isSequenceRunning)
+	{
+		return;
+	}
 	setupSequence(sequence, sequenceSize, repeat);
 	runSequence();
 }
