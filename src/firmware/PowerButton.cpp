@@ -61,10 +61,12 @@ void PowerButton::process(int dt)
 		}
 	}
 
-	/*if (getInstance().isValueChanged() && getInstance().getCurrentValue() != getInstance().getIdleValue())
+	if (getInstance().currentValueTimer() > 5000 && getInstance().getCurrentValue() != getInstance().getIdleValue())
 	{
-		Beeper::beep();
-	}*/
+		getInstance().resetCurrentValueTimer();
+		PcPower::forcedOff();
+	}
+
 	getInstance().resetValueChanged();
 }
 

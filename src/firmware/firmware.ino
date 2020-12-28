@@ -29,8 +29,6 @@ void setup()
 {
     portManager.init(19200);
     DataManager::init();
-    PcPower::init(PC_POWER);
-
     internalMemoryManager.initConfig();
 
     Timer2.setPeriod(TIMER_PERIOD * 1000); // Устанавливаем период таймера 20000 мкс -> 50 гц
@@ -81,7 +79,6 @@ void loop()
 // Прерывание А таймера 2
 ISR(TIMER2_A)
 {
-    PcPower::update(TIMER_PERIOD);
     Pin::updatePins(TIMER_PERIOD);
     portManager.update(TIMER_PERIOD);
     PowerButton::process(TIMER_PERIOD);
