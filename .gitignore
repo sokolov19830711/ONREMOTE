@@ -11,5 +11,9 @@ src/firmware/*.sln
 src/firmware/*.user
 src/firmware/*.vcxproj
 
+src/firmware_stm32/.vs
+src/firmware_stm32/.visualgdb
+src/firmware_stm32/build
+
 CMakeLists.txt.user
 CMakeSettings.json
