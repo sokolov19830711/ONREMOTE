@@ -9,12 +9,17 @@ extern uint8_t currentLength;
 extern "C"
 void main_loop()
 {
+	
+}
+
+extern "C"
+void update_on_timer()
+{
 	McuOutData outData;
 	CDC_Transmit_FS((uint8_t*)(&outData), sizeof(McuOutData));
-	HAL_Delay(500);
-	if(recieved && (currentLength == sizeof(McuInData)))
+	if (recieved && (currentLength == sizeof(McuInData)))
 	{
-		Led::blink();
+		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
 		recieved = 0;
 	}
 }
