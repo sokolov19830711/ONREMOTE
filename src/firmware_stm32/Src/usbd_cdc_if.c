@@ -32,7 +32,7 @@
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
-extern uint8_t str_rx[32];
+extern uint8_t str_rx[128];
 extern uint8_t recieved;
 extern uint8_t currentLength;
 /* USER CODE END PV */
