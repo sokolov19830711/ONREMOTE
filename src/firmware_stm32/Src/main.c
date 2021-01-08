@@ -56,6 +56,24 @@ static void MX_GPIO_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
+void reset_USB() // reset USB DP (D+)
+{
+	  GPIO_InitTypeDef GPIO_InitStruct = { 0 };
+
+	// инициализируем пин DP как выход
+	GPIO_InitStruct.Pin = GPIO_PIN_12;
+	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_RESET);    // прижимаем DP к "земле"
+	for(uint32_t i = 0 ; i < 100000 ; i++) {} // немного ждём
+
+	// переинициализируем пин для работы с USB
+	GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+	GPIO_InitStruct.Pull = GPIO_NOPULL;
+	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+	for (uint32_t i = 0; i < 100000; i++) {} // немного ждём
+}
 /* USER CODE END 0 */
 
 /**
@@ -86,9 +104,12 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  reset_USB();
   MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 2 */
-
+	
+	
+	
   /* USER CODE END 2 */
 
   /* Infinite loop */
