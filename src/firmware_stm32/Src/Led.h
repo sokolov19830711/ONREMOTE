@@ -1,8 +1,16 @@
 #pragma once
-class Led
+#include "UpdatableOnTimer.h"
+
+class Led : public UpdatableOnTimer
 {
 public:
 	
-	static void blink();
+	Led();
+	void blink();
+	void update();
+	
+private:
+	
+	bool _isBlinking = false;
 };
 

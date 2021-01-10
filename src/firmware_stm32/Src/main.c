@@ -64,7 +64,8 @@ void update_on_timer();
 
 void reset_USB() // reset USB DP (D+)
 {
-	  GPIO_InitTypeDef GPIO_InitStruct = { 0 };
+	__HAL_RCC_GPIOA_CLK_ENABLE();
+	GPIO_InitTypeDef GPIO_InitStruct = { 0 };
 
 	// инициализируем пин DP как выход
 	GPIO_InitStruct.Pin = GPIO_PIN_12;
@@ -113,7 +114,7 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
-
+	reset_USB();
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
@@ -243,7 +244,7 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOA_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(ONBOARD_LED_GPIO_Port, ONBOARD_LED_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(ONBOARD_LED_GPIO_Port, ONBOARD_LED_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin : ONBOARD_LED_Pin */
   GPIO_InitStruct.Pin = ONBOARD_LED_Pin;
