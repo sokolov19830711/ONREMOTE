@@ -47,6 +47,7 @@ TIM_HandleTypeDef htim2;
 uint8_t str_rx[128];
 uint8_t recieved = 0;
 uint8_t currentLength = 0;
+int mainTimerPeriod = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -84,7 +85,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	if (htim->Instance == TIM2)
 		{
-			update_on_timer(); 
+			update_on_timer(mainTimerPeriod); 
 		}
 }
 /* USER CODE END 0 */
@@ -117,7 +118,6 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  reset_USB();
   MX_USB_DEVICE_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
@@ -204,7 +204,7 @@ static void MX_TIM2_Init(void)
   htim2.Instance = TIM2;
   htim2.Init.Prescaler = 479;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim2.Init.Period = 49999;
+  htim2.Init.Period = 1999;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
@@ -223,7 +223,7 @@ static void MX_TIM2_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN TIM2_Init 2 */
-
+	mainTimerPeriod = (htim2.Init.Period + 1) / (48000 / (htim2.Init.Prescaler + 1));
   /* USER CODE END TIM2_Init 2 */
 
 }

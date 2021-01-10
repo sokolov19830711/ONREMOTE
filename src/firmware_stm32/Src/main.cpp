@@ -9,17 +9,24 @@ extern uint8_t currentLength;
 extern "C"
 void main_loop()
 {
-	
 }
 
 extern "C"
-void update_on_timer()
+void update_on_timer(int dt)
 {
-	McuOutData outData;
-	CDC_Transmit_FS((uint8_t*)(&outData), sizeof(McuOutData));
-	if (recieved && (currentLength == sizeof(McuInData)))
+	static int counter = 0;
+	counter += dt;
+	
+	if (counter > 249)
 	{
+		counter = 0;
 		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-		recieved = 0;
 	}
+//	McuOutData outData;
+//	CDC_Transmit_FS((uint8_t*)(&outData), sizeof(McuOutData));
+//	if (recieved && (currentLength == sizeof(McuInData)))
+//	{
+//		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+//		recieved = 0;
+//	}
 }
