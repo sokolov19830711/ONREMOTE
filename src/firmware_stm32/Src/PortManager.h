@@ -1,13 +1,12 @@
 #pragma once
 #include "UpdatableOnTimer.h"
 
-class Led : public UpdatableOnTimer
+class PortManager : public UpdatableOnTimer
 {
 public:
 	
-	Led();
+	PortManager();
 	
-	void blink();
 	void update();
 	
 private:
@@ -15,5 +14,4 @@ private:
 	bool _isBlinking;
 };
 
-extern Led led;
-
+extern PortManager portManager;
