@@ -169,7 +169,7 @@ Item {
         width: 287
         height: 30
         color: "#fefefe"
-        text: qsTr("ЕСЛИ ДАТЧИК ВСРЫТИЯ (INT)")
+        text: qsTr("ЕСЛИ ДАТЧИК ВСКРЫТИЯ (INT)")
         font.pixelSize: 21
         horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter
@@ -305,7 +305,7 @@ Item {
         width: 287
         height: 30
         color: "#fefefe"
-        text: qsTr("ЕСЛИ ДАТЧИК ВСРЫТИЯ (OUT)")
+        text: qsTr("ЕСЛИ ДАТЧИК ВСКРЫТИЯ (OUT)")
         font.pixelSize: 21
         horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter

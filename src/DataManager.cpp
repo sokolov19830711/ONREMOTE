@@ -60,7 +60,7 @@ McuOutData& DataManager::outData()
 	return _mcuOutData;
 }
 
-QSharedPointer<QSettings> DataManager::settings()
+QSharedPointer<QSettings>& DataManager::settings()
 {
 	return _settings;
 }
@@ -81,6 +81,7 @@ void DataManager::setSettingsValue(const QString& valueName, unsigned char value
 	if(_settingsMap[valueName])
 	{
 		*_settingsMap[valueName] = value;
+        _settings->setValue(valueName, *_settingsMap[valueName]);
 	}
 
 	else

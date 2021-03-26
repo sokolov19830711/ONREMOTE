@@ -19,7 +19,7 @@ public:
 
 	McuInData& inData();
 	McuOutData& outData();
-	QSharedPointer<QSettings> settings();
+    QSharedPointer<QSettings>& settings();
 
 	void writeMcuOutData(const QByteArray& data);
 
@@ -50,8 +50,8 @@ private:
 	McuOutData _mcuOutData;
 	McuOutData _prevMcuOutData;
 
-	// Тут мы храним имена переменных, используемых для настроек
-	// Если настройка используется только на стороне ПК, указываем на нее nullptr
+	// РўСѓС‚ РјС‹ С…СЂР°РЅРёРј РёРјРµРЅР° РїРµСЂРµРјРµРЅРЅС‹С…, РёСЃРїРѕР»СЊР·СѓРµРјС‹С… РґР»СЏ РЅР°СЃС‚СЂРѕРµРє
+	// Р•СЃР»Рё РЅР°СЃС‚СЂРѕР№РєР° РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ С‚РѕР»СЊРєРѕ РЅР° СЃС‚РѕСЂРѕРЅРµ РџРљ, СѓРєР°Р·С‹РІР°РµРј РЅР° РЅРµРµ nullptr
 	QMap<QString, unsigned char*> _settingsMap
 	{
 		{"turnOn", &_mcuInData.turnOn},
