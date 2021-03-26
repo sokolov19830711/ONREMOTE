@@ -103,7 +103,7 @@ void SerialPortManager::setPort(const QString &name)
     auto ports = QSerialPortInfo::availablePorts();
     for (auto & i : ports)
     {
-        //if((i.portName() == name) && (i.description().contains("CH340", Qt::CaseInsensitive)))
+        if((i.portName() == name) && (i.description().contains("CH340", Qt::CaseInsensitive)))
         {
             if (_port.isOpen())
             {
@@ -123,7 +123,7 @@ void SerialPortManager::setPort(const QString &name)
 
 	for (auto& i : ports)
 	{
-		//if (i.description().contains("CH340", Qt::CaseInsensitive))
+        if (i.description().contains("CH340", Qt::CaseInsensitive))
 		{
 			if (_port.isOpen())
 			{
