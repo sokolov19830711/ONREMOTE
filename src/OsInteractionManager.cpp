@@ -29,13 +29,14 @@ void OsInteractionManager::setStartOnBoot(bool state) const
 	if (state)
 	{
 		settings.setValue("ONREMOTE+", QDir::toNativeSeparators(QCoreApplication::applicationFilePath()));
-		settings.sync();
 	}
 
 	else
 	{
 		settings.remove("ONREMOTE+");
 	}
+
+    settings.sync();
 #endif // Q_OS_WIN32
 }
 
