@@ -231,7 +231,27 @@ QString DataManager::getPcTotalTime()
 {
 	updatePcTotalRunningTime();
 	QTime time(0, 0);
-	return time.addSecs(_settings->value("OS_totalRunningTime").toUInt()).toString("hh ч mm мин ss сек");
+    return time.addSecs(_settings->value("OS_totalRunningTime").toUInt()).toString("hh ч mm мин ss сек");
+}
+
+unsigned int DataManager::getDeviceSessionTimeSec() const
+{
+    int sessionTime;
+    memcpy(&sessionTime, &(_mcuOutData.sessionTime1), 4);
+    return sessionTime;
+}
+
+unsigned int DataManager::getDeviceTotalTimeSec() const
+{
+    int totalTime;
+    memcpy(&totalTime, &(_mcuOutData.totalTime1), 4);
+    return totalTime;
+}
+
+unsigned int DataManager::getPcTotalTimeSec()
+{
+    updatePcTotalRunningTime();
+    return _settings->value("OS_totalRunningTime").toUInt();
 }
 
 void DataManager::updatePcTotalRunningTime()

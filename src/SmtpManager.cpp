@@ -124,6 +124,49 @@ void SmtpManager::update()
 		}
 	}
 
+    // Счетчики наработки
+
+    // Общая наработка устройства
+    uint hours = _dataManager.getSettingsValue("totalHwHoursNotification");
+    uint minutes = _dataManager.getSettingsValue("totalHwMinutesNotification");
+    uint seconds = _dataManager.getSettingsValue("totalHwSecondsNotification");
+    if(hours || minutes || seconds)
+    {
+        uint sum = hours * 3600 + minutes * 60 + seconds;
+        if(sum < _dataManager.getDeviceTotalTimeSec())
+        {
+            addEventToLog("Достигнуто общее заданное время наработки устройства " + _dataManager.settings()->value("SMTP/deviceName").toString());
+            qDebug() << "Достигнуто общее заданное время наработки устройства " << _dataManager.settings()->value("SMTP/deviceName").toString() << sum;
+        }
+    }
+
+    // Наработка устройства за сессию
+    hours = _dataManager.getSettingsValue("sessionHwHoursNotification");
+    minutes = _dataManager.getSettingsValue("sessionHwMinutesNotification");
+    seconds = _dataManager.getSettingsValue("sessionHwSecondsNotification");
+    if(hours || minutes || seconds)
+    {
+        uint sum = hours * 3600 + minutes * 60 + seconds;
+        if(sum < _dataManager.getDeviceSessionTimeSec())
+        {
+            addEventToLog("Достигнуто заданное время наработки устройства за сессию " + _dataManager.settings()->value("SMTP/deviceName").toString());
+            qDebug() << "Достигнуто заданное время наработки устройства  за сессию" << _dataManager.settings()->value("SMTP/deviceName").toString() << sum;
+        }
+    }
+
+    // Общая наработка ПК
+    hours = _dataManager.getSettingsValue("totalSwHoursNotification");
+    minutes = _dataManager.getSettingsValue("totalSwMinutesNotification");
+    seconds = _dataManager.getSettingsValue("totalSwSecondsNotification");
+    if(hours || minutes || seconds)
+    {
+        uint sum = hours * 3600 + minutes * 60 + seconds;
+        if(sum < _dataManager.getPcTotalTimeSec())
+        {
+            addEventToLog("Достигнуто общее заданное время наработки ПК " + _dataManager.settings()->value("SMTP/deviceName").toString());
+            qDebug() << "Достигнуто общее заданное время наработки ПК " << _dataManager.settings()->value("SMTP/deviceName").toString() << sum;
+        }
+    }
 }
 
 void SmtpManager::sendEventLog()

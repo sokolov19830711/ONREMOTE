@@ -37,6 +37,10 @@ public:
 	Q_INVOKABLE QString getDeviceTotalTime() const;
 	Q_INVOKABLE QString getPcTotalTime();
 
+    unsigned int getDeviceTotalTimeSec() const;
+    unsigned int getPcTotalTimeSec();
+    unsigned int getDeviceSessionTimeSec() const;
+
 public slots:
 
 	void updatePcTotalRunningTime();
